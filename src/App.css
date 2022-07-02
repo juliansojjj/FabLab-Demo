@@ -9,8 +9,9 @@ body{
 }
 
 .base{
-    min-height: 34.9em;
-    margin-top: 11vh;
+    min-height: 84.5vh;
+    max-height: 100vh;
+    margin-top: 7vh;
     display: flex;
     justify-items: stretch;
 }
@@ -47,8 +48,17 @@ main{
 /*WEB*/
     --mainBlue: #255887;
     --darkBlue: #253E5C;
+    --neutralGrey: #e0e0e0;
+    --lightGrey: #f8f8f8;
 
 /*States*/
-    --greenComplete: #57F1B3;
-    --violetIncomplete:#DE11D6;
+    --greenComplete: #56F0B2;
+    --violetIncomplete:#7D1679;
+    --redOverdue: #E83B81;
+}
+
+@media only screen and (max-width:530px){
+    .base{
+        margin-top: 10vh;
+    }
 }

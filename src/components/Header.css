@@ -1,0 +1,21 @@
+header{
+    position: fixed;
+    height: 7vh;
+    width: 100vw;
+    top: 0;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-content: center;
+    justify-items: center;
+    background-color: white;
+    color: black;
+        /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 0 .2em 1em .1em rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+@media only screen and (max-width:530px){
+    header{
+        height:10vh;
+    }
+}

@@ -1,5 +1,5 @@
 .dashboard{
-    min-width: 10em;
+    width: 18em;
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -8,6 +8,7 @@
     box-shadow: .1em 0 1em .1em rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     padding: .5em;
+    font-family: 'SF Pro Display - Thin';
 }
 
 .dashboard-states{
@@ -19,6 +20,14 @@
 .dashboard-title{
     color: #e9e9e9;
     margin: 0 0 .5em 0;
+    font-family: 'SF Pro Display - Regular';
+    font-weight: 500;
+    font-size: 1.4em;
+}
+
+#main-title{
+    font-weight: bold;
+    font-size: 2em;
 }
 
 .dashboard-subtitle{
@@ -36,4 +45,11 @@
 
 .dashboard-button{
     margin: 0;
+}
+
+/* RESPONSIVE */
+@media only screen and (max-width:1360px){
+    .dashboard{
+        width: 14em;
+    }
 }

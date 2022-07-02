@@ -5,7 +5,7 @@ import './Aside.css'
 const Aside = () => {
   return (
     <aside className='dashboard'>
-      <h2 className='dashboard-title'>Filtros</h2>
+      <h2 className='dashboard-title' id='main-title'>Filtros</h2>
 
       <div className='dashboard-states'>
         <h3 className='dashboard-title'>Estado</h3>
