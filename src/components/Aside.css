@@ -1,0 +1,39 @@
+.dashboard{
+    min-width: 10em;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: .1em 0 1em .1em rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding: .5em;
+}
+
+.dashboard-states{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.dashboard-title{
+    color: #e9e9e9;
+    margin: 0 0 .5em 0;
+}
+
+.dashboard-subtitle{
+    margin: 0;
+}
+
+.state-check{
+    display: flex;
+    margin: 0 0 .5em 0;
+}
+
+.dashboard-date{
+    margin: 0 0 1em 0;
+}
+
+.dashboard-button{
+    margin: 0;
+}
