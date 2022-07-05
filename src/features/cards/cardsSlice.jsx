@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import { collection, getDocs } from "firebase/firestore";
-import db from "../../firebase";
+import db from '../../firebase'
+import { collection, getDocs, addDoc } from 'firebase/firestore'
 
 const initialState = {
     cards:[],
@@ -28,7 +28,7 @@ const cardsSlice = createSlice({
     name : 'cards',
     initialState,
     reducers:{
-        cardState(state,action){
+        stateHandle(state,action){
         }
     },
     extraReducers:{
@@ -48,5 +48,7 @@ const cardsSlice = createSlice({
 export const selectCards = (state)=>state.cards.cards;
 export const statusCards= (state)=>state.cards.status;
 export const errorCards= (state)=>state.cards.error;
+
+export const {stateHandle} = cardsSlice.actions;
 
 export default cardsSlice.reducer;

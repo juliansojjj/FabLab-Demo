@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux/es/exports'
-import { fetchCards, selectCards, statusCards, errorCards} from './cardsSlice'
+import { fetchCards, selectCards, statusCards, errorCards, stateHandle} from './cardsSlice'
 import Header from '../../components/Header'
 import './Item.css'
 
 const Item = () => {
     const dispatch = useDispatch()
-    const [info, setInfo] = useState([])
-    const [element, setElement] = useState([])
 
     const list = useSelector(selectCards)
     const listStatus = useSelector(statusCards)
@@ -17,10 +15,44 @@ const Item = () => {
     const {item} = useParams();
     const data = Object.entries({item}).shift().pop() //obtengo id crudo
 
-    const array = Object.entries(list) //obtengo arrays
+    const array = Object.entries(list); //obtengo arrays
 
+    const date = array.map(item=>{
+        if(item[1].id === data){
+        const date = Object.entries(item[1].date)
+        const dateSec = Object.entries(date[0])
+        const dateNano = Object.entries(date[1])
+        
+        const sec = dateSec[1].pop()
+        const nano = dateNano[1].pop()
+
+        const newDate = new Date (sec*1000 + nano/1000000)
+        const fecha = newDate.toLocaleDateString()
+        return fecha;
+        } 
+    })
+    const deadline = date.pop();
+    const dateInfo = ()=>{
+        if(deadline != null){
+            return deadline.split('/');
+        }
+    }
+
+    const getDate = ()=>{
+        const today = new Date()
+        const year = today.getFullYear()
+        const month = today.getMonth()
+        const day = today.getDate()
+
+        if(year > dateInfo[2]){ return console.log('overdueY')}
+        else if(month > dateInfo[1]){return console.log('overdueM')}
+        else if (day > dateInfo[0]){return console.log('asd')}
+        
+    }
+    
     useEffect(()=>{
-        dispatch(fetchCards())
+        dispatch(fetchCards());
+        getDate();
     },[dispatch])
 
  return (
@@ -44,7 +76,7 @@ const Item = () => {
                             </h3>
                         
                         <h2 className='item-subtitle'>Fecha límite</h2>
-                        <p className='item-text' >x/x/x</p>
+                        <p className='item-text' >{deadline}</p>
                         
                         <h2>Alumno</h2>
                         <p className='item-text'>{item[1].user}</p>
