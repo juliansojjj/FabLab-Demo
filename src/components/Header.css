@@ -5,8 +5,8 @@ header{
     top: 0;
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    align-content: center;
     justify-items: center;
+    align-items: center;
     background-color: white;
     color: black;
         /* offset-x | offset-y | blur-radius | spread-radius | color */

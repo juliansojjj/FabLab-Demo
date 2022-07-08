@@ -14,9 +14,12 @@
     height: 15em;
     text-align: center;
     background-color: white;
-     /* offset-x | offset-y | blur-radius | spread-radius | color */
-    border: solid rgba(0, 0, 0, 0.05);
-    border-width: .1em;
+    border: solid var(--neutralGrey);
+    border-width: .5px;
+}
+.card-state{
+    width: 100%;
+    height: .5em;
 }
 
 .cards-item:hover{
@@ -43,8 +46,8 @@
 
 .cards-img{
     object-fit: cover;
-    width: 94%;
-    height: 94%;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
 }
 
@@ -71,7 +74,7 @@
         text-align: center;
         background-color: white;
          /* offset-x | offset-y | blur-radius | spread-radius | color */
-        box-shadow: 0 .2em 1.5em .05em rgba(0, 0, 0, 0.05);  
+        box-shadow: 0 .2em 1.5em .05em rgba(0, 0, 0, .05);  
     }
     
     .cards-item:hover{

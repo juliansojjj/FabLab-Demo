@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import db from '../../firebase'
-import { collection, getDocs, addDoc } from 'firebase/firestore'
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore'
 
 const initialState = {
     cards:[],
@@ -28,7 +28,21 @@ const cardsSlice = createSlice({
     name : 'cards',
     initialState,
     reducers:{
-        stateHandle(state,action){
+        handleComplete(state,action){
+            const docRef = doc(db,'card',action.payload.id)
+            const data = {state:'complete'}
+            updateDoc(docRef,data).then(item=>{state.status = 'completed'})
+            .catch((err)=>{console.log(err.message)})
+            state.status = 'completed'
+            console.log(state.status)
+        },
+        handleIncomplete(state,action){
+            const docRef = doc(db,'card',action.payload.id)
+            const data = {state:'incomplete'}
+            updateDoc(docRef,data).then(item=>{state.status = 'incompleted'})
+            .catch((err)=>{console.log(err.message)})   
+            state.status = 'incompleted'
+            console.log(state.status)
         }
     },
     extraReducers:{
@@ -38,6 +52,7 @@ const cardsSlice = createSlice({
         [fetchCards.fulfilled]:(state,{payload})=>{
             state.status='fulfilled';
             state.cards = payload;
+            console.log(state.status)
         },
         [fetchCards.rejected]:(state,{error})=>{
             state.error= error.message;
@@ -48,7 +63,8 @@ const cardsSlice = createSlice({
 export const selectCards = (state)=>state.cards.cards;
 export const statusCards= (state)=>state.cards.status;
 export const errorCards= (state)=>state.cards.error;
+export const mainState = (state)=>state.status;
 
-export const {stateHandle} = cardsSlice.actions;
+export const {handleComplete,handleIncomplete} = cardsSlice.actions;
 
 export default cardsSlice.reducer;

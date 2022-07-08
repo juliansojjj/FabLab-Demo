@@ -1,11 +1,10 @@
 .item-container{
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    align-items: center;
     justify-items: center;
     gap: 0 1em;
+    align-items: flex-start;
 }
-
 .item-data{
     display: flex;
     flex-direction: column;
@@ -14,7 +13,6 @@
 
 .item-img-container{
     width: 40em;
-    display: flex;
 }
 
 .item-img{
@@ -22,6 +20,16 @@
     margin: auto;
     margin-top: 2em;
     
+}
+
+.item-state{
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    align-items: center;
+    margin-bottom: 2em;
+}
+.item-state--child:nth-child(2){
+    justify-self: flex-end;
 }
 
 hr {
@@ -33,8 +41,16 @@ hr {
     margin: 0;
   }
 
+.item-title{
+    font-family: 'SF Pro Display - Bold';
+    font-size: 2em;
+    margin: .5em 0 .5em 0;
+}
+
 .item-subtitle{
     margin-bottom: 0;
+    font-size: 1.1em;
+    font-family: 'SF Pro Display - Medium';
 }
 
 .item-text{
@@ -49,16 +65,63 @@ hr {
     border-radius: 1em;
     padding: .5em;
     min-width: fit-content;
+    margin: 1em 0 0 0;
+}
+
+.complete-button{
+    text-decoration: none;
+    width: 12em;
+    height: 2em;
+    color: white;
+    margin-right: 4em;
+    background-color: var(--violetIncomplete);
+    border-radius: .6em;
+    border: none;
+    font-family: 'SF Pro Display - Medium';
+    box-shadow: 0 0 1em .1em rgba(0, 0, 0, .05);
+}
+.complete-button:hover{
+    background-color: rgb(69, 23, 69);  
+    transition: all .1s ease-in-out;
+}
+.complete-button:active{
+    transform: scale(0.98);
+}
+
+.incomplete-button{
+    text-decoration: none;
+    width: 12em;
+    height: 2em;
+    margin-right: 4em;
+    color: white;
+    background-color: var(--greenComplete);
+    border-radius: .6em;
+    border: none;
+    font-family: 'SF Pro Display - Medium';
+    box-shadow: 0 0 1em .1em rgba(0, 0, 0, .05);
+}
+.incomplete-button:hover{
+    background-color: green;  
+    transition: all .1s ease-in-out;
+}
+.incomplete-button:active{
+    transform: scale(0.98);
 }
 
 .item-complete{
     color:var(--greenComplete);
     background-color: white;
+    font-family: 'SF Pro Display - Medium';
+    font-size: 1.5em;
+    margin: .5em 0 0 0;
 }
 
 .item-incomplete{
     color:var(--violetIncomplete);
     background-color: white;
+    font-family: 'SF Pro Display - Medium';
+    font-size: 1.5em;
+    margin: .5em 0 0 0;
 }
 
 .item-overdue{

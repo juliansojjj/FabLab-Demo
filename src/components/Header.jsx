@@ -6,13 +6,14 @@ import userIcon from '../icons/user-solid.svg'
 import './Header.css'
 
 const Logo = styled.img`
-  width: 2em;
+  width: 1.8em;
 `;
 
 const Input = styled.input`
     width: 16em;
-    height: 1.4em;
+    height: 1em;
     border-radius: 1em;
+    padding: .2em;
 `;
 
 const Header = () => {

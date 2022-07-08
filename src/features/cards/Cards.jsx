@@ -20,7 +20,8 @@ const Cards = () => {
             {listStatus == 'pending' ? <h2>Loading...</h2> : ''}
             {list.map(item=>{return(
                 <Link to={`/card/${item.id}`} key={item.id} className='cards-item'>
-                    <div className={`cards-container-img ${item.state}`}> <img src={item.image} className='cards-img' /></div>
+                    <div className={`cards-container-img`}> <img src={item.image} className='cards-img' /></div>
+                    <div className={`${item.state} card-state`}></div>
                     <h3 className='cards-title'>{item.title}</h3>
                     <p className='cards-text'>{item.description}</p>
                 </Link>
