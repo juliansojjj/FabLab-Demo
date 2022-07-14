@@ -1,24 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchCards, selectCards, statusCards, errorCards} from './cardsSlice'
+import {useGetDocsQuery} from '../../app/cardsApi'
 import './Cards.css'
 import { Link } from 'react-router-dom'
 
 const Cards = () => {
-    const dispatch = useDispatch()
-    const list = useSelector(selectCards)
-    const listStatus = useSelector(statusCards)
-    const listError = useSelector(errorCards)
-
-    useEffect(()=>{
-        dispatch(fetchCards())
-    },[dispatch])
+    const { data, error, isLoading, isSuccess, isError } = useGetDocsQuery();
 
   return (
     <div>
         <div className='cards-container'>
-            {listStatus == 'pending' ? <h2>Loading...</h2> : ''}
-            {list.map(item=>{return(
+        {isError && error.message}
+        {isLoading && "Loading..."}
+        {data ? data.map(item=>{return(
                 <Link to={`/card/${item.id}`} key={item.id} className='cards-item'>
                     <div className={`cards-container-img`}> <img src={item.image} className='cards-img' /></div>
                     <div className={`${item.state} card-state`}></div>
@@ -26,7 +19,7 @@ const Cards = () => {
                     <p className='cards-text'>{item.description}</p>
                 </Link>
             )})
-            }
+        :'data missing'}
         </div>
     </div>
   )

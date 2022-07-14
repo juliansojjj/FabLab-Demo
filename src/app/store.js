@@ -1,8 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
-import cardsReducer from '../features/cards/cardsSlice.jsx'
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { cardsApi } from "./cardsApi";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
-export default configureStore({
+export const store = configureStore({
     reducer:{
-        cards:cardsReducer
-    }
-})
+        [cardsApi.reducerPath] : cardsApi.reducer,
+    },
+    middleware:(getDefaultMiddleware)=>
+    getDefaultMiddleware().concat(cardsApi.middleware),
+});
+
+setupListeners(store.dispatch);

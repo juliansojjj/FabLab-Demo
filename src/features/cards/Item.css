@@ -32,6 +32,26 @@
     justify-self: flex-end;
 }
 
+.item-state--alert{
+    height: 1.5em;
+    display: flex;
+    background-color: #ff5900;
+    color:cornsilk;
+    align-items: center;
+    top:2vh;
+    right: 0;
+    border-left: 8px solid #741c11;
+    position: absolute;
+    padding: .5em;
+}
+.alert-btn{
+    width: 1.5em;
+    margin: 0 0 0 .5em;
+}
+.alert-btn:hover{
+    color: #741c11;
+}
+
 hr {
     display:block;
     width: 100%;               
