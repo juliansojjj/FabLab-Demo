@@ -9,9 +9,18 @@ header{
     align-items: center;
     background-color: white;
     color: black;
-        /* offset-x | offset-y | blur-radius | spread-radius | color */
-    box-shadow: 0 .2em 1em .1em rgba(0, 0, 0, 0.1);
+    border: solid var(--neutralGrey);
+    border-width: .5px;
     text-decoration: none;
+}
+
+.search-bar{
+    border: solid var(--neutralGrey);
+    border-width: .5px;
+    border-radius: .5em;
+    text-decoration: none;
+    padding: .2em;
+    width: 20em;
 }
 
 @media only screen and (max-width:530px){

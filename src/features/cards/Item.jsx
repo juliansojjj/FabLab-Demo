@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux/es/exports'
+import { useDispatch } from 'react-redux/es/exports'
 import Header from '../../components/Header'
 import './Item.css'
 import { useGetCardMutation, useUpdateToCompleteMutation, useUpdateToIncompleteMutation } from '../../app/cardsApi'

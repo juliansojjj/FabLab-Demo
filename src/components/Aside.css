@@ -4,8 +4,8 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    /* offset-x | offset-y | blur-radius | spread-radius | color */
-    box-shadow: .1em 0 1em .1em rgba(0, 0, 0, 0.1);
+    border: solid var(--neutralGrey);
+    border-width: .5px;
     box-sizing: border-box;
     padding: 1em;
     font-family: 'SF Pro Display - Thin';
@@ -18,7 +18,7 @@
 }
 
 .dashboard-title{
-    color: #e9e9e9;
+    color: var(--neutralGrey);
     margin: 0 0 .5em 0;
     font-family: 'SF Pro Display - Regular';
     font-weight: 500;

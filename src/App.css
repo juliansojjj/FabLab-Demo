@@ -22,6 +22,21 @@ main{
     width: 100%;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
+.navigate:hover{
+    text-decoration: underline;
+}
+
+h1{
+    font-family: 'SF Pro Display - Bold';
+}
+h2{
+    font-family: 'SF Pro Display - Bold';
+}
+
 .img-min{
     width: 1.2em;
 }

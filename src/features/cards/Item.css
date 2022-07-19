@@ -13,6 +13,8 @@
 
 .item-img-container{
     width: 40em;
+    border: solid var(--neutralGrey);
+    border-width: .5px;
 }
 
 .item-img{

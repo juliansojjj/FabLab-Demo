@@ -3,13 +3,15 @@ import {useGetDocsQuery} from '../../app/cardsApi'
 import './Cards.css'
 import { Link } from 'react-router-dom'
 import Menu from '../../icons/menu.svg'
-import { useToArchiveCardMutation } from '../../app/cardsApi'
+import { useUnArchiveCardMutation, useDeleteCardMutation } from '../../app/cardsApi'
 
-const Cards = () => {
+const ArchiveCards = () => {
     const { data, error, isLoading, isSuccess, isError } = useGetDocsQuery();
     const [selectMenu,setSelectMenu] = useState(null)
     const [menuOpen,setMenuOpen] = useState(false)
-    const [toArchiveCard] = useToArchiveCardMutation()
+    const [unArchiveCard] = useUnArchiveCardMutation()
+    const [deleteCard] = useDeleteCardMutation()
+    const [eliminateOption,setEliminateOption] = useState('')
 
     const cardMenu = (e)=>{
       e.stopPropagation()
@@ -31,25 +33,44 @@ const Cards = () => {
       }
     }
 
-    const archiveCard = async(e)=>{
+    const notArchiveCard = async(e)=>{
       e.preventDefault()
-      const state = e.target.attributes.getNamedItem("archive").value;
       const id = e.target.attributes.getNamedItem("cardid").value;
-      toArchiveCard(id)
+      unArchiveCard(id)
     }
+
+    const eliminateCard = (e)=>{
+        const id = e.target.attributes.getNamedItem("cardid").value;
+        deleteCard(id)
+        setEliminateOption('')
+    } 
 
   return (
     <div>
+        <h1>Cards Archivadas</h1>
+        {eliminateOption ? <div className='eliminate-container'>
+                    <div className='eliminate-alert'>
+                        <h2>Eliminar Card</h2>
+                        <p>La card se eliminará de manera <b>definitiva</b> ¿Está seguro que desea deletearla?</p>
+                        <button className='eliminate-confirm' onClick={eliminateCard} cardid={eliminateOption}>Eliminar</button>
+                        <button className='eliminate-cancel' onClick={(e)=>{setEliminateOption(false)}}>Cancelar</button>
+                    </div>
+                    <div className='eliminate-background'></div>
+                </div> : ''}
         <div className='cards-container'>
         {isError && error.message}
         {isLoading && "Loading..."}
         {data ? data.map(item=>{
-          if(item.archive !== 'true'){ return(
+          if(item.archive == 'true'){ return(
                 <div key={item.id} className='cards-item'>
                   <div className='item-menu'>
                     <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu}/></div>
                     {menuOpen ?
-                      selectMenu === `item-click-${item.id}` ? <div className='menu-option' archive={item.archive} onClick={archiveCard} cardid={item.id}>Archivar</div> : ''
+                      selectMenu === `item-click-${item.id}` ? 
+                        <div className='archive-menu'>
+                            <div className='archive-menu--option' archive={item.archive} onClick={notArchiveCard} cardid={item.id}>Desarchivar</div>
+                            <div className='archive-menu--option' onClick={(e)=>{setEliminateOption(item.id)}}>Eliminar</div>
+                            </div> : ''
                     : ''}
                   </div>
                   <Link to={`/card/${item.id}`}>
@@ -70,4 +91,4 @@ const Cards = () => {
   )
 }
 
-export default Cards
+export default ArchiveCards
