@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux/es/exports'
-import Header from '../../components/Header'
+import Header from '../Header'
 import './Item.css'
 import { useGetCardMutation, useUpdateToCompleteMutation, useUpdateToIncompleteMutation } from '../../app/cardsApi'
 import Alert from "../../icons/triangle-alert.svg"

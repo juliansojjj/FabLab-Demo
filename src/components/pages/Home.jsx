@@ -1,20 +1,16 @@
 import React from 'react'
 import Header from '../Header'
-import Footer from '../Footer'
 import Aside from '../Aside'
-import Cards from '../../features/cards/Cards'
+import Cards from '../cards/Cards'
 
 const Home = () => {
   return (
     <div>
       <Header/>
-        <div className='base'>
+        <div className='base-dashboard'>
           <Aside/>
-          <main>
-            <Cards/>
-          </main>
+          <Cards/>
       </div>
-      <Footer/>
     </div>
   )
 }

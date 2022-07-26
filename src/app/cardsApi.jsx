@@ -1,6 +1,7 @@
 import {createApi, fakeBaseQuery} from '@reduxjs/toolkit/query/react' 
 import db from '../firebase';
 import { getDocs, collection, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { async } from '@firebase/util';
 
 export const cardsApi = createApi({
     reducerPath: "cards",
@@ -18,6 +19,28 @@ export const cardsApi = createApi({
                     })
                 })
                 return {data:cards}
+
+            }catch(err){
+                console.log(err)
+                return {error:err}
+            }
+        }
+      }),
+      getSearch: builder.query({
+        async queryFn(){
+            try{
+                let cards = []
+                const input = sessionStorage.getItem('input')
+                const ref = await getDocs(collection(db,'card'))
+                const fetch = await ref.docs.map(doc=>{
+                    cards.push({
+                        id:doc.id,
+                        ...doc.data(),
+                    })
+                })
+                const filter = await cards.filter(item=>item.title.toLowerCase() == input)
+                if(filter.length == 0){return{data:'empty'}}
+                return {data:filter}
 
             }catch(err){
                 return {error:err}
@@ -100,8 +123,20 @@ export const cardsApi = createApi({
                 return {error:err}
             }
         }
+      }),
+      setOld:builder.mutation({
+        async queryFn(id){
+            try{
+                const docRef = doc(db,'card',id)
+                const data = {new:'false'}
+                await updateDoc(docRef,data).then(console.log('Card Old'))
+                .catch((err)=>{console.log(err.message)})
+            }catch(err){
+                console.log(err)
+            }
+        }
       })
     }),
   });
 
-export const {useGetDocsQuery, useGetCardMutation, useUpdateToCompleteMutation, useUpdateToIncompleteMutation, useToArchiveCardMutation, useUnArchiveCardMutation, useDeleteCardMutation} = cardsApi;
+export const {useGetDocsQuery, useGetSearchQuery, useGetCardMutation, useUpdateToCompleteMutation, useUpdateToIncompleteMutation, useToArchiveCardMutation, useUnArchiveCardMutation, useDeleteCardMutation, useSetOldMutation} = cardsApi;

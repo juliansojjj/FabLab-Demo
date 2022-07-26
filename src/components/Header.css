@@ -15,12 +15,26 @@ header{
 }
 
 .search-bar{
+    display: flex;
     border: solid var(--neutralGrey);
     border-width: .5px;
     border-radius: .5em;
     text-decoration: none;
     padding: .2em;
     width: 20em;
+}
+.search-bar--focus{
+    border: solid black 2px;
+}
+.search-input{
+    border-style: none;
+    width: 100%;
+}
+.search-input:focus{
+    outline: none;
+}
+.search-submit:active{
+    transform: scale(.9);
 }
 
 @media only screen and (max-width:530px){

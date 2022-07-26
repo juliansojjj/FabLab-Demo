@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../Header'
-import ArchiveCards from '../../features/cards/ArchiveCards'
+import ArchiveCards from '../cards/ArchiveCards'
 
 const Archive = () => {
   return (

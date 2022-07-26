@@ -5,6 +5,7 @@
     grid-auto-flow: row;
     gap: 2em .5em;
     justify-items: center;
+    padding: 1em;
 }
 
 .cards-item{
@@ -13,32 +14,34 @@
     color:var(--darkBlue);
     height: 16em;
     text-align: center;
-    background-color: white;
-    border: solid var(--neutralGrey);
-    border-width: .5px;
+    background-color: var(--lightGrey);
     position: relative;
+    font-family: 'SF Pro Display - Regular';
 }
 .cards-item:hover{
     transform: scale(1.1);
     transition: all 0.15s ease-out;
     z-index:1000;
 }
+
 .card-state{
     width: 100%;
     height: .5em;
 }
 .cards-title{
     margin: .5em 0 .5em 0;
-    font-family: 'SF Pro Display - Bold';
     font-size: 1.3em;
+    color: var(--neutralGrey);
+    font-weight: 100;
 }
 .cards-date{
     margin: 0 0 .5em 0;
-    font-family: 'SF Pro Display - Medium';
+    color: var(--neutralGrey);
+    font-weight: 100;
 }
 .cards-text{
     margin: 1em 0 .5em 0;
-    font-family: 'SF Pro Display - Thin';
+    color: var(--neutralGrey);
 }
 .cards-container-img{
     height: 8em;
@@ -48,6 +51,21 @@
     align-items: flex-end;
     box-sizing: border-box;
     position: relative;
+}
+.new-card{
+    background-color: white;
+    border: solid var(--neutralGrey);
+    border-width: .5px;
+}
+.new-card .cards-title{
+    color: black;
+    font-family: 'SF Pro Display - Medium';
+}
+.new-card .cards-date{
+    font-weight: 400;
+}
+.new-card .cards-text{
+    color: black;
 }
 
 .item-menu{
