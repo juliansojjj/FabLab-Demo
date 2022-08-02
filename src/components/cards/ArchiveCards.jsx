@@ -80,7 +80,7 @@ const ArchiveCards = () => {
                     <div className={`${item.state} card-state`}></div>
                     <h3 className='cards-title'>{item.title}</h3>
                     <h4 className='cards-date'>{item.date}</h4>
-                    <p className='cards-text'>{item.description}</p>
+                    <p className='cards-user'>{item.user}</p>
                   </Link>
                 </div>
             )}

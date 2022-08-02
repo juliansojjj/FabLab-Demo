@@ -1,7 +1,6 @@
 import {createApi, fakeBaseQuery} from '@reduxjs/toolkit/query/react' 
 import db from '../firebase';
 import { getDocs, collection, doc, updateDoc, deleteDoc } from 'firebase/firestore';
-import { async } from '@firebase/util';
 
 export const cardsApi = createApi({
     reducerPath: "cards",

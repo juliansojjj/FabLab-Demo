@@ -39,7 +39,7 @@
     color: var(--neutralGrey);
     font-weight: 100;
 }
-.cards-text{
+.cards-user{
     margin: 1em 0 .5em 0;
     color: var(--neutralGrey);
 }
@@ -63,9 +63,6 @@
 }
 .new-card .cards-date{
     font-weight: 400;
-}
-.new-card .cards-text{
-    color: black;
 }
 
 .item-menu{
