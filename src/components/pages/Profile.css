@@ -1,0 +1,133 @@
+.logout-button{
+    border-style: none;
+    background-color: rgb(230, 0, 0);
+    color: white;
+    border-radius: .3em;
+    padding: .5em;
+    margin: .5em;
+}
+.logout-button:hover{
+    background-color: rgb(173, 0, 0);
+    transition: all .1s ease-in-out;
+}
+.logout-button:active{
+    transform: scale(0.98);
+}
+
+.users-list{
+    border-radius: 2em;
+    background-color: red;
+}
+.users-list--item{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    border: 1px solid var(--neutralGrey);
+    border-bottom: .5px;
+    background-color: var(--lightGrey);
+}
+.user-list--item:nth-last-child(1){
+    background-color: red;
+}
+
+.snackbar{
+    height: 1.5em;
+    display: flex;
+    background-color: #ff5900;
+    color:cornsilk;
+    align-items: center;
+    top:8vh;
+    right: 0;
+    border-left: 8px solid #741c11;
+    position: absolute;
+    padding: .5em;
+}
+.snackbar-btn{
+    width: 1.5em;
+    margin: 0 0 0 .5em;
+}
+.snackbar-btn:hover{
+    color: #741c11;
+}
+
+.user-info{
+    display: grid;
+    grid-template-columns: repeat(2,minmax(15em,20em));
+    margin-bottom: 1em;
+}
+.user-email{
+    background-color: var(--lightGrey);
+    max-width: 15em;
+    height: 1.3em;
+    border: 1px solid var(--neutralGrey);
+    border-radius: .3em;
+    align-items: center;
+}
+.user-pass{
+    display: flex;
+    background-color: var(--lightGrey);
+    max-width: 15em;
+    height: 1.3em;
+    border: 1px solid var(--neutralGrey);
+    border-radius: .3em;
+    align-items: center;
+}
+
+.eliminate-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+}
+.eliminate-alert{
+    width: 40em;
+    height: 20em;
+    z-index: 30;
+    background-color: white;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+}
+.eliminate-alert h2{
+    font-size: 1.8em;
+}
+.eliminate-confirm{
+    background-color: red;
+    color: white;
+    border-style: none;
+    border-radius: .3em;
+    height: 2em;
+    width: 5em;
+    margin: 1em 0 1em 0;
+}
+.eliminate-confirm:hover{
+    background-color: rgb(129, 0, 0);
+}
+.eliminate-confirm:active{
+    transform: scale(0.9);
+}
+.eliminate-cancel{
+    border-style: none;
+    height: 2em;
+    width: 5em;
+    border-radius: .3em;
+}
+.eliminate-cancel:hover{
+    background-color: rgb(185, 185, 185);
+}
+.eliminate-cancel:active{
+    transform: scale(0.9);
+}
+.eliminate-background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(50, 50, 50);
+    filter: opacity(70%);
+    z-index: 20;
+}

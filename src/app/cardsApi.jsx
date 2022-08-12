@@ -1,11 +1,45 @@
 import {createApi, fakeBaseQuery} from '@reduxjs/toolkit/query/react' 
-import db from '../firebase';
-import { getDocs, collection, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { getDocs, getDoc, collection, doc, updateDoc, deleteDoc, data } from 'firebase/firestore';
 
 export const cardsApi = createApi({
     reducerPath: "cards",
     baseQuery: fakeBaseQuery(),
     endpoints: (builder) => ({
+        getUsers: builder.query({
+            async queryFn(){
+                try{
+                    let users = []
+                    const ref = await getDocs(collection(db,'Users'))
+                    const fetch = await ref.docs.map(doc=>{
+                        users.push({
+                            id:doc.id,
+                            ...doc.data(),
+                        })
+                    })
+                    return {data:users}
+    
+                }catch(err){
+                    console.log(err)
+                    return {error:err}
+                }
+            }
+          }),
+          getUser: builder.mutation({
+            async queryFn(id){
+                try{
+                    if (id){
+                    const ref = await doc(db,'Users',id)
+                    const fetch = await getDoc(ref)
+                    const user = await fetch.data()
+                    return {data:user}}
+    
+                }catch(err){
+                    console.log(err)
+                    return {error:err}
+                }
+            }
+          }),  
       getDocs: builder.query({
         async queryFn(){
             try{
@@ -122,20 +156,8 @@ export const cardsApi = createApi({
                 return {error:err}
             }
         }
-      }),
-      setOld:builder.mutation({
-        async queryFn(id){
-            try{
-                const docRef = doc(db,'card',id)
-                const data = {new:'false'}
-                await updateDoc(docRef,data).then(console.log('Card Old'))
-                .catch((err)=>{console.log(err.message)})
-            }catch(err){
-                console.log(err)
-            }
-        }
       })
     }),
   });
 
-export const {useGetDocsQuery, useGetSearchQuery, useGetCardMutation, useUpdateToCompleteMutation, useUpdateToIncompleteMutation, useToArchiveCardMutation, useUnArchiveCardMutation, useDeleteCardMutation, useSetOldMutation} = cardsApi;
+export const {useGetUsersQuery, useGetUserMutation, useGetDocsQuery, useGetSearchQuery, useGetCardMutation, useUpdateToCompleteMutation, useUpdateToIncompleteMutation, useToArchiveCardMutation, useUnArchiveCardMutation, useDeleteCardMutation} = cardsApi;

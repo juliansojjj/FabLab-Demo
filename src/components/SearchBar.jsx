@@ -24,7 +24,7 @@ const SearchBar = () => {
           setSearchBarFocus(false)
           setTypeSearch(typeSearch.trim())
           sessionStorage.setItem('input', typeSearch);
-          navigate(`/card/search/${typeSearch}`)
+          navigate(`card/search/${typeSearch}`)
           window.location.reload()
         }
       }

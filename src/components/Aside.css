@@ -4,8 +4,6 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    border: solid var(--neutralGrey);
-    border-width: .5px;
     box-sizing: border-box;
     padding: 1em;
     font-family: 'SF Pro Display - Thin';
@@ -21,12 +19,11 @@
     color: var(--neutralGrey);
     margin: 0 0 .5em 0;
     font-family: 'SF Pro Display - Regular';
-    font-weight: 500;
+    font-weight: 400;
     font-size: 1.4em;
 }
 
 #main-title{
-    font-weight: bold;
     font-size: 2em;
 }
 

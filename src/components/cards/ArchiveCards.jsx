@@ -46,7 +46,7 @@ const ArchiveCards = () => {
     } 
 
   return (
-    <div>
+    <div className='base'>
         <h1>Cards Archivadas</h1>
         {eliminateOption ? <div className='eliminate-container'>
                     <div className='eliminate-alert'>
@@ -57,36 +57,38 @@ const ArchiveCards = () => {
                     </div>
                     <div className='eliminate-background'></div>
                 </div> : ''}
-        <div className='cards-container'>
-        {isError && error.message}
-        {isLoading && "Loading..."}
-        {data ? data.map(item=>{
-          if(item.archive == 'true'){ return(
-                <div key={item.id} className='cards-item'>
-                  <div className='item-menu'>
-                    <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu}/></div>
-                    {menuOpen ?
-                      selectMenu === `item-click-${item.id}` ? 
-                        <div className='archive-menu'>
-                            <div className='archive-menu--option' archive={item.archive} onClick={notArchiveCard} cardid={item.id}>Desarchivar</div>
-                            <div className='archive-menu--option' onClick={(e)=>{setEliminateOption(item.id)}}>Eliminar</div>
-                            </div> : ''
-                    : ''}
-                  </div>
-                  <Link to={`/card/${item.id}`}>
-                    <div className={`cards-container-img`}>                      
-                      <img src={item.image} className='cards-img' />
+        <main>
+          <div className='cards-container'>
+          {isError && error.message}
+          {isLoading && "Loading..."}
+          {data ? data.map(item=>{
+            if(item.archive == 'true'){ return(
+                  <div key={item.id} className='cards-item'>
+                    <div className='item-menu'>
+                      <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu}/></div>
+                      {menuOpen ?
+                        selectMenu === `item-click-${item.id}` ? 
+                          <div className='archive-menu'>
+                              <div className='archive-menu--option' archive={item.archive} onClick={notArchiveCard} cardid={item.id}>Desarchivar</div>
+                              <div className='archive-menu--option' onClick={(e)=>{setEliminateOption(item.id)}}>Eliminar</div>
+                              </div> : ''
+                      : ''}
                     </div>
-                    <div className={`${item.state} card-state`}></div>
-                    <h3 className='cards-title'>{item.title}</h3>
-                    <h4 className='cards-date'>{item.date}</h4>
-                    <p className='cards-user'>{item.user}</p>
-                  </Link>
-                </div>
-            )}
-          })
-        :'data missing'}
-        </div>
+                    <Link to={`/card/${item.id}`}>
+                      <div className={`cards-container-img`}>                      
+                        <img src={item.image} className='cards-img' />
+                      </div>
+                      <div className={`${item.state} card-state`}></div>
+                      <h3 className='cards-title'>{item.title}</h3>
+                      <h4 className='cards-date'>{item.date}</h4>
+                      <p className='cards-user'>{item.user}</p>
+                    </Link>
+                  </div>
+              )}
+            })
+          :'data missing'}
+          </div>
+        </main>
     </div>
   )
 }

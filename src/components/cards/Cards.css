@@ -1,6 +1,7 @@
 .cards-container{
     display: grid;
     width: 100%;
+    height: 100%;
     grid-template-columns: repeat(4,1fr);
     grid-auto-flow: row;
     gap: 2em .5em;
@@ -12,15 +13,15 @@
     width: 17em;
     text-decoration: none;
     color:var(--darkBlue);
+    background-color: var(--lightGrey);
     height: 16em;
     text-align: center;
-    background-color: var(--lightGrey);
     position: relative;
     font-family: 'SF Pro Display - Regular';
 }
 .cards-item:hover{
-    transform: scale(1.1);
-    transition: all 0.15s ease-out;
+    transform: scale(1.05);
+    transition: all 0.05s ease-out;
     z-index:1000;
 }
 
@@ -54,8 +55,7 @@
 }
 .new-card{
     background-color: white;
-    border: solid var(--neutralGrey);
-    border-width: .5px;
+    border: none;
 }
 .new-card .cards-title{
     color: black;
@@ -63,6 +63,10 @@
 }
 .new-card .cards-date{
     font-weight: 400;
+    color: var(--smokeGrey);
+}
+.new-card .cards-user{
+    color: #9f9f9f;
 }
 
 .item-menu{

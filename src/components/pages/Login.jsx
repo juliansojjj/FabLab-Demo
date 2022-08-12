@@ -2,8 +2,10 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
+import { setLogin } from '../../features/user/userSlice'
+import { useEffect } from 'react'
 
 const Login = () => {
     const navigate = useNavigate()
@@ -15,10 +17,10 @@ const Login = () => {
     const handleChange = (e)=>{
         const name = e.target.name
         const input = e.target.value
-        if (name == 'email' && input){
+        if (name == 'email'){
             setEmail(input)
         }
-        if (name == 'password' && input){
+        if (name == 'password'){
             setPassword(input)
         }
     }
@@ -27,7 +29,9 @@ const Login = () => {
         e.preventDefault()
         signInWithEmailAndPassword(auth,email,password).then((userCredential)=>{
             const user = userCredential.user
-            console.log(user)
+            const id = userCredential.user.uid
+            navigate('/')
+
         }).catch((err)=>{
             setError(err)
         })
@@ -49,7 +53,7 @@ const Login = () => {
                     value={password}
                     required
                     />
-                    <button type='submit'>Registrarse</button>
+                    <button type='submit'>Iniciar Sesión</button>
                 </form>
                 <Link to='/signup'>¿No tenés cuenta? Registrate</Link>
             </div>

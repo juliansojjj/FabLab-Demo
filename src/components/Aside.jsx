@@ -29,7 +29,7 @@ const Aside = () => {
 
       <div>
         <h3 className='dashboard-title'>Características</h3>
-        <Link reloadDocument to='/archive' className='navigate'>Archivados</Link>
+        <Link to='/archive' className='navigate'>Archivados</Link>
       </div>
     </aside>
   )

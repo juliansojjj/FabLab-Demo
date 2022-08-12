@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import {useGetDocsQuery, useSetOldMutation, useToArchiveCardMutation} from '../../app/cardsApi'
+import {useGetDocsQuery, useToArchiveCardMutation} from '../../app/cardsApi'
 import './Cards.css'
 import { Link } from 'react-router-dom'
 import Menu from '../../icons/menu.svg'
+import { db } from '../../firebase'
+import { doc, updateDoc } from 'firebase/firestore'
 
 const Cards = () => {
     const { data, error, isError } = useGetDocsQuery();
-    const [setOld] = useSetOldMutation()
     const [selectMenu,setSelectMenu] = useState(null)
     const [menuOpen,setMenuOpen] = useState(false)
     const [toArchiveCard] = useToArchiveCardMutation()
@@ -38,11 +39,14 @@ const Cards = () => {
       toArchiveCard(id)
     }
 
-    const setNewFalse = (e)=>{
+    const setNewFalse = async(e)=>{
       const id = e.target.attributes.getNamedItem("cardid").value;
       const notNew = e.target.attributes.getNamedItem("new").value;
-      if(notNew == 'true'){
-        setOld(id)
+      if(notNew == 'true' && id){
+        const docRef = doc(db,'card',id)
+        const data = {new:'false'}
+        await updateDoc(docRef,data).then(console.log('Card Old'))
+        .catch((err)=>{console.log(err.message)})
       }
     }
 
