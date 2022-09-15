@@ -2,9 +2,9 @@
 
 Página web para la administración de impresiones 3D del FabLab de Ort.
 
-## Available Scripts
+## Objetivos 
 
-In the project directory, you can run:
+...
 
 ### Participantes
 `Guido Sojnoczki`

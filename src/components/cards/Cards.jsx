@@ -5,12 +5,25 @@ import { Link } from 'react-router-dom'
 import Menu from '../../icons/menu.svg'
 import { db } from '../../firebase'
 import { doc, updateDoc } from 'firebase/firestore'
+import { useSelector } from 'react-redux'
+import { showFilter, orderFilter } from '../../features/filters/filtersSlice'
 
 const Cards = () => {
     const { data, error, isError } = useGetDocsQuery();
     const [selectMenu,setSelectMenu] = useState(null)
     const [menuOpen,setMenuOpen] = useState(false)
     const [toArchiveCard] = useToArchiveCardMutation()
+    const show = useSelector(showFilter)
+    const order = useSelector(orderFilter)
+    let arrayData = []
+
+    if(data){
+      arrayData = [...data]
+      if(order == 'recent'){
+        arrayData.sort((a,b)=>a.serialNum-b.serialNum)}
+      if(order == 'old'){
+        arrayData.sort((a,b)=>b.serialNum-a.serialNum)}
+    }
 
     const cardMenu = (e)=>{
       e.stopPropagation()
@@ -53,10 +66,12 @@ const Cards = () => {
   return (
     <div>
         <div className='cards-container'>
-        {isError && error.message}
-        {data ? data.map((item)=>{
-          if(item.archive !== 'true'){ 
-            return(
+          {isError && error.message}
+          {data
+            ? show !== ''
+              ? arrayData.filter(item=>item.state == show).map(item=>{
+                if(item.archive !== 'true'){
+                return(
                 <div key={item.id} className={item.new == 'true' ? `new-card cards-item` : `cards-item`}>
                   <div className='item-menu'>
                     <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu}/></div>
@@ -74,9 +89,30 @@ const Cards = () => {
                     <p className='cards-user'>{item.user}</p>
                   </Link>
                 </div>
-            )
-          }
-          }) : <h2>Loading...</h2>}
+          )}}) 
+              : arrayData.map(item=>{
+                if(item.archive !== 'true'){
+                  return(
+                <div key={item.id} className={item.new == 'true' ? `new-card cards-item` : `cards-item`}>
+                  <div className='item-menu'>
+                    <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu}/></div>
+                    {menuOpen ?
+                      selectMenu === `item-click-${item.id}` ? <div className='menu-option' archive={item.archive} onClick={archiveCard} cardid={item.id}>Archivar</div> : ''
+                    : ''}
+                  </div>
+                  <Link to={`/card/${item.id}`} cardid={item.id} new={item.new} onClick={setNewFalse}>
+                    <div className={`cards-container-img`}>                      
+                      <img src={item.image} className='cards-img' />
+                    </div>
+                    <div className={`${item.state} card-state`}></div>
+                    <h3 className='cards-title'>{item.title}</h3>
+                    <h4 className='cards-date'>{item.date}</h4>
+                    <p className='cards-user'>{item.user}</p>
+                  </Link>
+                </div>
+          )}}) 
+            : <h2>Loading...</h2>}
+
         </div>
     </div>
   )
