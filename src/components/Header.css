@@ -12,6 +12,7 @@ header{
     border: solid var(--neutralGrey);
     border-width: .5px;
     text-decoration: none;
+    z-index: 100;
 }
 
 .search-bar{
@@ -35,6 +36,36 @@ header{
 }
 .search-submit:active{
     transform: scale(.9);
+}
+.search-options{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 20.5em;
+    background-color: white;
+    max-height: 1em;
+}
+.options-grid{
+    display: grid;
+    grid-template-columns: auto max-content;
+}
+.options-grid-typeCell{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+}
+.search-options--child{
+    border-bottom: .5px solid var(--neutralGrey);
+    padding: .3em;
+    background-color: white;
+}
+.search-options--child:hover{
+    cursor: pointer;
+    background-color: var(--lightGrey);
+}
+.search-options--message{
+    margin-left: 11em;
+    color: var(--smokeGrey);
 }
 
 @media only screen and (max-width:530px){
