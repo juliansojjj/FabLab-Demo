@@ -35,8 +35,14 @@ const Verification = () => {
 
       return(
         session 
-        ? data?.admin !== 'false' 
+        ? data?.admin 
+          ? data?.admin !== 'false'
           ? <Outlet/> 
+          : <main>
+              <h1>Su usuario no está habilitado para ingresar :(</h1>
+              <h2>Comuníquese con un administrador para solucionarlo</h2>
+              <button onClick={logout} className='logout-button'>Cerrar Sesión</button>
+            </main>
           : <main>
               <h1>Su usuario no está habilitado para ingresar :(</h1>
               <h2>Comuníquese con un administrador para solucionarlo</h2>

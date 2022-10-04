@@ -14,12 +14,13 @@ const SearchBar = () => {
     const [searchInputFocus,setSearchInputFocus] = useState(false)
     const [searchBarFocus,setSearchBarFocus] = useState(false)
     const [typeSearch,setTypeSearch] = useState('')
-    let arrayData = []
+    let arrayData = ['']
 
     if (data){
       arrayData = [...data]
+      arrayData = arrayData.filter(item=>item.title)
       if(typeSearch.trim()){
-      arrayData = arrayData.filter(item=>item.title.toLowerCase().toString().includes(typeSearch))
+        arrayData = arrayData.filter(item=>item.title.toLowerCase().toString().includes(typeSearch))
       }
     }
 

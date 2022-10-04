@@ -1,0 +1,66 @@
+.presentation-container{
+    background-color: var(--darkBlue);
+    height: 100vh;
+    width: 100%;
+}
+.presentation-img{
+    height: 12em;
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(22deg) brightness(107%) contrast(101%);
+    margin: 4em 0 0 4em;
+}
+
+.main{
+    padding: 4em;
+}
+
+.sign-form{
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+    align-items: flex-end;
+}
+.sign-form--title{
+    font-size: 2.5em;
+    margin: 0 0 .75em 0;
+    text-align: end;
+    color: var(--darkBlue);
+}
+.sign-form--subtitle{
+    font-size: 1em;
+    margin-bottom: .5em;
+    text-align: end;
+    color: var(--smokeGrey);
+}
+.sign-form--input{
+    margin-bottom: 1.5em;
+    border-radius: .5em;
+    border: 2px solid var(--neutralGrey);
+    text-align: right;
+    padding-right: .5em;
+}
+.sign-form--btn{
+    width: 7em;
+    padding: .4em;
+    border: none;
+    border-radius: .5em;
+    background-color: var(--greenComplete);
+    color: white;
+}
+.sign-form--btn:hover{
+    background-color: #14769d;
+}
+.sign-form--btn:active{
+    transform: scale(.98);
+}
+.sign-form--error{
+    color: #cb0000;
+    font-style: italic;
+    margin-bottom: 1em;
+}
+.sign-redirect{
+    margin-top: 1em;
+    color:var(--redOverdue);
+}
+.sign-redirect:hover{
+    color: #570b0b;
+}

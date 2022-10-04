@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import Header from '../Header'
 import {signOut} from 'firebase/auth'
 import {auth} from '../../firebase'
@@ -7,8 +7,10 @@ import { useNavigate } from 'react-router-dom'
 import { useGetUsersQuery, useGetUserMutation } from '../../app/cardsApi'
 import { doc, updateDoc, getDoc, deleteDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
-import { onAuthStateChanged, deleteUser } from 'firebase/auth'
-import { useEffect } from 'react'
+import { onAuthStateChanged, deleteUser, updatePassword } from 'firebase/auth'
+import Edit from '../../icons/edit-pen.svg'
+import Cancel from '../../icons/xmark-solid.svg'
+import Check from '../../icons/check-solid.svg'
 
 const Profile = () => {
   const navigate = useNavigate()
@@ -19,6 +21,11 @@ const Profile = () => {
   const [getUser,{data:info,error:err}] = useGetUserMutation()
   const [email,setEmail] = useState()
   const [user,setUser] = useState()
+  const [editPass,setEditPass] = useState(false)
+  const [passError,setPassError] = useState()
+  const passMsgErrors = ['Firebase: Error (auth/requires-recent-login).',
+                          'Firebase: Password should be at least 6 characters (auth/weak-password).']
+  const [passSuccessAdvice,setPassSuccessAdvice] = useState()
 
   useEffect(()=>{
     if(auth.currentUser){
@@ -68,6 +75,30 @@ const Profile = () => {
       setSnackbar('Debe haber iniciado sesión recientemente para eliminar la cuenta')
     }}) 
   }
+
+  const managePass = (e)=>{
+    if(!editPass)setEditPass(true)
+    else setEditPass(false)
+  }
+
+  const updatePass = (e)=>{
+    e.preventDefault()
+    const mainPass = e.target.passInputMain.value
+    const repeatPass = e.target.passInputRepeat.value
+    if(mainPass != repeatPass)setPassError('Las contraseñas no coinciden')
+    else{
+      updatePassword(auth.currentUser,mainPass)
+      .then(()=>{
+        console.log('contraseña cambiada exitosamente')
+        setPassError()
+        setEditPass(false)
+      })
+      .catch(err=>{
+        console.log(err.message)
+        setPassError(err.message)})
+    }
+  }
+
   return (
     <div className='base'>
       <Header/>
@@ -96,36 +127,79 @@ const Profile = () => {
             {auth ? 
             <div className='user-info'>
               <div>
-                Dirección de email
+                <span>Dirección de email</span>
                 <div className='user-email'>{email ? email : ''}</div>
               </div>
-              <div>
-                Contraseña
-                <div className='user-pass'>*******</div>
+              <div className='user-pass'>
+                <span>Contraseña</span>
+                <div className='user-pass--btn'>
+                  {editPass 
+                    ? <button className='pass-btn--confirm' form='user-pass--form' type='submit'>
+                        <img src={Check}/>
+                      </button>
+                    : <button className='pass-btn--edit' onClick={managePass}>
+                        <img src={Edit}/>
+                      </button>
+                  }
+                  {editPass 
+                    ? <button className='pass-btn--cancel' onClick={managePass}>
+                        <img src={Cancel}/>
+                      </button> 
+                    : ''}
+                </div>
+                {editPass 
+                  ? <form onSubmit={updatePass} className='user-pass--form' id='user-pass--form'>
+                      <input type="password" name='passInputMain' className='pass-form--input' required/>
+                      <span>Repita la contraseña</span>
+                      <input type="password" name='passInputRepeat' className='pass-form--input' required/>
+                      {passError 
+                        ? <span className='pass-form--error'>
+                            {passError == passMsgErrors[0]
+                              ? 'Su sesión es demasiado vieja, vuelva a iniciar sesión'
+                              : passError == passMsgErrors[1]
+                                ? 'La contraseña debe tener como mínimo 6 caracteres'
+                                : passError}
+                          </span> 
+                        : ''}
+                    </form>
+                  : <div className='user-pass--show'>*******</div>}
               </div>
             </div>
             : ''}
 
-            <button onClick={logout} className='logout-button'>Cerrar Sesión</button>
-            <button onClick={(e)=>{setEliminateOption(true)}} className='logout-button'>Eliminar Usuario</button>
-            
             {info?.admin == 'main' 
             ? <div className='users-list'>
-              {data  
-                ? data.map(item=>{
-                  return(
-                <div className='users-list--item' key={item.id}>
-                  <span>{item.user}</span>
-                  <span>{item.email}</span>
-                  <div>
-                    <span><b>Administrador</b>:{item.admin=='false' ? 'No' : 'Sí'}</span>
-                    <button onClick={adminHandle} userid={item.id} admin={item.admin}>{item.admin=='false' ? 'Habilitar' : 'Desabilitar'}</button>
-                   </div>
+                <div className='users-list-title'>
+                  <span>Nombre</span>
+                  <span>Mail</span>
+                  <span>Administrador</span>
                 </div>
-              )})
-            : 'Loading...'}
+                {data  
+                  ? data.map(item=>{
+                    return(
+                  <div className='users-list--item' key={item.id}>
+                    <span>{item.user}</span>
+                    <span>{item.email}</span>
+                    <div>
+                      <span><b>Administrador</b>:{item.admin=='false' ? 'No' : 'Sí'}</span>
+                      {item.user !== info.user 
+                      ? <button 
+                        onClick={adminHandle} 
+                        userid={item.id} 
+                        admin={item.admin}
+                        className='users-list--btn'>
+                          {item.admin=='false' ? 'Habilitar' : 'Deshabilitar'}
+                        </button>
+                      : ''}
+                    </div>
+                  </div>
+                )})
+                  : 'Loading...'}
             </div>
             : '' }
+
+            <button onClick={logout} className='account-button account-logout'>Cerrar Sesión</button>
+            <button onClick={(e)=>{setEliminateOption(true)}} className='account-button'>Eliminar Usuario</button>
           </main>
     </div>
   )

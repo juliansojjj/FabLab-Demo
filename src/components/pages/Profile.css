@@ -1,32 +1,64 @@
-.logout-button{
+.account-button{
     border-style: none;
     background-color: rgb(230, 0, 0);
     color: white;
     border-radius: .3em;
     padding: .5em;
-    margin: .5em;
+    margin: 2em 1em 0 0;
 }
-.logout-button:hover{
+.account-button:hover{
     background-color: rgb(173, 0, 0);
     transition: all .1s ease-in-out;
 }
-.logout-button:active{
+.account-button:active{
     transform: scale(0.98);
+}
+.account-logout{
+    background-color: var(--smokeGrey);
+}
+.account-logout:hover{
+    background-color: #808080;
 }
 
 .users-list{
-    border-radius: 2em;
-    background-color: red;
+    width: fit-content;
+    margin-top: 1em;
+}
+.users-list-title{
+    display: grid;
+    grid-template-columns: repeat(3,minmax(10em,15em));
+    background-color: var(--lightGrey);
+    color: var(--smokeGrey);
+    justify-content: center;
+    justify-items: center;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    padding: .3em;
 }
 .users-list--item{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    border: 1px solid var(--neutralGrey);
-    border-bottom: .5px;
-    background-color: var(--lightGrey);
+    grid-template-columns: repeat(3,minmax(10em,15em));
+    border-bottom: .5px solid var(--neutralGrey);
+    background-color: white;
+    padding: .5em;
+    justify-items: center;
+    align-items: center;
 }
-.user-list--item:nth-last-child(1){
-    background-color: red;
+.users-list--item:last-child{
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border-bottom: none;
+}
+.users-list--btn{
+    border: none;
+    border-radius: .5em;
+    padding: .4em;
+    margin-left: 1em;   
+    background-color: var(--neutralGrey);
+}
+.users-list--btn:hover{
+    background-color: var(--smokeGrey);
+    color: black;
 }
 
 .snackbar{
@@ -62,7 +94,14 @@
     border-radius: .3em;
     align-items: center;
 }
+
 .user-pass{
+    display: grid;
+    grid-template-areas: "title btn"
+                         "pass  btn";
+    align-items: flex-end;
+}
+.user-pass--show{
     display: flex;
     background-color: var(--lightGrey);
     max-width: 15em;
@@ -70,6 +109,83 @@
     border: 1px solid var(--neutralGrey);
     border-radius: .3em;
     align-items: center;
+}
+.user-pass--form{
+    display: flex;
+    flex-direction: column;
+}
+.pass-form--input{
+    border: 1px solid var(--neutralGrey);
+    border-radius: .3em;
+}
+.pass-form--error{
+    color: #cb0000;
+    font-style: italic;
+}
+.user-pass--btn{
+    display: flex;
+    grid-row: span 2;
+}
+.pass-btn--edit{
+    width: 1.5em;
+    height: 1.5em;
+    padding: .3em;
+    border: none;
+    border-radius: .5em;
+    background-color: #d69336;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1em;
+}
+.pass-btn--edit img{
+    width: .8em;
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(22deg) brightness(107%) contrast(101%);
+}
+.pass-btn--edit:hover{
+    background-color: #8b5f23;
+}
+.pass-btn--edit:active{
+    transform: scale(0.9);
+}
+.pass-btn--cancel{
+    width: 1.5em;
+    height:1.5em;
+    border: none;
+    border-radius: .5em;
+    background-color: #cb0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: .7em;
+}
+.pass-btn--cancel img{
+    width: .7em;
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(22deg) brightness(107%) contrast(101%); 
+}
+.pass-btn--cancel:hover{
+    background-color: #860000;
+}
+
+.pass-btn--confirm{
+    width: 1.5em;
+    height:1.5em;
+    border: none;
+    border-radius: .5em;
+    background-color: #3ed850;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: .7em;
+}
+.pass-btn--confirm img{
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(22deg) brightness(107%) contrast(101%); 
+}
+.pass-btn--confirm:hover{
+    background-color: #2b9337;
+}
+.pass-btn--confirm:active{
+    transform: scale(0.9);
 }
 
 .eliminate-container{
