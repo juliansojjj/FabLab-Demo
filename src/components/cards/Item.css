@@ -1,27 +1,30 @@
 .item-container{
     display: grid;
     grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
     justify-items: center;
     gap: 0 1em;
     align-items: flex-start;
 }
 .item-data{
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
+    background-color: var(--lightGrey);
+    padding: 1em;
+    box-sizing: border-box ;
+    border-radius: 1em;
+    color: var(--smokeGrey);
 }
 
 .item-img-container{
-    width: 40em;
-    border: solid var(--neutralGrey);
-    border-width: .5px;
+    max-width: 35em;
+    margin-top: 2em;
 }
 
 .item-img{
     width: 100%;
-    margin: auto;
-    margin-top: 2em;
-    
 }
 
 .item-state{
@@ -34,24 +37,47 @@
     justify-self: flex-end;
 }
 
-.item-state--alert{
-    height: 1.5em;
+.item-alert{
+    height: 1.7em;
     display: flex;
-    background-color: #ff5900;
-    color:cornsilk;
+    background-color: #e00000 ;
+    color: white;
     align-items: center;
-    top:2vh;
+    top:5vh;
     right: 0;
-    border-left: 8px solid #741c11;
-    position: absolute;
+    border-left: 10px solid #990000;
+    position: fixed;
     padding: .5em;
+    z-index: 110;
+    border-radius: .5em;
+    animation-name: alert-in, alert-out;
+    animation-duration: .15s, 1s;
+    animation-delay: 0s, 3s;
 }
-.alert-btn{
-    width: 1.5em;
-    margin: 0 0 0 .5em;
+.item-alert:hover{
+    cursor: default;
 }
-.alert-btn:hover{
-    color: #741c11;
+.item-alert-btn{
+    height: 1.4em;
+    margin: 0 .3em 0 .5em;
+    filter: invert(9%) sepia(97%) saturate(3684%) hue-rotate(354deg) brightness(102%) contrast(114%);
+}
+.item-alert-btn:hover{
+    filter: invert(13%) sepia(32%) saturate(6387%) hue-rotate(349deg) brightness(82%) contrast(120%);
+}
+.item-alert-sign{
+    height: 1.7em;
+    margin: 0 .7em 0 .2em;
+    filter: invert(9%) sepia(97%) saturate(3684%) hue-rotate(354deg) brightness(102%) contrast(114%);
+}
+
+@keyframes alert-in{
+    0% {transform: translateX(12em);}
+    100% {transform: translateX(0);}
+}
+@keyframes alert-out{
+    0% {transform: translateX(0);}
+    100% {transform: translateX(25em);}
 }
 
 hr {
@@ -64,43 +90,117 @@ hr {
   }
 
 .item-title{
-    font-family: 'SF Pro Display - Bold';
     font-size: 2em;
     margin: .5em 0 .5em 0;
+    color: black;
 }
 
 .item-subtitle{
     margin-bottom: 0;
-    font-size: 1.1em;
-    font-family: 'SF Pro Display - Medium';
+    color: var(--neutralGrey);
+    font-size: 1.2em;
 }
 
 .item-text{
     margin-top: .5em;
     margin-bottom: 2em;
+    color: var(--smokeGrey);
 }
 
-.item-info{
-    background-color: var(--lightGrey);
+.item-text--printer{
+    margin-top: .5em;
+    border-radius: .5em;
+    border: 1px solid var(--neutralGrey);
+    padding: .2em;
+    width: fit-content;
+}
+.item-text--printer:hover{
+    cursor: default;
+}
+.item-text--printer img{
+    height: .8em;
+    margin: 0 .4em 0 .5em;
+    /*filter: invert(99%) sepia(3%) saturate(737%) hue-rotate(162deg) brightness(116%) contrast(76%);
+    */ filter: invert(69%) sepia(8%) saturate(0%) hue-rotate(222deg) brightness(92%) contrast(86%);
+}
+
+.item-printer-options{
+    position: absolute;
+    top: 29.2em;
+    width: 5.7em;
     display: flex;
     flex-direction: column;
+}
+.item-printer-option{
+    background-color: var(--lightGrey);
+    border: 1px solid var(--neutralGrey);
+    border-bottom: 0;
+    padding: .3em;
+}
+.item-printer-option:hover{
+    background-color: var(--neutralGrey);
+    cursor: default;
+}
+.item-printer-option:first-child{
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+}
+.item-printer-option:last-child{
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+    border-bottom: 1px solid var(--neutralGrey);;
+}
+
+.item-file{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-column: span 2;
+    background-color: var(--lightGrey);
     border-radius: 1em;
-    padding: .5em;
-    min-width: fit-content;
+    padding: 1em;
     margin: 1em 0 0 0;
+    width: 100%;
+}
+.item-file--info{
+    display: flex;
+    flex-direction: column;
+}
+
+.item-file--download{
+    background-color: green;
+    border-radius: .5em;
+    height: fit-content;
+    width: fit-content;
+    text-align: center;
+    padding: .5em;
+    color: white;
+    margin: 1em 1em 0 0;
+    cursor: default;
+    justify-self: flex-end;
+}
+.item-file--download:hover{
+    background-color: darkgreen;
+    cursor: default;
+}
+.item-file--download:active{
+    transform: scale(.98);
+}
+.item-file--download img{
+    height: 1em;
+    margin-left: .5em;
+    filter: invert(99%) sepia(0%) saturate(0%) hue-rotate(168deg) brightness(102%) contrast(102%);
 }
 
 .complete-button{
     text-decoration: none;
-    width: 12em;
-    height: 2em;
-    color: white;
+    width: fit-content;
+    max-height: fit-content;
+    padding: .4em;
     margin-right: 4em;
+    color: white;
     background-color: var(--violetIncomplete);
-    border-radius: .6em;
+    border-radius: .4em;
     border: none;
-    font-family: 'SF Pro Display - Medium';
-    box-shadow: 0 0 1em .1em rgba(0, 0, 0, .05);
 }
 .complete-button:hover{
     background-color: rgb(69, 23, 69);  
@@ -112,15 +212,14 @@ hr {
 
 .incomplete-button{
     text-decoration: none;
-    width: 12em;
-    height: 2em;
+    width: fit-content;
+    max-height: fit-content;
+    padding: .4em;
     margin-right: 4em;
     color: white;
     background-color: var(--greenComplete);
-    border-radius: .6em;
+    border-radius: .4em;
     border: none;
-    font-family: 'SF Pro Display - Medium';
-    box-shadow: 0 0 1em .1em rgba(0, 0, 0, .05);
 }
 .incomplete-button:hover{
     background-color: green;  
@@ -132,17 +231,13 @@ hr {
 
 .item-complete{
     color:var(--greenComplete);
-    background-color: white;
-    font-family: 'SF Pro Display - Medium';
-    font-size: 1.5em;
+    font-size: 1.1em;
     margin: .5em 0 0 0;
 }
 
 .item-incomplete{
     color:var(--violetIncomplete);
-    background-color: white;
-    font-family: 'SF Pro Display - Medium';
-    font-size: 1.5em;
+    font-size: 1.1em;
     margin: .5em 0 0 0;
 }
 

@@ -25,8 +25,11 @@
     margin-top: 1em;
 }
 .users-list-title{
+    margin: 2em 0 1em 0;
+}
+.users-list-column{
     display: grid;
-    grid-template-columns: repeat(3,minmax(10em,15em));
+    grid-template-columns: repeat(3,minmax(10em,20em));
     background-color: var(--lightGrey);
     color: var(--smokeGrey);
     justify-content: center;
@@ -37,7 +40,7 @@
 }
 .users-list--item{
     display: grid;
-    grid-template-columns: repeat(3,minmax(10em,15em));
+    grid-template-columns: repeat(3,minmax(10em,20em));
     border-bottom: .5px solid var(--neutralGrey);
     background-color: white;
     padding: .5em;
@@ -53,7 +56,7 @@
     border: none;
     border-radius: .5em;
     padding: .4em;
-    margin-left: 1em;   
+    margin: .5em;   
     background-color: var(--neutralGrey);
 }
 .users-list--btn:hover{
@@ -61,24 +64,76 @@
     color: black;
 }
 
-.snackbar{
-    height: 1.5em;
+.profile-alert{
+    height: 1.7em;
     display: flex;
-    background-color: #ff5900;
-    color:cornsilk;
+    background-color: #e00000 ;
+    color: white;
     align-items: center;
-    top:8vh;
+    top:5vh;
     right: 0;
-    border-left: 8px solid #741c11;
-    position: absolute;
+    border-left: 10px solid #990000;
+    position: fixed;
     padding: .5em;
+    z-index: 110;
+    border-radius: .5em;
+    animation-name: alert-in, alert-out;
+    animation-duration: .15s, 1s;
+    animation-delay: 0s, 3s;
 }
-.snackbar-btn{
-    width: 1.5em;
-    margin: 0 0 0 .5em;
+.profile-alert:hover{
+    cursor: default;
 }
-.snackbar-btn:hover{
-    color: #741c11;
+.profile-alert-btn{
+    height: 1.4em;
+    margin: 0 .3em 0 .5em;
+    filter: invert(9%) sepia(97%) saturate(3684%) hue-rotate(354deg) brightness(102%) contrast(114%);
+}
+.profile-alert-btn:hover{
+    filter: invert(13%) sepia(32%) saturate(6387%) hue-rotate(349deg) brightness(82%) contrast(120%);
+}
+.profile-alert-sign{
+    height: 1.7em;
+    margin: 0 .7em 0 .2em;
+    filter: invert(9%) sepia(97%) saturate(3684%) hue-rotate(354deg) brightness(102%) contrast(114%);
+}
+
+.profile-successAlert{
+    height: 1.7em;
+    display: flex;
+    background-color: #6bbf59 ;
+    color: white;
+    align-items: center;
+    top:5vh;
+    right: 0;
+    border-left: 10px solid #08a045;
+    position: fixed;
+    padding: .5em;
+    z-index: 110;
+    border-radius: .5em;
+    animation-name: alert-in, alert-out;
+    animation-duration: .15s, 1s;
+    animation-delay: 0s, 3s;
+}
+.profile-successAlert:hover{
+    cursor: default;
+}
+.profile-successAlert-btn{
+    height: 1.4em;
+    margin: 0 .3em 0 .5em;
+    filter: invert(31%) sepia(98%) saturate(1370%) hue-rotate(125deg) brightness(98%) contrast(94%);
+}
+.profile-successAlert-btn:hover{
+    filter: invert(18%) sepia(39%) saturate(7322%) hue-rotate(148deg) brightness(83%) contrast(95%);
+}
+
+@keyframes alert-in{
+    0% {transform: translateX(12em);}
+    100% {transform: translateX(0);}
+}
+@keyframes alert-out{
+    0% {transform: translateX(0);}
+    100% {transform: translateX(25em);}
 }
 
 .user-info{
@@ -93,6 +148,7 @@
     border: 1px solid var(--neutralGrey);
     border-radius: .3em;
     align-items: center;
+    padding-left: .2em;
 }
 
 .user-pass{
@@ -109,6 +165,7 @@
     border: 1px solid var(--neutralGrey);
     border-radius: .3em;
     align-items: center;
+    padding-left: .2em;
 }
 .user-pass--form{
     display: flex;
@@ -212,6 +269,7 @@
 .eliminate-alert h2{
     font-size: 1.8em;
 }
+
 .eliminate-confirm{
     background-color: red;
     color: white;

@@ -1,111 +1,161 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux/es/exports'
 import Header from '../Header'
 import './Item.css'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from '../../firebase'
 import { useGetCardMutation, useUpdateToCompleteMutation, useUpdateToIncompleteMutation } from '../../app/cardsApi'
-import Alert from "../../icons/triangle-alert.svg"
+import Alert from "../../icons/triangle-alert-empty.svg"
+import Xmark from "../../icons/xmark-solid.svg"
+import Download from "../../icons/download-solid.svg"
+import ArrowDown from '../../icons/arrow-down.svg'
 
 const Item = () => {
-    const [getCard,{data, error, isLoading, isError}] = useGetCardMutation()
+    const [getCard, { data, error, isLoading, isError }] = useGetCardMutation()
     const [updateToComplete] = useUpdateToCompleteMutation()
     const [updateToIncomplete] = useUpdateToIncompleteMutation()
     const params = useParams()
     const dispatch = useDispatch
     const [advice, setAdvice] = useState(true)
-    const [alert,setAlert] = useState('')
-    
-    const getDate = ()=>{
-        if (data){
+    const [alert, setAlert] = useState(false)
+    const [menu, setMenu] = useState(false)
+
+    const getDate = () => {
+        if (data) {
             const date = data.date
             const fecha = date.split('/')
             console.log(fecha)
-        
+
             const today = new Date()
             const year = today.getFullYear()
             const month = today.getMonth()
             const day = today.getDate()
 
-            if(year > fecha[2]){return console.log('Trabajo atrasado')}
-            else if(month > fecha[1]){return console.log('Trabajo atrasado')}
-            else if (day > fecha[0]){return console.log('Trabajo atrasado')}
-            }
+            if (year > fecha[2]) { return console.log('Trabajo atrasado') }
+            else if (month > fecha[1]) { return console.log('Trabajo atrasado') }
+            else if (day > fecha[0]) { return console.log('Trabajo atrasado') }
+        }
     }
 
-    const stateToComplete = async (e)=>{
+    const stateToComplete = async (e) => {
         e.preventDefault()
-        const {item} = params;
-        const string = Object.entries({item}).shift().pop()
+        const { item } = params;
+        const string = Object.entries({ item }).shift().pop()
         updateToComplete(string)
-        setAlert('show')
+        alertManage()
     }
-    const stateToIncomplete = async (e)=>{
+    const stateToIncomplete = async (e) => {
         e.preventDefault()
-        const {item} = params;
-        const string = Object.entries({item}).shift().pop()
+        const { item } = params;
+        const string = Object.entries({ item }).shift().pop()
         updateToIncomplete(string)
-        setAlert('show')
+        alertManage()
     }
 
-    useEffect(()=>{
-        const {item} = params;
-        const string = Object.entries({item}).shift().pop()
+    const setMenuOpen = (e) => {
+        if (menu) setMenu(false)
+        else setMenu(true)
+    }
+
+    const alertManage = (e)=>{
+        if (alert) setAlert(false);
+        else if(!alert){
+            setAlert(true);
+            setTimeout(()=>{setAlert(false)},4000)
+        }
+    }
+
+    const updatePrinterCard = async (e)=>{
+        const { item } = params;
+        const string = Object.entries({ item }).shift().pop()
+        const dataPrinter = e.target.getAttribute("data-printer");
+        const docRef = doc(db,'card',string)
+        const data = {printer:dataPrinter}
+        await updateDoc(docRef,data).then(()=>console.log('Printer actualizada'))
+        setMenu(false)
+        alertManage()
+    }
+
+    useEffect(() => {
+        const { item } = params;
+        const string = Object.entries({ item }).shift().pop()
         getCard(string)
-    },[])
+    }, [])
 
- return (
-    <div className='base'>
-        <Header/>
-        {isError ? error : ''}
-        {isLoading ? <h2>Loading...</h2> : data ? data.map(item=>{
-            return(
-                <main key={item.id} className='item-container' >
-                    <div className='item-img-container item-container--child'>
-                        <img src={item.image} className='item-img' />
-                    </div>
-                    <div className='item-data item-container--child'>
-                        <h2 className='item-title'>{item.title}</h2>
-                        <hr />
-                        <h3 className='item-subtitle'>Estado</h3>
-                        <div className='item-state'>
-                            <h4 className={`item-${item.state} item-state--child`}>
-                            {item.state == 'complete' ? 'Completo' : ''}
-                            {item.state == 'incomplete' ? 'Incompleto' : ''}
-                            </h4>                    
-                            {item.state == 'complete' ? <button onClick={stateToIncomplete} className={`${item.state}-button item-state--child`}>Marcar como incompleto</button> : ''}
-                            {item.state == 'incomplete' ? <button onClick={stateToComplete} className={`${item.state}-button item-state--child`}>Marcar como completo</button> : ''}
+    return (
+        <div className='base'>
+            <Header />
+            {isError ? error : ''}
+            {isLoading ? <h2>Loading...</h2> : data ? data.map(item => {
+                return (
+                    <main key={item.id} className='item-container' >
+                        <div className='item-img-container item-container--child'>
+                            <img src={item.image} className='item-img' />
                         </div>
-                        {alert == 'show' ? 
-                                <div className={`item-state--alert`}>
-                                    <img src={Alert} className='img-min' />
-                                    <span className='alert-msg'>Refresque la página para ver los cambios</span>
-                                    <span className='alert-btn' onClick={(e)=>{setAlert('hidden')}}>X</span>
-                                </div> 
-                            :''} 
-                        
-                        <h3 className='item-subtitle'>Fecha límite</h3>
-                        <p className='item-text' >{item.date}</p>
-                        
-                        <h3 className='item-subtitle'>Alumno</h3>
-                        <p className='item-text'>{item.user}</p>
-                        
-                        <h3 className='item-subtitle'>Año</h3>
-                        <p className='item-text'>{item.userY}</p>
-                        <hr />
+                        <div className='item-data item-container--child'>
+                            <h3 className='item-title'>{item.user} - {item.title}</h3>
+                            <span className='item-subtitle'>Estado</span>
+                            <div className='item-state'>
+                                <h4 className={`item-${item.state} item-state--child`}>
+                                    {item.state == 'complete' ? 'Completo' : ''}
+                                    {item.state == 'incomplete' ? 'Incompleto' : ''}
+                                </h4>
+                                {item.state == 'complete' ? <button onClick={stateToIncomplete} className={`${item.state}-button item-state--child`}>Marcar como incompleto</button> : ''}
+                                {item.state == 'incomplete' ? <button onClick={stateToComplete} className={`${item.state}-button item-state--child`}>Marcar como completo</button> : ''}
+                            </div>
 
-                        <div className='item-info'>
-                            <h3 className='item-subtitle'>Información</h3>
-                            <h4 className='item-subtitle'>Medidas</h4>
-                            <p className='item-text'>40 x 50</p>
-                            <h4 className='item-subtitle'>Descripción</h4>
-                            <p className='item-text'>{item.description}</p>
+                            <span className='item-subtitle'>Fecha límite</span>
+                            <span className='item-text' >{item.date}</span>
+
+                            <span className='item-subtitle'>Alumno</span>
+                            <span className='item-text'>{item.user}</span>
+
+                            <span className='item-subtitle'>Año</span>
+                            <span className='item-text'>{item.userY}</span>
+
+                            <span className='item-subtitle'>Impresora</span>
+                            <div className='item-text--printer' onClick={setMenuOpen} >
+                                <span>{item.printer}</span>
+                                <img src={ArrowDown} />
+                            </div>
+                            {menu
+                                ? <div className='item-printer-options'>
+                                    <span className='item-printer-option' onClick={updatePrinterCard} data-printer='Printer 1'>Printer 1</span>
+                                    <span className='item-printer-option' onClick={updatePrinterCard} data-printer='Printer 2'>Printer 2</span>
+                                    <span className='item-printer-option' onClick={updatePrinterCard} data-printer='Printer 3'>Printer 3</span>
+                                </div>
+                                : ''}
                         </div>
-                    </div>
-                </main>)}
+                        {alert ?
+                            <div className='item-alert'>
+                                <img src={Alert} className='item-alert-sign' />
+                                <span className='item-alert-msg'>Refresque la página para ver los cambios</span>
+                                <img className='item-alert-btn' onClick={alertManage} src={Xmark} />
+                            </div>
+                            : ''}
+
+                        <div className='item-file'>
+                            <div className='item-file--info item-file--son'>
+                                <h3>Información</h3>
+                                <span className='item-subtitle'>Medidas</span>
+                                <p className='item-text'>{item.measures}</p>
+                                <span className='item-subtitle'>Relleno</span>
+                                <p className='item-text'>{item.filling}</p>
+                                <span className='item-subtitle'>Descripción</span>
+                                <p className='item-text'>{item.description}</p>
+                            </div>
+                            <a href={item.file} download className='item-file--download item-file--son'>
+                                <span>Descargar</span>
+                                <img src={Download} />
+                            </a>
+                        </div>
+                    </main>)
+            }
             )
-        : 'missing data'}
-    </div>
-  )
+                : 'missing data'}
+        </div>
+    )
 }
 
 export default Item
