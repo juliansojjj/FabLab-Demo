@@ -64,6 +64,46 @@
     color: black;
 }
 
+.students-list-title{
+    margin: 2em 0 1em 0;
+}
+.students-list-column{
+    display: grid;
+    grid-template-columns: minmax(10em,20em) 4em repeat(2,minmax(10em,20em));
+    background-color: var(--lightGrey);
+    color: var(--smokeGrey);
+    justify-content: center;
+    justify-items: center;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    padding: .3em;
+}
+.students-list--item{
+    display: grid;
+    grid-template-columns: minmax(10em,20em) 4em repeat(2,minmax(10em,20em));
+    border-bottom: .5px solid var(--neutralGrey);
+    background-color: white;
+    padding: .5em;
+    justify-items: center;
+    align-items: center;
+}
+.students-list--item:last-child{
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border-bottom: none;
+}
+.students-list--btn{
+    border: none;
+    border-radius: .5em;
+    padding: .4em;
+    margin: .5em;   
+    background-color: var(--neutralGrey);
+}
+.students-list--btn:hover{
+    background-color: var(--smokeGrey);
+    color: black;
+}
+
 .profile-alert{
     height: 1.7em;
     display: flex;

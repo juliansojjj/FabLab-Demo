@@ -1,0 +1,123 @@
+.table-column{
+    display: grid;
+    grid-template-columns: repeat(3,minmax(15em,20em));
+    background-color: var(--lightGrey);
+    color: var(--smokeGrey);
+    justify-items: center;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    padding: .3em;
+    max-width: 60em;
+}
+
+.table-item{
+    display: grid;
+    grid-template-columns: minmax(15em,20em) minmax(30em,40em);
+    text-align: center;
+    padding: .3em;
+    border-bottom: .5px solid var(--neutralGrey);
+    background-color: white;
+    max-width: 60em;
+}
+
+.table-item:last-child{
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border-bottom: none;
+}
+
+.table-item--container{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.table-container--child{
+    display: grid;
+    grid-template-columns: repeat(2,minmax(15em,20em));
+    justify-items: center;
+    padding: .2em 0 .2em 0;
+}
+
+.table-title{
+    margin-bottom: 1em;
+}
+
+.table-link{
+    color: var(--redOverdue);
+}
+.table-link:hover{
+    color: rgb(134, 0, 0);
+}
+
+.table-incomplete-btn{
+    text-decoration: none;
+    width: fit-content;
+    max-height: fit-content;
+    padding: .3em;
+    margin-right: 4em;
+    color: white;
+    background-color: var(--greenComplete);
+    border-radius: .4em;
+    border: none;
+}
+.table-incomplete-btn:hover{
+    background-color: green;  
+    transition: all .1s ease-in-out;
+}
+.table-incomplete-btn:active{
+    transform: scale(0.98);
+}
+
+.table-complete-btn{
+    text-decoration: none;
+    width: fit-content;
+    max-height: fit-content;
+    padding: .3em;
+    margin-right: 4em;
+    color: white;
+    background-color: var(--violetIncomplete);
+    border-radius: .4em;
+    border: none;
+}
+.table-complete-btn:hover{
+    background-color: rgb(69, 23, 69);  
+    transition: all .1s ease-in-out;
+}
+.table-complete-btn:active{
+    transform: scale(0.98);
+}
+
+.table-alert{
+    height: 1.7em;
+    display: flex;
+    background-color: #e00000 ;
+    color: white;
+    align-items: center;
+    top:5vh;
+    right: 0;
+    border-left: 10px solid #990000;
+    position: fixed;
+    padding: .5em;
+    z-index: 110;
+    border-radius: .5em;
+    animation-name: alert-in, alert-out;
+    animation-duration: .15s, 1s;
+    animation-delay: 0s, 3s;
+}
+.table-alert:hover{
+    cursor: default;
+}
+.table-alert-btn{
+    height: 1.4em;
+    margin: 0 .3em 0 .5em;
+    filter: invert(9%) sepia(97%) saturate(3684%) hue-rotate(354deg) brightness(102%) contrast(114%);
+}
+.table-alert-btn:hover{
+    filter: invert(13%) sepia(32%) saturate(6387%) hue-rotate(349deg) brightness(82%) contrast(120%);
+}
+.table-alert-sign{
+    height: 1.7em;
+    margin: 0 .7em 0 .2em;
+    filter: invert(9%) sepia(97%) saturate(3684%) hue-rotate(354deg) brightness(102%) contrast(114%);
+}

@@ -10,6 +10,7 @@ import NotFound from './components/pages/NotFound';
 import Signup from './components/pages/Signup';
 import Login from './components/pages/Login';
 import Verification from './components/pages/Verification';
+import Table from './components/pages/Table';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
                   <Route path='/' element={<Home/>} />
                   <Route path='profile' element={<Profile/>}/>
                   <Route path='archive' element={<Archive/>} />
+                  <Route path='table' element={<Table/>} />
                   <Route path='card/:item' element={<Item/>} />
                   <Route path='card/search/:input' element={<SearchCards/>} />
               </Route>

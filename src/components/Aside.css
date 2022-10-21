@@ -15,12 +15,25 @@
     margin-bottom: 1em;
 }
 
+.dashboard-links{
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-links--child{
+    margin-top: .5em;
+}
+
 .dashboard-title{
     color: var(--neutralGrey);
     margin: 0 0 .5em 0;
     font-family: 'SF Pro Display - Regular';
     font-weight: 400;
     font-size: 1.4em;
+}
+
+.dashboard-links-title{
+    margin-bottom: 0;
 }
 
 #main-title{

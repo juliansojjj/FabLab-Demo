@@ -51,26 +51,43 @@ const Profile = () => {
   const adminHandle = async (e) => {
     const id = e.target.attributes.getNamedItem("data-userid").value;
     const admin = e.target.attributes.getNamedItem("data-admin").value;
-    const operation = e.target.attributes.getNamedItem("data-operation").value; 
+    const operation = e.target.attributes.getNamedItem("data-operation").value;
     console.log(operation)
     const docRef = doc(db, 'Users', id)
     if (admin == 'false' && operation == 'true') {
       let data = { admin: 'true' }
       await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
         .catch((err) => { console.log(err.message) })
-    } 
-    else if (admin == 'true' && operation == 'false'){
+    }
+    else if (admin == 'true' && operation == 'false') {
       let data = { admin: 'false' }
       await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
         .catch((err) => { console.log(err.message) })
-    } 
-    else if (admin == 'true' && operation == 'admin'){
+    }
+    else if (admin == 'true' && operation == 'admin') {
       let data = { admin: 'admin' }
       await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
         .catch((err) => { console.log(err.message) })
     }
-    else if (admin == 'admin' && operation == 'true'){
+    else if (admin == 'admin' && operation == 'true') {
       let data = { admin: 'true' }
+      await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
+        .catch((err) => { console.log(err.message) })
+    }
+  }
+
+  const studentHandle = async (e) => {
+    const id = e.target.attributes.getNamedItem("data-userid").value;
+    const student = e.target.attributes.getNamedItem("data-student").value;
+    const operation = e.target.attributes.getNamedItem("data-operation").value;
+    const docRef = doc(db, 'Users', id)
+    if (student == 'false' && operation == 'true') {
+      let data = { student: 'true' }
+      await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
+        .catch((err) => { console.log(err.message) })
+    }
+    else if (student == 'true' && operation == 'false') {
+      let data = { student: 'false' }
       await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
         .catch((err) => { console.log(err.message) })
     }
@@ -219,41 +236,80 @@ const Profile = () => {
             </div>
             {data
               ? data.map(item => {
-                return (
-                  <div className='users-list--item' key={item.id}>
-                    <span>{item.user}</span>
-                    <span>{item.email}</span>
-                    <div>
-                      <span><b>Administrador</b>:{item.admin == 'false' ? 'No' : item.admin == 'admin' ? 'Admin' : 'Si'}</span>
-                      {item.user !== info.user
-                        ? <div>
-                          <button
-                            onClick={adminHandle}
-                            data-userid={item.id}
-                            data-admin={item.admin}
-                            className='users-list--btn'
-                            data-operation={item.admin == 'false' ? 'true' : 'false'}>
-                              {item.admin == 'false' ? 'Habilitar' : 'Deshabilitar'}
-                          </button>
-                          {item.admin == 'true' || item.admin == 'admin'
-                            ? <button
-                              className='users-list--btn'
+                if (item.admin !== 'student') {
+                  return (
+                    <div className='users-list--item' key={item.id}>
+                      <span>{item.user}</span>
+                      <span>{item.email}</span>
+                      <div>
+                        <span><b>Administrador</b>:{item.admin == 'false' ? 'No' : item.admin == 'admin' ? 'Admin' : 'Si'}</span>
+                        {item.user !== info.user
+                          ? <div>
+                            <button
                               onClick={adminHandle}
                               data-userid={item.id}
                               data-admin={item.admin}
-                              data-operation={item.admin == 'admin' ? 'true' : 'admin'}>
-                                {item.admin == 'admin' ? 'Descender rango' : 'Aumentar rango'}
+                              className='users-list--btn'
+                              data-operation={item.admin == 'false' ? 'true' : 'false'}>
+                              {item.admin == 'false' ? 'Habilitar' : 'Deshabilitar'}
                             </button>
-                            : ''}
-                        </div>
-                        : ''}
+                            {item.admin == 'true' || item.admin == 'admin'
+                              ? <button
+                                className='users-list--btn'
+                                onClick={adminHandle}
+                                data-userid={item.id}
+                                data-admin={item.admin}
+                                data-operation={item.admin == 'admin' ? 'true' : 'admin'}>
+                                {item.admin == 'admin' ? 'Descender rango' : 'Aumentar rango'}
+                              </button>
+                              : ''}
+                          </div>
+                          : ''}
+                      </div>
                     </div>
-                  </div>
-                )
+                  )
+                }
               })
               : 'Loading...'}
+
+            <h3 className='students-list-title'>Lista de alumnos</h3>
+            <div className='students-list-column'>
+              <span>Nombre</span>
+              <span>Año</span>
+              <span>Mail</span>
+              <span>Estado</span>
+            </div>
+            {data
+              ? data.map(item => {
+                if (item.admin == 'student') {
+                  return (
+                    <div className='students-list--item' key={item.id}>
+                      <span>{item.user}</span>
+                      <span>{item.year}</span>
+                      <span>{item.email}</span>
+                      <div>
+                        <span>{item.student == 'false' ? 'Deshabilitado' : 'Habilitado'}</span>
+                        <div>
+                            <button
+                              onClick={studentHandle}
+                              data-userid={item.id}
+                              data-student={item.student}
+                              className='students-list--btn'
+                              data-operation={item.student == 'false' ? 'true' : 'false'}>
+                              {item.student == 'false' ? 'Habilitar' : 'Deshabilitar'}
+                            </button>
+                          </div>
+                      </div>
+                    </div>
+                  )
+                }
+              })
+              : 'Loading...'}
+
           </div>
           : ''}
+
+
 
         <button onClick={logout} className='account-button account-logout'>Cerrar Sesión</button>
         <button onClick={(e) => { setEliminateOption(true) }} className='account-button'>Eliminar Usuario</button>

@@ -113,9 +113,10 @@ const Aside = () => {
           : ''}
       </div>
 
-      <div>
-        <h3 className='dashboard-title'>Características</h3>
-        <Link to='/archive' className='navigate'>Archivados</Link>
+      <div className='dashboard-links'>
+        <h3 className='dashboard-title dashboard-links-title'>Características</h3>
+        <Link to='/archive' className='navigate dashboard-links--child'>Archivados</Link>
+        <Link to='/table' className='navigate dashboard-links--child'>List view</Link>
       </div>
     </aside>
   )
