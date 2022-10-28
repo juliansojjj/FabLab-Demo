@@ -5,7 +5,7 @@ import Header from '../Header'
 import './Item.css'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
-import { useGetCardMutation, useUpdateToCompleteMutation, useUpdateToIncompleteMutation } from '../../app/cardsApi'
+import { useGetCardMutation } from '../../app/cardsApi'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
 import Download from "../../icons/download-solid.svg"
@@ -13,8 +13,6 @@ import ArrowDown from '../../icons/arrow-down.svg'
 
 const Item = () => {
     const [getCard, { data, error, isLoading, isError }] = useGetCardMutation()
-    const [updateToComplete] = useUpdateToCompleteMutation()
-    const [updateToIncomplete] = useUpdateToIncompleteMutation()
     const params = useParams()
     const dispatch = useDispatch
     const [advice, setAdvice] = useState(true)
@@ -41,15 +39,29 @@ const Item = () => {
     const stateToComplete = async (e) => {
         e.preventDefault()
         const { item } = params;
-        const string = Object.entries({ item }).shift().pop()
-        updateToComplete(string)
+        const id = Object.entries({ item }).shift().pop()
+        try {
+            const docRef = doc(db, 'card', id)
+            const data = { state: 'complete' }
+            updateDoc(docRef, data).then(console.log('Incomplete Now'))
+                .catch((err) => { console.log(err.message) })
+        } catch (err) {
+            return { error: err }
+        }
         alertManage()
     }
     const stateToIncomplete = async (e) => {
         e.preventDefault()
         const { item } = params;
-        const string = Object.entries({ item }).shift().pop()
-        updateToIncomplete(string)
+        const id = Object.entries({ item }).shift().pop()
+        try {
+            const docRef = doc(db, 'card', id)
+            const data = { state: 'incomplete' }
+            updateDoc(docRef, data).then(console.log('Incomplete Now'))
+                .catch((err) => { console.log(err.message) })
+        } catch (err) {
+            return { error: err }
+        }
         alertManage()
     }
 
@@ -58,29 +70,37 @@ const Item = () => {
         else setMenu(true)
     }
 
-    const alertManage = (e)=>{
+    const alertManage = (e) => {
         if (alert) setAlert(false);
-        else if(!alert){
+        else if (!alert) {
             setAlert(true);
-            setTimeout(()=>{setAlert(false)},4000)
+            setTimeout(() => { setAlert(false) }, 4000)
         }
     }
 
-    const updatePrinterCard = async (e)=>{
+    const updatePrinterCard = async (e) => {
         const { item } = params;
         const string = Object.entries({ item }).shift().pop()
         const dataPrinter = e.target.getAttribute("data-printer");
-        const docRef = doc(db,'card',string)
-        const data = {printer:dataPrinter}
-        await updateDoc(docRef,data).then(()=>console.log('Printer actualizada'))
+        const docRef = doc(db, 'card', string)
+        const data = { printer: dataPrinter }
+        await updateDoc(docRef, data).then(() => console.log('Printer actualizada'))
         setMenu(false)
         alertManage()
+    }
+
+    const newOut = async (id) => {
+        const docRef = doc(db, 'card', id)
+        const data = { new: 'false' }
+        await updateDoc(docRef, data).then(console.log('Card Old'))
+        .catch((err) => { console.log(err.message) })
     }
 
     useEffect(() => {
         const { item } = params;
         const string = Object.entries({ item }).shift().pop()
         getCard(string)
+        newOut(string)
     }, [])
 
     return (

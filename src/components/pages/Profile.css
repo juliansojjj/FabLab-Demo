@@ -20,7 +20,7 @@
     background-color: #808080;
 }
 
-.users-list{
+.lists{
     width: fit-content;
     margin-top: 1em;
 }
@@ -47,11 +47,7 @@
     justify-items: center;
     align-items: center;
 }
-.users-list--item:last-child{
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
-    border-bottom: none;
-}
+/* AGREGAR LAST CHILD SIN BOTTOM Y CON BORDER */
 .users-list--btn{
     border: none;
     border-radius: .5em;

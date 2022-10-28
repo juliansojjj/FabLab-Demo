@@ -214,6 +214,49 @@
     background-color: var(--redOverdue)
 }
 
+.cards-alert{
+    height: 1.7em;
+    display: flex;
+    background-color: #e00000 ;
+    color: white;
+    align-items: center;
+    top:5vh;
+    right: 0;
+    border-left: 10px solid #990000;
+    position: fixed;
+    padding: .5em;
+    z-index: 110;
+    border-radius: .5em;
+    animation-name: alert-in, alert-out;
+    animation-duration: .15s, 1s;
+    animation-delay: 0s, 3s;
+}
+.cards-alert:hover{
+    cursor: default;
+}
+.cards-alert-btn{
+    height: 1.4em;
+    margin: 0 .3em 0 .5em;
+    filter: invert(9%) sepia(97%) saturate(3684%) hue-rotate(354deg) brightness(102%) contrast(114%);
+}
+.cards-alert-btn:hover{
+    filter: invert(13%) sepia(32%) saturate(6387%) hue-rotate(349deg) brightness(82%) contrast(120%);
+}
+.cards-alert-sign{
+    height: 1.7em;
+    margin: 0 .7em 0 .2em;
+    filter: invert(9%) sepia(97%) saturate(3684%) hue-rotate(354deg) brightness(102%) contrast(114%);
+}
+
+@keyframes alert-in{
+    0% {transform: translateX(12em);}
+    100% {transform: translateX(0);}
+}
+@keyframes alert-out{
+    0% {transform: translateX(0);}
+    100% {transform: translateX(25em);}
+}
+
 /* ADAPTACION RESPONSIVE 
 
 @media only screen and (max-width:1360px) {

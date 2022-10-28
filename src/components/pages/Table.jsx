@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import Header from '../Header'
 import './Table.css'
 import { useGetUsersQuery, useGetDocsQuery } from '../../app/cardsApi'
-import { useUpdateToCompleteMutation, useUpdateToIncompleteMutation } from '../../app/cardsApi'
+import { db } from '../../firebase'
+import { doc, updateDoc } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
@@ -11,8 +12,28 @@ const Table = () => {
   const { data, error } = useGetUsersQuery()
   const { data: info, error: err } = useGetDocsQuery()
   const [alert, setAlert] = useState(false)
-  const [updateToComplete] = useUpdateToCompleteMutation()
-  const [updateToIncomplete] = useUpdateToIncompleteMutation()
+
+  const updateToComplete = async (id) =>{
+    try{
+      const docRef = doc(db,'card',id)
+      const data = {state:'complete'}
+      updateDoc(docRef,data).then(console.log('Complete Now'))
+      .catch((err)=>{console.log(err.message)})
+  }catch(err){
+      return {error:err}
+  }
+  }
+
+  const updateToIncomplete = async (id) =>{
+    try{
+      const docRef = doc(db,'card',id)
+      const data = {state:'incomplete'}
+      updateDoc(docRef,data).then(console.log('Incomplete Now'))
+      .catch((err)=>{console.log(err.message)})
+  }catch(err){
+      return {error:err}
+  }
+  }
 
   const alertManage = (msg) => {
     if (alert) setAlert(false);

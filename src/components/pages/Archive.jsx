@@ -4,9 +4,9 @@ import ArchiveCards from '../cards/ArchiveCards'
 
 const Archive = () => {
   return (
-    <div>
+    <div className='base'>
         <Header/>
-        <main className='base'>
+        <main>
             <ArchiveCards/>
         </main>
     </div>

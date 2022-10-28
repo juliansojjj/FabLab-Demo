@@ -154,7 +154,7 @@ const Profile = () => {
     <div className='base'>
       <Header />
       {eliminateOption
-        ? <div className='eliminate-container'>
+        ? <div className='eliminate-container' >
           <div className='eliminate-alert'>
             <h2>Eliminar Usuario</h2>
             <p>El usuario se eliminará de manera <b>definitiva</b> ¿Está seguro que desea proseguir?</p>
@@ -227,7 +227,7 @@ const Profile = () => {
           : ''}
 
         {info?.admin == 'main'
-          ? <div className='users-list'>
+          ? <div className='lists'>
             <h3 className='users-list-title'>Lista de administradores</h3>
             <div className='users-list-column'>
               <span>Nombre</span>
@@ -235,10 +235,10 @@ const Profile = () => {
               <span>Administrador</span>
             </div>
             {data
-              ? data.map(item => {
+              ? data.map((item,i) => {
                 if (item.admin !== 'student') {
                   return (
-                    <div className='users-list--item' key={item.id}>
+                    <div className='users-list--item'>
                       <span>{item.user}</span>
                       <span>{item.email}</span>
                       <div>
