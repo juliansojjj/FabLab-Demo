@@ -19,12 +19,15 @@
 }
 
 .item-img-container{
-    max-width: 35em;
-    margin-top: 2em;
+    width: 30em;
+    height: 100%;
+    border-radius: 1em;
 }
 
 .item-img{
+    height: 100%;
     width: 100%;
+    object-fit: cover;
 }
 
 .item-state{

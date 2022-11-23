@@ -284,8 +284,8 @@ const Profile = () => {
                 if (item.admin == 'student') {
                   return (
                     <div className='students-list--item' key={item.id}>
-                      <span>{item.user}</span>
-                      <span>{item.year}</span>
+                      <span>{item.userName}</span>
+                      <span>{item.userYear}</span>
                       <span>{item.email}</span>
                       <div>
                         <span>{item.student == 'false' ? 'Deshabilitado' : 'Habilitado'}</span>

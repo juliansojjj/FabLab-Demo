@@ -75,7 +75,7 @@ const Table = () => {
               if (item.student == 'true') {
                 return (
                   <div className='table-item' key={item.id}>
-                    <span>{item.user}</span>
+                    <span>{item.userName}</span>
                     <div className='table-item--container'>
                       {item.cards.map(card => {
                         return (
