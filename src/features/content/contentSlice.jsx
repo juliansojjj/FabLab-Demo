@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import localData from '../../database/data.json'
+import localData from '../../database/data.json';
+import _ from 'lodash';
+
 
 const initialState = {
     "admin":{
@@ -15,29 +17,32 @@ const contentSlice = createSlice({
     name:'content',
     initialState,
     reducers:{
-        newUser(state,action){
-            state.newUser = {
-                "name":action.payload.name,
-                "email":action.payload.email,
-                "pass":action.payload.pass,
-                "type":"manager"
-            }
-        },
         userLogin(state,action){
             state.userLogin = true
-            if(action.payload) state.admin = action.payload 
+            if(action.payload.createUser) {
+                state.admin = action.payload.userLogin;
+                state.users.push(action.payload.userLogin);
+            } else{
+                state.admin = action.payload;
+                state.users.push(action.payload);
+            }
         },
         userLogout(state,action){
             state.userLogin=false;
             state.admin = {};
         },
-        userRole(state,action){
-             
+        usersRole(state,action){
+            const userIndex = state.users.findIndex(item=>item.id == action.payload.id)
+             if(action.payload.type == 'student'){
+                state.users[userIndex].student = action.payload.operation;
+             } else{
+                state.users[userIndex].admin = action.payload.operation;
+             } 
         }
     }
 })
 
-export const {newUser, userLogin, userLogout} = contentSlice.actions;
+export const {newUser, userLogin, userLogout, usersRole} = contentSlice.actions;
 
 export const  selectUserLogin = (state)=> state.content.userLogin;
 export const  selectAdmin = (state)=> state.content.admin;

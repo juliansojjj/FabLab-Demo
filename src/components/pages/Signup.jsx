@@ -7,10 +7,14 @@ import { Link } from 'react-router-dom'
 import { doc, setDoc } from 'firebase/firestore'
 import './Sign.css'
 import Logo from '../../icons/logo.svg'
-import { selectUserLogin } from '../../features/content/contentSlice'
-import { useSelector } from 'react-redux'
+import { newUser, selectUserLogin, userLogin } from '../../features/content/contentSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { nanoid } from 'nanoid'
 
 const Signup = () => {
+    const dispatch = useDispatch();
+    const [userType, setuserType] = useState();
+
     const navigate = useNavigate()
     const [email,setEmail] = useState()
     const [password,setPassword] = useState()
@@ -43,27 +47,15 @@ const Signup = () => {
         if(email && password && repeatPassword){
             if(password.length < 6 || repeatPassword.length < 6){setError('Las contraseñas deben tener 6 caracteres como mínimo')}
             else if(password == repeatPassword){
-                createUserWithEmailAndPassword(auth,email,password).then(async(userCredential)=>{
-                    setError()
-                    const info = userCredential.user
-                    const email = info.email
-                    const id = info.uid
-                    console.log(info)
-                    console.log(email)
-                    console.log(id)
-                    await setDoc(doc(db,'Users',id),
-                        {user:user,
-                        email:email,
-                        admin:'false'})
-                        .then(()=>{
-                            signOut(auth)
-                            .then(()=>{
-                                navigate('/login')})
-                    })
-                }).catch(err=>{
-                    console.log(err)
-                    setError(err.message)
-                })
+                dispatch(userLogin({"createUser":true,"userLogin":{
+                    "id":nanoid(10),
+                    "name":user,
+                    "email":email,
+                    "pass":password,
+                    "type":"manager"
+                  }}
+                ));
+                  navigate('/')
             }else{setError('Las contraseñas no coinciden')}
         } 
     }

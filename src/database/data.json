@@ -1,18 +1,6 @@
 {
     "users": [
       {
-        "id": "101",
-        "user": "Juan Doe",
-        "email": "admin@email.com",
-        "admin":"admin"
-      },
-      {
-        "id": "202",
-        "user": "Joe Quark",
-        "email": "manager@email.com",
-        "admin":"manager"
-      },
-      {
         "id": "303",
         "user": "Baruch Brown",
         "email": "exmanager@email.com",
@@ -86,4 +74,3 @@
       }
     ]
   }
-  

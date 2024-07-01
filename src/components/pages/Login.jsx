@@ -32,18 +32,20 @@ const Login = () => {
       <div className="main">
         <form onSubmit={handleSubmit} className="sign-form">
           <button type="submit" className="sign-form--btn" onClick={()=>setuserType({
-            "name":"Juan Doe",
+            "id":"101",
+            "user":"Juan Doe",
             "email":"admin@email.com",
             "pass":"123456",
-            "type":"admin"
+            "admin":"admin"
           })}>
             Iniciar Sesión como Administrador
           </button>
           <button type="submit" className="sign-form--btn" onClick={()=>setuserType({
-            "name":"Joe Quark",
+            "id":"202",
+            "user":"Joe Quark",
             "email":"manager@email.com",
             "pass":"123456",
-            "type":"manager"
+            "admin":"manager"
           })}>
             Iniciar Sesión como manager
           </button>

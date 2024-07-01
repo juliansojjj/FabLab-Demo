@@ -5,7 +5,7 @@ import { auth } from '../../firebase'
 import './Profile.css'
 import { useNavigate } from 'react-router-dom'
 import { useGetUsersQuery, useGetUserMutation } from '../../app/cardsApi'
-import { selectAdmin, selectUsers, userLogout } from '../../features/content/contentSlice'
+import { selectAdmin, selectUsers, userLogout, usersRole } from '../../features/content/contentSlice'
 import Edit from '../../icons/edit-pen.svg'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
@@ -39,45 +39,23 @@ const Profile = () => {
     const id = e.target.attributes.getNamedItem("data-userid").value;
     const role = e.target.attributes.getNamedItem("data-admin").value;
     const operation = e.target.attributes.getNamedItem("data-operation").value;
-    console.log(operation)
-    // const docRef = doc(db, 'Users', id)
-    if (role == 'false' && operation == 'true') {
-      let data = { admin: 'manager' }
-      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-      //   .catch((err) => { console.log(err.message) })
-    }
-    else if (role == 'manager' || role == 'admin' && operation == 'false') {
-      let data = { admin: 'false' }
-      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-      //   .catch((err) => { console.log(err.message) })
-    }
-    else if (role == 'manager' && operation == 'admin') {
-      let data = { admin: 'admin' }
-      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-      //   .catch((err) => { console.log(err.message) })
-    }
-    else if (role == 'admin' && operation == 'manager') {
-      let data = { admin: 'manager' }
-      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-      //   .catch((err) => { console.log(err.message) })
-    }
+    dispatch(usersRole({
+      'id':id,
+      "operation":operation,
+      "type":"admin"
+    }))
   }
 
   const studentHandle = async (e) => {
     const id = e.target.attributes.getNamedItem("data-userid").value;
-    const student = e.target.attributes.getNamedItem("data-student").value;
     const operation = e.target.attributes.getNamedItem("data-operation").value;
-    // const docRef = doc(db, 'Users', id)
-    if (student == 'false' && operation == 'true') {
-      let data = { student: 'true' }
-      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-      //   .catch((err) => { console.log(err.message) })
-    }
-    else if (student == 'true' && operation == 'false') {
-      let data = { student: 'false' }
-      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-      //   .catch((err) => { console.log(err.message) })
-    }
+    
+    console.log(operation)
+    dispatch(usersRole({
+      'id':id,
+      "operation":operation,
+      "type":"student"
+    }))
   }
 
   const eliminateUser = async (e) => {
@@ -168,7 +146,7 @@ const Profile = () => {
         : ''}
 
       <main>
-        <h1 className='title-bottom'>{adminLogged.name}</h1>
+        <h1 className='title-bottom'>{adminLogged.user}</h1>
 
         <div className='user-info'>
             <div>
@@ -212,7 +190,7 @@ const Profile = () => {
           </div>
 
         
-        {adminLogged.type == 'admin'
+        {adminLogged.admin == 'admin'
           ? <div className='lists'>
             <h3 className='users-list-title'>Lista de administradores</h3>
             <div className='users-list-column'>
@@ -223,32 +201,34 @@ const Profile = () => {
             {users.map((item,i) => {
                 if (!item.student) {
                   return (
-                    <div className='users-list--item'>
+                    <div className='users-list--item' key={item.id}>
                       <span>{item.user}</span>
                       <span>{item.email}</span>
                       <div>
-                        <span><b>Administrador</b>:{item.admin == 'false' ? 'No' : item.admin == 'admin' ? 'Admin' : 'Manager'}</span>
-                        {<div>
+                        <span><b>Administrador</b>:{item.admin == 'false' ? 'Deshabilitado' : item.admin == 'admin' ? 'Admin' : 'Manager'}</span>
+                        {adminLogged.id !== item.id
+                        ?
+                          <div>
                             <button
                               onClick={adminHandle}
                               data-userid={item.id}
                               data-admin={item.admin}
                               className='users-list--btn'
-                              data-operation={item.admin == 'false' ? 'true' : 'false'}>
+                              data-operation={item.admin == 'false' ? 'manager' : 'false'}>
                               {item.admin == 'false' ? 'Habilitar' : 'Deshabilitar'}
                             </button>
-                            {item.admin == 'true' || item.admin == 'admin'
+                            {item.admin == 'manager' || item.admin == 'admin'
                               ? <button
                                 className='users-list--btn'
                                 onClick={adminHandle}
                                 data-userid={item.id}
                                 data-admin={item.admin}
-                                data-operation={item.admin == 'admin' ? 'true' : 'admin'}>
+                                data-operation={item.admin == 'admin' ? 'manager' : 'admin'}>
                                 {item.admin == 'admin' ? 'Descender rango' : 'Aumentar rango'}
                               </button>
                               : ''}
                           </div>
-                          }
+                          : ''}
                       </div>
                     </div>
                   )
@@ -265,7 +245,7 @@ const Profile = () => {
             </div>
 
             {users.map(item => {
-                if (item.student == 'true') {
+                if (item.student) {
                   return (
                     <div className='students-list--item' key={item.id}>
                       <span>{item.userName}</span>
