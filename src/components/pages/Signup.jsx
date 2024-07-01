@@ -2,11 +2,13 @@ import React,{useEffect} from 'react'
 import { useState } from 'react'
 import { auth, db } from '../../firebase'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signOut} from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { doc, setDoc } from 'firebase/firestore'
 import './Sign.css'
 import Logo from '../../icons/logo.svg'
+import { selectUserLogin } from '../../features/content/contentSlice'
+import { useSelector } from 'react-redux'
 
 const Signup = () => {
     const navigate = useNavigate()
@@ -17,6 +19,7 @@ const Signup = () => {
     const [error,setError] = useState()
     const errorSignMsg = ['Firebase: Password should be at least 6 characters (auth/weak-password).',
                           'Firebase: Error (auth/email-already-in-use).']
+    const userLogged = useSelector(selectUserLogin)
 
     const handleChange = (e)=>{
         const name = e.target.name
@@ -64,6 +67,8 @@ const Signup = () => {
             }else{setError('Las contraseñas no coinciden')}
         } 
     }
+
+    if(userLogged) return <Navigate to='/' />
 
   return (
     <div className='base-sign'>

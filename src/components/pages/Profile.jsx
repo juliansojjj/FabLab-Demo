@@ -5,18 +5,19 @@ import { auth } from '../../firebase'
 import './Profile.css'
 import { useNavigate } from 'react-router-dom'
 import { useGetUsersQuery, useGetUserMutation } from '../../app/cardsApi'
-import { doc, updateDoc, getDoc, deleteDoc } from 'firebase/firestore'
-import { db } from '../../firebase'
-import { onAuthStateChanged, deleteUser, updatePassword } from 'firebase/auth'
+import { selectAdmin, selectUsers, userLogout } from '../../features/content/contentSlice'
 import Edit from '../../icons/edit-pen.svg'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
 import Check from '../../icons/check-solid.svg'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Profile = () => {
   const navigate = useNavigate()
 
-  const { data, error } = useGetUsersQuery()
+  const users = useSelector(selectUsers)
+  const dispatch = useDispatch()
+
   const [alert, setAlert] = useState(false)
   const [eliminateOption, setEliminateOption] = useState()
   const [getUser, { data: info, error: err }] = useGetUserMutation()
@@ -28,51 +29,37 @@ const Profile = () => {
     'Firebase: Password should be at least 6 characters (auth/weak-password).']
   const [successAlert, setSuccessAlert] = useState(false)
 
-  useEffect(() => {
-    if (auth.currentUser) {
-      console.log(auth.currentUser)
-      setEmail(auth.currentUser.email)
-      setUser(auth.currentUser)
-      const id = auth.currentUser.uid
-      getUser(id)
-    }
-  }, [auth.currentUser])
+  const adminLogged = useSelector(selectAdmin)
 
   const logout = (e) => {
-    signOut(auth).then(() => {
-      console.log('Sesión cerrada')
-      navigate('/')
-      window.location.reload()
-    }).catch((err) => {
-      console.log(err)
-    })
+    dispatch(userLogout())
   }
 
   const adminHandle = async (e) => {
     const id = e.target.attributes.getNamedItem("data-userid").value;
-    const admin = e.target.attributes.getNamedItem("data-admin").value;
+    const role = e.target.attributes.getNamedItem("data-admin").value;
     const operation = e.target.attributes.getNamedItem("data-operation").value;
     console.log(operation)
-    const docRef = doc(db, 'Users', id)
-    if (admin == 'false' && operation == 'true') {
-      let data = { admin: 'true' }
-      await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-        .catch((err) => { console.log(err.message) })
+    // const docRef = doc(db, 'Users', id)
+    if (role == 'false' && operation == 'true') {
+      let data = { admin: 'manager' }
+      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
+      //   .catch((err) => { console.log(err.message) })
     }
-    else if (admin == 'true' && operation == 'false') {
+    else if (role == 'manager' || role == 'admin' && operation == 'false') {
       let data = { admin: 'false' }
-      await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-        .catch((err) => { console.log(err.message) })
+      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
+      //   .catch((err) => { console.log(err.message) })
     }
-    else if (admin == 'true' && operation == 'admin') {
+    else if (role == 'manager' && operation == 'admin') {
       let data = { admin: 'admin' }
-      await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-        .catch((err) => { console.log(err.message) })
+      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
+      //   .catch((err) => { console.log(err.message) })
     }
-    else if (admin == 'admin' && operation == 'true') {
-      let data = { admin: 'true' }
-      await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-        .catch((err) => { console.log(err.message) })
+    else if (role == 'admin' && operation == 'manager') {
+      let data = { admin: 'manager' }
+      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
+      //   .catch((err) => { console.log(err.message) })
     }
   }
 
@@ -80,31 +67,31 @@ const Profile = () => {
     const id = e.target.attributes.getNamedItem("data-userid").value;
     const student = e.target.attributes.getNamedItem("data-student").value;
     const operation = e.target.attributes.getNamedItem("data-operation").value;
-    const docRef = doc(db, 'Users', id)
+    // const docRef = doc(db, 'Users', id)
     if (student == 'false' && operation == 'true') {
       let data = { student: 'true' }
-      await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-        .catch((err) => { console.log(err.message) })
+      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
+      //   .catch((err) => { console.log(err.message) })
     }
     else if (student == 'true' && operation == 'false') {
       let data = { student: 'false' }
-      await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
-        .catch((err) => { console.log(err.message) })
+      // await updateDoc(docRef, data).then(alertManage('Actualize la página para ver los cambios'))
+      //   .catch((err) => { console.log(err.message) })
     }
   }
 
   const eliminateUser = async (e) => {
-    const id = auth.currentUser.uid
-    const ref = doc(db, 'Users', id)
-    await deleteUser(user).then(async () => {
-      await deleteDoc(ref)
-    })
-      .catch((err) => {
-        if (err.message == 'Firebase: Error (auth/requires-recent-login).') {
-          setEliminateOption()
-          alertManage('Debe haber iniciado sesión recientemente para eliminar la cuenta')
-        }
-      })
+    // const id = auth.currentUser.uid
+    // const ref = doc(db, 'Users', id)
+    // await deleteUser(user).then(async () => {
+    //   await deleteDoc(ref)
+    // })
+    //   .catch((err) => {
+    //     if (err.message == 'Firebase: Error (auth/requires-recent-login).') {
+    //       setEliminateOption()
+    //       alertManage('Debe haber iniciado sesión recientemente para eliminar la cuenta')
+    //     }
+    //   })
   }
 
   const managePass = (e) => {
@@ -118,17 +105,17 @@ const Profile = () => {
     const repeatPass = e.target.passInputRepeat.value
     if (mainPass != repeatPass) setPassError('Las contraseñas no coinciden')
     else {
-      updatePassword(auth.currentUser, mainPass)
-        .then(() => {
-          console.log('contraseña cambiada exitosamente')
-          successAlertManage('Contraseña cambiada exitosamente')
-          setPassError()
-          setEditPass(false)
-        })
-        .catch(err => {
-          console.log(err.message)
-          setPassError(err.message)
-        })
+      // updatePassword(auth.currentUser, mainPass)
+      //   .then(() => {
+      //     console.log('contraseña cambiada exitosamente')
+      //     successAlertManage('Contraseña cambiada exitosamente')
+      //     setPassError()
+      //     setEditPass(false)
+      //   })
+      //   .catch(err => {
+      //     console.log(err.message)
+      //     setPassError(err.message)
+      //   })
     }
   }
 
@@ -181,13 +168,12 @@ const Profile = () => {
         : ''}
 
       <main>
-        <h1 className='title-bottom'>{info ? info.user : ''}</h1>
+        <h1 className='title-bottom'>{adminLogged.name}</h1>
 
-        {auth ?
-          <div className='user-info'>
+        <div className='user-info'>
             <div>
               <span>Dirección de email</span>
-              <div className='user-email'>{email ? email : ''}</div>
+              <div className='user-email'>{adminLogged.email}</div>
             </div>
             <div className='user-pass'>
               <span>Contraseña</span>
@@ -224,9 +210,9 @@ const Profile = () => {
                 : <div className='user-pass--show'>*******</div>}
             </div>
           </div>
-          : ''}
 
-        {info?.admin == 'main'
+        
+        {adminLogged.type == 'admin'
           ? <div className='lists'>
             <h3 className='users-list-title'>Lista de administradores</h3>
             <div className='users-list-column'>
@@ -234,17 +220,15 @@ const Profile = () => {
               <span>Mail</span>
               <span>Administrador</span>
             </div>
-            {data
-              ? data.map((item,i) => {
-                if (item.admin !== 'student') {
+            {users.map((item,i) => {
+                if (!item.student) {
                   return (
                     <div className='users-list--item'>
                       <span>{item.user}</span>
                       <span>{item.email}</span>
                       <div>
-                        <span><b>Administrador</b>:{item.admin == 'false' ? 'No' : item.admin == 'admin' ? 'Admin' : 'Si'}</span>
-                        {item.user !== info.user
-                          ? <div>
+                        <span><b>Administrador</b>:{item.admin == 'false' ? 'No' : item.admin == 'admin' ? 'Admin' : 'Manager'}</span>
+                        {<div>
                             <button
                               onClick={adminHandle}
                               data-userid={item.id}
@@ -264,13 +248,13 @@ const Profile = () => {
                               </button>
                               : ''}
                           </div>
-                          : ''}
+                          }
                       </div>
                     </div>
                   )
                 }
               })
-              : 'Loading...'}
+            }
 
             <h3 className='students-list-title'>Lista de alumnos</h3>
             <div className='students-list-column'>
@@ -279,13 +263,13 @@ const Profile = () => {
               <span>Mail</span>
               <span>Estado</span>
             </div>
-            {data
-              ? data.map(item => {
-                if (item.admin == 'student') {
+
+            {users.map(item => {
+                if (item.student == 'true') {
                   return (
                     <div className='students-list--item' key={item.id}>
                       <span>{item.userName}</span>
-                      <span>{item.userYear}</span>
+                      <span>{item.userY}</span>
                       <span>{item.email}</span>
                       <div>
                         <span>{item.student == 'false' ? 'Deshabilitado' : 'Habilitado'}</span>
@@ -304,10 +288,12 @@ const Profile = () => {
                   )
                 }
               })
-              : 'Loading...'}
+            }
+
 
           </div>
           : ''}
+        
 
 
 

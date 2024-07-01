@@ -107,36 +107,35 @@ const Item = () => {
         <div className='base'>
             <Header />
             {isError ? error : ''}
-            {isLoading ? <h2>Loading...</h2> : data ? data.map(item => {
-                return (
-                    <main key={item.id} className='item-container' >
+            {isLoading ? <h2>Loading...</h2> : data ? (
+                    <main className='item-container' >
                         <div className='item-img-container item-container--child'>
-                            <img src={item.image} className='item-img' />
+                            <img src={data.image} className='item-img' />
                         </div>
                         <div className='item-data item-container--child'>
-                            <h3 className='item-title'>{item.user} - {item.title}</h3>
+                            <h3 className='item-title'>{data.user} - {data.title}</h3>
                             <span className='item-subtitle'>Estado</span>
                             <div className='item-state'>
-                                <h4 className={`item-${item.state} item-state--child`}>
-                                    {item.state == 'complete' ? 'Completo' : ''}
-                                    {item.state == 'incomplete' ? 'Incompleto' : ''}
+                                <h4 className={`item-${data.state} item-state--child`}>
+                                    {data.state == 'complete' ? 'Completo' : ''}
+                                    {data.state == 'incomplete' ? 'Incompleto' : ''}
                                 </h4>
-                                {item.state == 'complete' ? <button onClick={stateToIncomplete} className={`${item.state}-button item-state--child`}>Marcar como incompleto</button> : ''}
-                                {item.state == 'incomplete' ? <button onClick={stateToComplete} className={`${item.state}-button item-state--child`}>Marcar como completo</button> : ''}
+                                {data.state == 'complete' ? <button onClick={stateToIncomplete} className={`${data.state}-button item-state--child`}>Marcar como incompleto</button> : ''}
+                                {data.state == 'incomplete' ? <button onClick={stateToComplete} className={`${data.state}-button item-state--child`}>Marcar como completo</button> : ''}
                             </div>
 
                             <span className='item-subtitle'>Fecha límite</span>
-                            <span className='item-text' >{item.date}</span>
+                            <span className='item-text' >{data.date}</span>
 
                             <span className='item-subtitle'>Alumno</span>
-                            <span className='item-text'>{item.user}</span>
+                            <span className='item-text'>{data.user}</span>
 
                             <span className='item-subtitle'>Año</span>
-                            <span className='item-text'>{item.userY}</span>
+                            <span className='item-text'>{data.userY}</span>
 
                             <span className='item-subtitle'>Impresora</span>
                             <div className='item-text--printer' onClick={setMenuOpen} >
-                                <span>{item.printer}</span>
+                                <span>{data.printer}</span>
                                 <img src={ArrowDown} />
                             </div>
                             {menu
@@ -159,20 +158,18 @@ const Item = () => {
                             <div className='item-file--info item-file--son'>
                                 <h3>Información</h3>
                                 <span className='item-subtitle'>Medidas</span>
-                                <p className='item-text'>{item.measures}</p>
+                                <p className='item-text'>{data.measures}</p>
                                 <span className='item-subtitle'>Relleno</span>
-                                <p className='item-text'>{item.filling}</p>
+                                <p className='item-text'>{data.filling}</p>
                                 <span className='item-subtitle'>Descripción</span>
-                                <p className='item-text'>{item.description}</p>
+                                <p className='item-text'>{data.description}</p>
                             </div>
-                            <a href={item.file} download className='item-file--download item-file--son'>
+                            <a href={data.file} download className='item-file--download item-file--son'>
                                 <span>Descargar</span>
                                 <img src={Download} />
                             </a>
                         </div>
                     </main>)
-            }
-            )
                 : 'missing data'}
         </div>
     )
