@@ -9,9 +9,11 @@ import { useSelector } from 'react-redux'
 import { showFilter, orderFilter } from '../../features/filters/filtersSlice'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
+import { selectAdmin, selectCards } from '../../features/content/contentSlice'
 
 const Cards = () => {
-  const { data, error, isError } = useGetDocsQuery();
+  const data = useSelector(selectCards)
+  const adminLogged = useSelector(selectAdmin)
   const [selectMenu, setSelectMenu] = useState(null)
   const [alert, setAlert] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -81,13 +83,12 @@ const Cards = () => {
           </div>
           : ''}
       <div className='cards-container'>
-        {isError && error.message}
-        {data
-          ? show !== ''
+        {data &&
+            show !== ''
             ? arrayData.filter(item => item.state == show).map(item => {
               if (item.archive !== 'true') {
                 return (
-                  <div key={item.id} className={item.new == 'true' ? `new-card cards-item` : `cards-item`}>
+                  <div key={item.id} className={adminLogged.viewed.find(pos=>pos==item.id) ? `cards-item`: `new-card cards-item`}>
                     <div className='item-menu'>
                       <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu} /></div>
                       {menuOpen ?
@@ -110,7 +111,7 @@ const Cards = () => {
             : arrayData.map(item => {
               if (item.archive !== 'true') {
                 return (
-                  <div key={item.id} className={item.new == 'true' ? `new-card cards-item` : `cards-item`}>
+                  <div key={item.id} className={adminLogged.viewed.find(pos=>pos==item.id) ? `cards-item`: `new-card cards-item`}>
                     <div className='item-menu'>
                       <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu} /></div>
                       {menuOpen ?
@@ -130,7 +131,7 @@ const Cards = () => {
                 )
               }
             })
-          : <h2>Loading...</h2>}
+          }
 
       </div>
     </div>

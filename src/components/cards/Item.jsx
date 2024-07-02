@@ -1,68 +1,57 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux/es/exports'
+import { useDispatch, useSelector } from 'react-redux/es/exports'
 import Header from '../Header'
 import './Item.css'
-import { doc, updateDoc } from 'firebase/firestore'
-import { db } from '../../firebase'
-import { useGetCardMutation } from '../../app/cardsApi'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
 import Download from "../../icons/download-solid.svg"
 import ArrowDown from '../../icons/arrow-down.svg'
+import { obsoleteViewed, selectAdmin, selectCards } from '../../features/content/contentSlice'
 
 const Item = () => {
-    const [getCard, { data, error, isLoading, isError }] = useGetCardMutation()
+    
     const params = useParams()
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
     const [advice, setAdvice] = useState(true)
     const [alert, setAlert] = useState(false)
     const [menu, setMenu] = useState(false)
+    const adminLogged = useSelector(selectAdmin);
+    const cards = useSelector(selectCards);
 
-    const getDate = () => {
-        if (data) {
-            const date = data.date
-            const fecha = date.split('/')
-            console.log(fecha)
 
-            const today = new Date()
-            const year = today.getFullYear()
-            const month = today.getMonth()
-            const day = today.getDate()
-
-            if (year > fecha[2]) { return console.log('Trabajo atrasado') }
-            else if (month > fecha[1]) { return console.log('Trabajo atrasado') }
-            else if (day > fecha[0]) { return console.log('Trabajo atrasado') }
-        }
-    }
-
+    const { item } = params;
+    const string = Object.entries({ item }).shift().pop()
+    const data = cards.filter(item=>item.id == string)[0];
+    dispatch(obsoleteViewed({cardId:string,userId:adminLogged.id}));
+ 
     const stateToComplete = async (e) => {
-        e.preventDefault()
-        const { item } = params;
-        const id = Object.entries({ item }).shift().pop()
-        try {
-            const docRef = doc(db, 'card', id)
-            const data = { state: 'complete' }
-            updateDoc(docRef, data).then(console.log('Incomplete Now'))
-                .catch((err) => { console.log(err.message) })
-        } catch (err) {
-            return { error: err }
-        }
-        alertManage()
+        // e.preventDefault()
+        // const { item } = params;
+        // const id = Object.entries({ item }).shift().pop()
+        // try {
+        //     const docRef = doc(db, 'card', id)
+        //     const data = { state: 'complete' }
+        //     updateDoc(docRef, data).then(console.log('Incomplete Now'))
+        //         .catch((err) => { console.log(err.message) })
+        // } catch (err) {
+        //     return { error: err }
+        // }
+        // alertManage()
     }
     const stateToIncomplete = async (e) => {
-        e.preventDefault()
-        const { item } = params;
-        const id = Object.entries({ item }).shift().pop()
-        try {
-            const docRef = doc(db, 'card', id)
-            const data = { state: 'incomplete' }
-            updateDoc(docRef, data).then(console.log('Incomplete Now'))
-                .catch((err) => { console.log(err.message) })
-        } catch (err) {
-            return { error: err }
-        }
-        alertManage()
+        // e.preventDefault()
+        // const { item } = params;
+        // const id = Object.entries({ item }).shift().pop()
+        // try {
+        //     const docRef = doc(db, 'card', id)
+        //     const data = { state: 'incomplete' }
+        //     updateDoc(docRef, data).then(console.log('Incomplete Now'))
+        //         .catch((err) => { console.log(err.message) })
+        // } catch (err) {
+        //     return { error: err }
+        // }
+        // alertManage()
     }
 
     const setMenuOpen = (e) => {
@@ -79,35 +68,27 @@ const Item = () => {
     }
 
     const updatePrinterCard = async (e) => {
-        const { item } = params;
-        const string = Object.entries({ item }).shift().pop()
-        const dataPrinter = e.target.getAttribute("data-printer");
-        const docRef = doc(db, 'card', string)
-        const data = { printer: dataPrinter }
-        await updateDoc(docRef, data).then(() => console.log('Printer actualizada'))
-        setMenu(false)
-        alertManage()
-    }
+        // const { item } = params;
+        // const string = Object.entries({ item }).shift().pop()
+        // const dataPrinter = e.target.getAttribute("data-printer");
+        // const docRef = doc(db, 'card', string)
+        // const data = { printer: dataPrinter }
+        // await updateDoc(docRef, data).then(() => console.log('Printer actualizada'))
+        // setMenu(false)
+        // alertManage()
+     }
 
-    const newOut = async (id) => {
-        const docRef = doc(db, 'card', id)
-        const data = { new: 'false' }
-        await updateDoc(docRef, data).then(console.log('Card Old'))
-        .catch((err) => { console.log(err.message) })
-    }
-
-    useEffect(() => {
-        const { item } = params;
-        const string = Object.entries({ item }).shift().pop()
-        getCard(string)
-        newOut(string)
-    }, [])
+    // // const newOut = async (id) => {
+    // //     const docRef = doc(db, 'card', id)
+    // //     const data = { new: 'false' }
+    // //     await updateDoc(docRef, data).then(console.log('Card Old'))
+    // //     .catch((err) => { console.log(err.message) })
+    // // }
 
     return (
         <div className='base'>
             <Header />
-            {isError ? error : ''}
-            {isLoading ? <h2>Loading...</h2> : data ? (
+            {data ? 
                     <main className='item-container' >
                         <div className='item-img-container item-container--child'>
                             <img src={data.image} className='item-img' />
@@ -169,10 +150,10 @@ const Item = () => {
                                 <img src={Download} />
                             </a>
                         </div>
-                    </main>)
+                    </main>
                 : 'missing data'}
         </div>
     )
 }
 
-export default Item
+export default Item;

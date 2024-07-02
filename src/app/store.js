@@ -6,12 +6,9 @@ import contentReducer from "../features/content/contentSlice";
 
 export const store = configureStore({
     reducer:{
-        [cardsApi.reducerPath] : cardsApi.reducer,
         filters: filtersReducer,
         content:contentReducer
-    },
-    middleware:(getDefaultMiddleware)=>
-    getDefaultMiddleware().concat(cardsApi.middleware),
+    }
 });
 
 setupListeners(store.dispatch);

@@ -5,7 +5,6 @@ import Home from './components/pages/Home'
 import Archive from './components/pages/Archive'
 import Profile from './components/pages/Profile';
 import Item from './components/cards/Item';
-import SearchCards from './components/cards/SearchCards';
 import NotFound from './components/pages/NotFound';
 import Signup from './components/pages/Signup';
 import Login from './components/pages/Login';
@@ -26,7 +25,6 @@ const App = () => {
                   <Route path='archive' element={<Archive/>} />
                   <Route path='table' element={<Table/>} />
                   <Route path='card/:item' element={<Item/>} />
-                  <Route path='card/search/:input' element={<SearchCards/>} />
               </Route>
         </Routes>
     </BrowserRouter>

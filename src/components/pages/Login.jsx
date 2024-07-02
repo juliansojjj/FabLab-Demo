@@ -6,19 +6,31 @@ import {userLogin} from "../../features/content/contentSlice"
 import { selectUserLogin } from "../../features/content/contentSlice";
 import "./Sign.css";
 import Logo from "../../icons/logo.svg";
+import { faker } from '@faker-js/faker';
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [userType, setuserType] = useState();
   const userLogged = useSelector(selectUserLogin)
 
   
-
+  function createRandomUser(role){
+    return {
+      id: faker.string.uuid(),
+      user: `${faker.person.firstName()} ${faker.person.lastName()}`,
+      email: faker.internet.email(),
+      admin:role,
+      viewed:[]
+    };
+  }
+  
+  const user = createRandomUser();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(userLogin(userType));
+    const role = e.currentTarget.attributes.getNamedItem("data-role").value;
+    const user = createRandomUser(role)
+    dispatch(userLogin(user));
     navigate('/');
   };
 
@@ -31,22 +43,10 @@ const Login = () => {
       </div>
       <div className="main">
         <form onSubmit={handleSubmit} className="sign-form">
-          <button type="submit" className="sign-form--btn" onClick={()=>setuserType({
-            "id":"101",
-            "user":"Juan Doe",
-            "email":"admin@email.com",
-            "pass":"123456",
-            "admin":"admin"
-          })}>
+          <button className="sign-form--btn" data-role="admin" onClick={handleSubmit}>
             Iniciar Sesión como Administrador
           </button>
-          <button type="submit" className="sign-form--btn" onClick={()=>setuserType({
-            "id":"202",
-            "user":"Joe Quark",
-            "email":"manager@email.com",
-            "pass":"123456",
-            "admin":"manager"
-          })}>
+          <button className="sign-form--btn" data-role="manager" onClick={handleSubmit}>
             Iniciar Sesión como manager
           </button>
           <Link to="/signup" className="sign-redirect">

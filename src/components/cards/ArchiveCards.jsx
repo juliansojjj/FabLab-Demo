@@ -7,9 +7,12 @@ import { Link } from 'react-router-dom'
 import Menu from '../../icons/menu.svg'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
+import { useSelector } from 'react-redux'
+import { selectAdmin, selectCards } from '../../features/content/contentSlice'
 
 const ArchiveCards = () => {
-  const { data, error, isLoading, isSuccess, isError } = useGetDocsQuery();
+  const data = useSelector(selectCards)
+  const adminLogged = useSelector(selectAdmin)
   const [selectMenu, setSelectMenu] = useState(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [eliminateOption, setEliminateOption] = useState('')
@@ -91,12 +94,10 @@ const ArchiveCards = () => {
           </div>
           : ''}
         <div className='cards-container'>
-          {isError && error.message}
-          {isLoading && "Loading..."}
           {data ? data.map(item => {
             if (item.archive == 'true') {
               return (
-                <div key={item.id} className='cards-item'>
+                <div key={item.id} className={adminLogged.viewed.find(pos=>pos==item.id) ? `cards-item`: `new-card cards-item`}>
                   <div className='item-menu'>
                     <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu} /></div>
                     {menuOpen ?

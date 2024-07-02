@@ -57,18 +57,18 @@ export const cardsApi = createApi({
         }
       }),
       getSearch: builder.query({
-        async queryFn(){
-            try{
-                const input = sessionStorage.getItem('input')
-                const card = localData.cards.find(item=>item.title.toLocaleLowerCase == input)
+        // async queryFn(){
+        //     try{
+        //         const input = sessionStorage.getItem('input')
+        //         const card = localData.cards.find(item=>item.title.toLocaleLowerCase == input)
                 
-                if(!card)return{data:'empty'}
-                return {data:card}
+        //         if(!card)return{data:'empty'}
+        //         return {data:card}
 
-            }catch(err){
-                return {error:err}
-            }
-        }
+        //     }catch(err){
+        //         return {error:err}
+        //     }
+        // }
       }),
       getCard:builder.mutation({
         async queryFn(string){

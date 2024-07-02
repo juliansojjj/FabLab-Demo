@@ -49,10 +49,11 @@ const Signup = () => {
             else if(password == repeatPassword){
                 dispatch(userLogin({"createUser":true,"userLogin":{
                     "id":nanoid(10),
-                    "name":user,
+                    "user":user,
                     "email":email,
                     "pass":password,
-                    "type":"manager"
+                    "type":"manager",
+                    "viewed":[]
                   }}
                 ));
                   navigate('/')

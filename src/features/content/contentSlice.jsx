@@ -10,7 +10,9 @@ const initialState = {
     "userLogin":false,
 
     "users":localData.users,
-    "cards":localData.cards
+    "cards":localData.cards,
+
+    "search":''
 }
 
 const contentSlice = createSlice({
@@ -38,17 +40,45 @@ const contentSlice = createSlice({
              } else{
                 state.users[userIndex].admin = action.payload.operation;
              } 
+        },
+        deleteUser(state,action){
+            console.log(action.payload)
+            const userIndex = state.users.findIndex(item=>item.id == action.payload);
+            console.log(userIndex)
+            state.userLogin=false;
+            state.admin = {};
+            if(userIndex !== -1) state.users.splice(userIndex,1);
+        },
+        searchUpdate(state,action){
+            const input = action.payload.trim()
+            const card = state.cards.find(item=>item.title.toLocaleLowerCase == input)
+                
+            if(!card){
+            }else state.search = card
+
+        },
+        obsoleteViewed(state,action){
+            const userIndex = state.users.findIndex(item=>item.id == action.payload.userId);
+            const cardId = action.payload.cardId;
+            console.log(action.payload)
+            if(state.users[userIndex].viewed.find(item=>item == cardId)){                
+            }else {
+                state.users[userIndex].viewed.push(cardId)
+                state.admin.viewed.push(cardId)
+            }
         }
     }
 })
 
-export const {newUser, userLogin, userLogout, usersRole} = contentSlice.actions;
+export const {newUser, userLogin, userLogout, usersRole, deleteUser, searchUpdate, obsoleteViewed} = contentSlice.actions;
 
 export const  selectUserLogin = (state)=> state.content.userLogin;
 export const  selectAdmin = (state)=> state.content.admin;
 
 export const  selectUsers = (state)=> state.content.users;
 export const  selectCards = (state)=> state.content.cards;
+
+export const  selectSearch = (state)=> state.content.search;
 
 export default contentSlice.reducer;
 

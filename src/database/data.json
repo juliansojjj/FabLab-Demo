@@ -26,7 +26,6 @@
     "cards": [
       {
         "id": "CdSQNhmpTYYZRJU3Rqzd",
-        "new":"true",
         "archive":"false",
         "title": "Infinite Cube",
         "image":"https://www.renderhub.com/sanchiesp/infinity-cube/infinity-cube-02.jpg",
@@ -42,7 +41,6 @@
       },
       {
         "id": "741852",
-        "new":"true",
         "archive":"true",
         "title": "Labradog",
         "image":"https://p.turbosquid.com/ts-thumb/Ax/8QlZVq/bJ/labradorretriever1200x1200/jpg/1628854041/1200x1200/fit_q99/b8914f51a81329753da320b0903b814c35f15141/labradorretriever1200x1200.jpg",
@@ -58,7 +56,6 @@
       },
       {
         "id": "456789",
-        "new":"false",
         "archive":"false",
         "title": "Male Character",
         "image":"https://images.free3d.com/imgd/l72681-male-base-mesh-6682.png",
@@ -70,7 +67,7 @@
         "measures":"10cm x 10cm",
         "filling":"80%",
         "description":"Esto es un male character",
-        "file":"https://free3d.com/3d-model/male-base-mesh-6682.html#"
+        "file":"https://free3d.com/dl-files.php?p=54e78ba726be8b012c8b4567&f=0"
       }
     ]
   }

@@ -7,10 +7,12 @@ import { doc, updateDoc } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
+import { useSelector } from 'react-redux'
+import { selectCards, selectUsers } from '../../features/content/contentSlice'
 
 const Table = () => {
-  const { data, error } = useGetUsersQuery()
-  const { data: info, error: err } = useGetDocsQuery()
+  const data = useSelector(selectUsers)
+  const info = useSelector(selectCards)
   const [alert, setAlert] = useState(false)
 
   const updateToComplete = async (id) =>{
