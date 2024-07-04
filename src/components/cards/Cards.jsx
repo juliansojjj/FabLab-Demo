@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import './Cards.css'
-import { Link } from 'react-router-dom'
-import Menu from '../../icons/menu.svg'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectAdmin, selectCards, cardModification, selectCardsShow, selectCardsOrder } from '../../features/content/contentSlice'
+import { Link } from 'react-router-dom'
+import { cardModification, selectAdmin, selectCards, selectCardsOrder, selectCardsShow } from '../../features/content/contentSlice'
+import Menu from '../../icons/menu.svg'
+import './Cards.css'
 
 const Cards = () => {
   const data = useSelector(selectCards)

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux/es/exports'
+import { useParams } from 'react-router-dom'
+import { cardModification, obsoleteViewed, selectAdmin, selectCards } from '../../features/content/contentSlice'
+import ArrowDown from '../../icons/arrow-down.svg'
+import Download from "../../icons/download-solid.svg"
+import Folder from '../../icons/folder-filled.svg'
 import Header from '../Header'
 import './Item.css'
-import Download from "../../icons/download-solid.svg"
-import ArrowDown from '../../icons/arrow-down.svg'
-import Folder from '../../icons/folder-filled.svg'
-import { cardModification, obsoleteViewed, selectAdmin, selectCards } from '../../features/content/contentSlice'
 
 const Item = () => {
     
@@ -51,7 +51,7 @@ const Item = () => {
             {data ? 
                     <main className='item-container' >
                         <div className='item-img-container item-container--child'>
-                            <img src={data.image} className='item-img' />
+                            <img src={data.image} alt='contentImage' className='item-img' />
                         </div>
                         <div className='item-data item-container--child'>
                             <h3 className='item-title'>{data.user} - {data.title}</h3>
@@ -77,7 +77,7 @@ const Item = () => {
                             <span className='item-subtitle'>Impresora</span>
                             <div className='item-text--printer' onClick={setMenuOpen} >
                                 <span>{data.printer}</span>
-                                <img src={ArrowDown} />
+                                <img alt='arrowDownLogo'src={ArrowDown} />
                             </div>
                             {menu &&
                                 <div className='item-printer-options'>
@@ -101,11 +101,11 @@ const Item = () => {
                             <div className='item-file--buttons item-file--son'>
                                 <a href={data.file} download className='item-file--download item-file--son'>
                                     <span>Descargar</span>
-                                    <img src={Download} />
+                                    <img alt='downloadLogo' src={Download} />
                                 </a>
                                 <button  className='item-file--archive item-file--son' data-operation="archive" onClick={cardHandle} data-value={data.archive === 'true' ? 'false': 'true'}>
                                     <span>{data.archive === 'true' ? 'Desarchivar' : 'Archivar'}</span>
-                                    <img src={Folder} />
+                                    <img alt='folderLogo' src={Folder} />
                                 </button>
                             </div>
                         </div>

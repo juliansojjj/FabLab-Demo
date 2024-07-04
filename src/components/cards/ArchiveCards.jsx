@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import './Cards.css'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { cardModification, selectAdmin, selectCards } from '../../features/content/contentSlice'
 import Menu from '../../icons/menu.svg'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
-import { useDispatch, useSelector } from 'react-redux'
-import { selectAdmin, selectCards, cardModification } from '../../features/content/contentSlice'
+import './Cards.css'
 
 const ArchiveCards = () => {
   const data = useSelector(selectCards)
@@ -72,9 +72,9 @@ const ArchiveCards = () => {
       <main>
         {alert ?
           <div className='cards-alert'>
-            <img src={Alert} className='cards-alert-sign' />
+            <img src={Alert} alt='alertLogo' className='cards-alert-sign' />
             <span className='cards-alert-msg'>Refresque la página para ver los cambios</span>
-            <img className='cards-alert-btn' onClick={alertManage} src={Xmark} />
+            <img className='cards-alert-btn' alt='errorLogo' onClick={alertManage} src={Xmark} />
           </div>
           : ''}
         <div className='cards-container'>
@@ -83,7 +83,7 @@ const ArchiveCards = () => {
               return (
                 <div key={item.id} className={adminLogged.viewed.find(pos=>pos===item.id) ? `cards-item`: `new-card cards-item`}>
                   <div className='item-menu'>
-                    <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu} /></div>
+                    <div className='menu-click'><img src={Menu} alt='MenuLogo' id={`item-click-${item.id}`} onClick={cardMenu} /></div>
                     {menuOpen ?
                       selectMenu === `item-click-${item.id}` ?
                         <div className='archive-menu'>
@@ -94,7 +94,7 @@ const ArchiveCards = () => {
                   </div>
                   <Link to={`/card/${item.id}`}>
                     <div className={`cards-container-img`}>
-                      <img src={item.image} className='cards-img' />
+                      <img src={item.image} alt='contentImage' className='cards-img' />
                     </div>
                     <div className={`${item.state} card-state`}></div>
                     <h3 className='cards-title'>{item.title}</h3>

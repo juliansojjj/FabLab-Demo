@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Header from "../Header";
-import "./Profile.css";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   deleteUser,
@@ -9,11 +8,12 @@ import {
   userLogout,
   usersRole,
 } from "../../features/content/contentSlice";
+import Check from "../../icons/check-solid.svg";
 import Edit from "../../icons/edit-pen.svg";
 import Alert from "../../icons/triangle-alert-empty.svg";
 import Xmark from "../../icons/xmark-solid.svg";
-import Check from "../../icons/check-solid.svg";
-import { useDispatch, useSelector } from "react-redux";
+import Header from "../Header";
+import "./Profile.css";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -142,10 +142,11 @@ const Profile = () => {
 
       {alert && (
         <div className="profile-alert">
-          <img src={Alert} className="profile-alert-sign" />
+          <img src={Alert} alt='alertLogo' className="profile-alert-sign" />
           <span className="profile-alert-msg">{alert}</span>
           <img
             className="profile-alert-btn"
+            alt='errorLogo'
             onClick={alertManage}
             src={Xmark}
           />
@@ -157,6 +158,7 @@ const Profile = () => {
           <span className="profile-successAlert-msg">{successAlert}</span>
           <img
             className="profile-successAlert-btn"
+            alt='closeLogo'
             onClick={successAlertManage}
             src={Xmark}
           />
@@ -180,16 +182,16 @@ const Profile = () => {
                   form="user-pass--form"
                   type="submit"
                 >
-                  <img src={Check} />
+                  <img alt='checkLogo' src={Check} />
                 </button>
               ) : (
                 <button className="pass-btn--edit" onClick={managePass}>
-                  <img src={Edit} />
+                  <img alt='editLogo' src={Edit} />
                 </button>
               )}
               {editPass && (
                 <button className="pass-btn--cancel" onClick={managePass}>
-                  <img src={Xmark} />
+                  <img alt='closeLogo' src={Xmark} />
                 </button>
               )}
             </div>

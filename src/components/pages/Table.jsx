@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import Header from '../Header'
-import './Table.css'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { cardModification, selectCards, selectUsers } from '../../features/content/contentSlice'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
-import { useDispatch, useSelector } from 'react-redux'
-import { selectCards, selectUsers, cardModification } from '../../features/content/contentSlice'
+import Header from '../Header'
+import './Table.css'
 
 const Table = () => {
   const dispatch = useDispatch()
@@ -90,9 +90,9 @@ const Table = () => {
 
         {alert ?
           <div className='table-alert'>
-            <img src={Alert} className='table-alert-sign' />
+            <img src={Alert} alt='alertLogo' className='table-alert-sign' />
             <span className='table-alert-msg'>Refresque la página para ver los cambios</span>
-            <img className='table-alert-btn' onClick={alertManage} src={Xmark} />
+            <img className='table-alert-btn' alt='closeLogo' onClick={alertManage} src={Xmark} />
           </div>
           : ''}
 

@@ -35,15 +35,15 @@ const Header = () => {
         <div>
           <Link to='/'><img src={Fablab} className='img-logo web-logo' replace /></Link>
           {location.pathname === '/' ? 
-          <img src={menu} className='img-responsive' onClick={menuHandle}/> 
-          : <Link to='/'><img src={Fablab} className='img-logo responsive-logo' replace /></Link>
+          <img src={menu} className='img-responsive' alt='MenuLogo' onClick={menuHandle}/> 
+          : <Link to='/'><img src={Fablab} alt='FabLabLogo' className='img-logo responsive-logo' replace /></Link>
             
           }
           
           
         </div>
         <SearchBar/>
-        <Link to="/profile"><img src={userIcon} className='img-min' replace /></Link>
+        <Link to="/profile"><img alt='ProfileLogo' src={userIcon} className='img-min' replace /></Link>
     </header>
     {responsiveMenu &&
       <div>

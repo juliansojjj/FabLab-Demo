@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {userLogin} from "../../features/content/contentSlice"
-import { selectUserLogin } from "../../features/content/contentSlice";
-import "./Sign.css";
-import Logo from "../../icons/logo.svg";
 import { faker } from '@faker-js/faker';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { selectUserLogin, userLogin } from "../../features/content/contentSlice";
+import Logo from "../../icons/logo.svg";
+import "./Sign.css";
 
 const Login = () => {
   const navigate = useNavigate();

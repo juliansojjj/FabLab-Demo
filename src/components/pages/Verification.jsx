@@ -1,9 +1,8 @@
-import React, {useState} from 'react'
-import './Profile.css'
-import {useNavigate, Outlet, Navigate, useLocation} from 'react-router-dom' 
-import { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { selectUserLogin } from '../../features/content/contentSlice';
+import './Profile.css';
 
 const Verification = () => {
     const navigate = useNavigate()

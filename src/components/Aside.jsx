@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
-import './Aside.css'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { filtersAndOrder, selectCardsOrder, selectCardsShow } from '../features/content/contentSlice'
 import ArrowDown from '../icons/arrow-down.svg'
+import './Aside.css'
 
 const Aside = ({responsive}) => {
   const dispatch = useDispatch()
@@ -101,7 +101,7 @@ const Aside = ({responsive}) => {
         <h3 className='dashboard-title'>Orden de subida</h3>
         <div onClick={OrderMenuManage} className='dashboard-order-select'>
           <span>{order === 'recent' ? 'Más reciente' : 'Más antiguo'}</span>
-          <img src={ArrowDown}/>
+          <img src={ArrowDown} alt='arrowDownLogo'/>
         </div>
         {menuOpen 
           ? <div className='dashboard-order--options'>

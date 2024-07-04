@@ -1,12 +1,10 @@
-import React,{useEffect} from 'react'
-import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import './Sign.css'
-import Logo from '../../icons/logo.svg'
-import { newUser, selectUserLogin, userLogin } from '../../features/content/contentSlice'
-import { useDispatch, useSelector } from 'react-redux'
 import { nanoid } from 'nanoid'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { selectUserLogin, userLogin } from '../../features/content/contentSlice'
+import Logo from '../../icons/logo.svg'
+import './Sign.css'
 
 const Signup = () => {
     const dispatch = useDispatch();

@@ -1,15 +1,15 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
-import './App.css'
-import Home from './components/pages/Home'
-import Archive from './components/pages/Archive'
-import Profile from './components/pages/Profile';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
 import Item from './components/cards/Item';
-import NotFound from './components/pages/NotFound';
-import Signup from './components/pages/Signup';
+import Archive from './components/pages/Archive';
+import Home from './components/pages/Home';
 import Login from './components/pages/Login';
-import Verification from './components/pages/Verification';
+import NotFound from './components/pages/NotFound';
+import Profile from './components/pages/Profile';
+import Signup from './components/pages/Signup';
 import Table from './components/pages/Table';
+import Verification from './components/pages/Verification';
 
 const App = () => {
   return (
