@@ -37,8 +37,8 @@ const contentSlice = createSlice({
             state.admin = {};
         },
         usersRole(state,action){
-            const userIndex = state.users.findIndex(item=>item.id == action.payload.id)
-             if(action.payload.type == 'student'){
+            const userIndex = state.users.findIndex(item=>item.id === action.payload.id)
+             if(action.payload.type === 'student'){
                 state.users[userIndex].student = action.payload.operation;
              } else{
                 state.users[userIndex].admin = action.payload.operation;
@@ -46,7 +46,7 @@ const contentSlice = createSlice({
         },
         deleteUser(state,action){
             console.log(action.payload)
-            const userIndex = state.users.findIndex(item=>item.id == action.payload);
+            const userIndex = state.users.findIndex(item=>item.id === action.payload);
             console.log(userIndex)
             state.userLogin=false;
             state.admin = {};
@@ -54,17 +54,17 @@ const contentSlice = createSlice({
         },
         searchUpdate(state,action){
             const input = action.payload.trim()
-            const card = state.cards.find(item=>item.title.toLocaleLowerCase == input)
+            const card = state.cards.find(item=>item.title.toLocaleLowerCase === input)
                 
             if(!card){
             }else state.search = card
 
         },
         obsoleteViewed(state,action){
-            const userIndex = state.users.findIndex(item=>item.id == action.payload.userId);
+            const userIndex = state.users.findIndex(item=>item.id === action.payload.userId);
             const cardId = action.payload.cardId;
             console.log(action.payload)
-            if(state.users[userIndex].viewed.find(item=>item == cardId)){                
+            if(state.users[userIndex].viewed.find(item=>item === cardId)){                
             }else {
                 state.users[userIndex].viewed.push(cardId)
                 state.admin.viewed.push(cardId)
@@ -72,11 +72,11 @@ const contentSlice = createSlice({
         },
         cardModification(state,action){
             const cardId = action.payload.cardId;
-            const cardIndex = state.cards.findIndex(item=>item.id == cardId);
+            const cardIndex = state.cards.findIndex(item=>item.id === cardId);
             
-            if(action.payload.operation == 'state')         state.cards[cardIndex].state = action.payload.value;         
-            else if(action.payload.operation == 'archive')  state.cards[cardIndex].archive = action.payload.value;
-            else if(action.payload.operation == 'printer')  state.cards[cardIndex].printer = action.payload.value;
+            if(action.payload.operation === 'state')         state.cards[cardIndex].state = action.payload.value;         
+            else if(action.payload.operation === 'archive')  state.cards[cardIndex].archive = action.payload.value;
+            else if(action.payload.operation === 'printer')  state.cards[cardIndex].printer = action.payload.value;
             else state.cards.splice(cardIndex,1)
         },
         filtersAndOrder(state,action){

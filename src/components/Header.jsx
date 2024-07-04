@@ -14,7 +14,7 @@ const Header = () => {
 
   console.log(location)
   const menuHandle = (e)=>{
-    if(location.pathname == '/'){
+    if(location.pathname === '/'){
       if(responsiveMenu) {
         setResponsiveMenu(false)
         document.body.style.overflow = 'auto';
@@ -34,7 +34,7 @@ const Header = () => {
     <header>
         <div>
           <Link to='/'><img src={Fablab} className='img-logo web-logo' replace /></Link>
-          {location.pathname == '/' ? 
+          {location.pathname === '/' ? 
           <img src={menu} className='img-responsive' onClick={menuHandle}/> 
           : <Link to='/'><img src={Fablab} className='img-logo responsive-logo' replace /></Link>
             

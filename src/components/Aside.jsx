@@ -17,21 +17,21 @@ const Aside = ({responsive}) => {
   const [menuOpenVerif,setMenuOpenVerif] = useState(false)
 
   const showManage = (e)=>{
-    if(e.target.name == 'completeSelect'){
+    if(e.target.name === 'completeSelect'){
       if(!showComplete){
         setShowComplete(true)
         dispatch(filtersAndOrder({show:'complete'}))
       }if(showComplete){
         setShowComplete(false)
         dispatch(filtersAndOrder({show:'all'}))
-      }if(show == 'incomplete'){
+      }if(show === 'incomplete'){
         setShowIncomplete(false)
         setShowComplete(true)
         dispatch(filtersAndOrder({show:'complete'}))
       }
     }
 
-    if(e.target.name == 'incompleteSelect'){
+    if(e.target.name === 'incompleteSelect'){
       if(!showIncomplete){
         setShowIncomplete(true)
         dispatch(filtersAndOrder({show:'incomplete'}))
@@ -40,7 +40,7 @@ const Aside = ({responsive}) => {
         setShowIncomplete(false)
         dispatch(filtersAndOrder({show:'all'}))
       }
-      if(show == 'complete'){
+      if(show === 'complete'){
         setShowComplete(false)
         setShowIncomplete(true)
         dispatch(filtersAndOrder({show:'incomplete'}))
@@ -59,8 +59,8 @@ const Aside = ({responsive}) => {
 
   const orderManage = (e)=>{
     const name = e.target.attributes.getNamedItem("name").value;
-    if (name == 'recentOption'){
-      if(order == 'recent'){
+    if (name === 'recentOption'){
+      if(order === 'recent'){
         setMenuOpen(false)
       }
       else{
@@ -69,8 +69,8 @@ const Aside = ({responsive}) => {
       }
     }
 
-    if(name == 'oldOption'){
-      if(order == 'old'){
+    if(name === 'oldOption'){
+      if(order === 'old'){
         setMenuOpen(false)
       }
       else {
@@ -100,7 +100,7 @@ const Aside = ({responsive}) => {
       <div className='dashboard-order'>
         <h3 className='dashboard-title'>Orden de subida</h3>
         <div onClick={OrderMenuManage} className='dashboard-order-select'>
-          <span>{order == 'recent' ? 'Más reciente' : 'Más antiguo'}</span>
+          <span>{order === 'recent' ? 'Más reciente' : 'Más antiguo'}</span>
           <img src={ArrowDown}/>
         </div>
         {menuOpen 

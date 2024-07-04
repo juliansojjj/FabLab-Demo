@@ -79,9 +79,9 @@ const ArchiveCards = () => {
           : ''}
         <div className='cards-container'>
           {data ? data.map(item => {
-            if (item.archive == 'true') {
+            if (item.archive === 'true') {
               return (
-                <div key={item.id} className={adminLogged.viewed.find(pos=>pos==item.id) ? `cards-item`: `new-card cards-item`}>
+                <div key={item.id} className={adminLogged.viewed.find(pos=>pos===item.id) ? `cards-item`: `new-card cards-item`}>
                   <div className='item-menu'>
                     <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu} /></div>
                     {menuOpen ?

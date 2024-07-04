@@ -19,7 +19,7 @@ const Table = () => {
     const state = e.currentTarget.attributes.getNamedItem("data-state").value;
     console.log(state)
     console.log(cardId)
-    if (state == 'complete')  dispatch(cardModification({operation:'state',cardId:cardId,value:'incomplete'}));
+    if (state === 'complete')  dispatch(cardModification({operation:'state',cardId:cardId,value:'incomplete'}));
     else                      dispatch(cardModification({operation:'state',cardId:cardId,value:'complete'}));  
 
   }
@@ -48,14 +48,14 @@ const Table = () => {
               if (!item.admin) {
                 return (
                   <div className='table-item' key={item.id}>
-                    <span className={item.student == 'false' && 'bannedStudent'}>{item.userName}</span>
+                    <span className={item.student === 'false' && 'bannedStudent'}>{item.userName}</span>
                     <div className='table-item--container'>
                       {item.cards.map(card => {
                         return (
                           <div className='table-container--child' key={card}>
                             <Link to={`/card/${card}`} className='table-link' >
                               {info.map(doc => {
-                                if (doc.id == card) {
+                                if (doc.id === card) {
                                   return (
                                     <span>{doc.title}</span>
                                   )
@@ -63,14 +63,14 @@ const Table = () => {
                               })}
                             </Link>
                             {info.map(doc => {
-                              if (doc.id == card) {
+                              if (doc.id === card) {
                                 return (
                                   <button
                                     className={`table-${doc.state}-btn`}
                                     onClick={stateHandle}
                                     data-state={doc.state}
                                     data-cardid={doc.id}>
-                                    {doc.state == 'complete'
+                                    {doc.state === 'complete'
                                       ? 'Marcar como incompleto'
                                       : 'Marcar como completo'}
                                   </button>

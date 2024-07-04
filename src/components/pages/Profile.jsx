@@ -214,9 +214,9 @@ const Profile = () => {
                 />
                 {passError && (
                   <span className="pass-form--error">
-                    {passError == passMsgErrors[0]
+                    {passError === passMsgErrors[0]
                       ? "Su sesión es demasiado vieja, vuelva a iniciar sesión"
-                      : passError == passMsgErrors[1]
+                      : passError === passMsgErrors[1]
                       ? "La contraseña debe tener como mínimo 6 caracteres"
                       : passError}
                   </span>
@@ -228,7 +228,7 @@ const Profile = () => {
           </div>
         </div>
 
-        {adminLogged.admin == "admin" && (
+        {adminLogged.admin === "admin" && (
           <div className="lists">
             <h3 className="users-list-title">Lista de administradores</h3>
             <div className="users-list-column">
@@ -245,9 +245,9 @@ const Profile = () => {
                     <div>
                       <span>
                         <b>Administrador</b>:
-                        {item.admin == "false"
+                        {item.admin === "false"
                           ? "Deshabilitado"
-                          : item.admin == "admin"
+                          : item.admin === "admin"
                           ? "Admin"
                           : "Manager"}
                       </span>
@@ -259,25 +259,25 @@ const Profile = () => {
                             data-admin={item.admin}
                             className="users-list--btn"
                             data-operation={
-                              item.admin == "false" ? "manager" : "false"
+                              item.admin === "false" ? "manager" : "false"
                             }
                           >
-                            {item.admin == "false"
+                            {item.admin === "false"
                               ? "Habilitar"
                               : "Deshabilitar"}
                           </button>
-                          {item.admin == "manager" ||
-                            (item.admin == "admin" && (
+                          {item.admin === "manager" ||
+                            (item.admin === "admin" && (
                               <button
                                 className="users-list--btn"
                                 onClick={adminHandle}
                                 data-userid={item.id}
                                 data-admin={item.admin}
                                 data-operation={
-                                  item.admin == "admin" ? "manager" : "admin"
+                                  item.admin === "admin" ? "manager" : "admin"
                                 }
                               >
-                                {item.admin == "admin"
+                                {item.admin === "admin"
                                   ? "Descender rango"
                                   : "Aumentar rango"}
                               </button>
@@ -307,7 +307,7 @@ const Profile = () => {
                     <span>{item.email}</span>
                     <div>
                       <span>
-                        {item.student == "false"
+                        {item.student === "false"
                           ? "Deshabilitado"
                           : "Habilitado"}
                       </span>
@@ -318,10 +318,10 @@ const Profile = () => {
                           data-student={item.student}
                           className="students-list--btn"
                           data-operation={
-                            item.student == "false" ? "true" : "false"
+                            item.student === "false" ? "true" : "false"
                           }
                         >
-                          {item.student == "false"
+                          {item.student === "false"
                             ? "Habilitar"
                             : "Deshabilitar"}
                         </button>

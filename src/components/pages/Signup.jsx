@@ -25,16 +25,16 @@ const Signup = () => {
     const handleChange = (e)=>{
         const name = e.target.name
         const input = e.target.value
-        if (name == 'email'){
+        if (name === 'email'){
             setEmail(input)
         }
-        if (name == 'password'){
+        if (name === 'password'){
             setPassword(input)
         }
-        if (name == 'repeatPassword'){
+        if (name === 'repeatPassword'){
             setRepeatPassword(input)
         }
-        if(name == 'user'){
+        if(name === 'user'){
             setUser(input)
         }
     }
@@ -43,7 +43,7 @@ const Signup = () => {
         e.preventDefault()
         if(email && password && repeatPassword){
             if(password.length < 6 || repeatPassword.length < 6){setError('Las contraseñas deben tener 6 caracteres como mínimo')}
-            else if(password == repeatPassword){
+            else if(password === repeatPassword){
                 dispatch(userLogin({"createUser":true,"userLogin":{
                     "id":nanoid(10),
                     "user":user,
@@ -102,9 +102,9 @@ const Signup = () => {
                 />
                 {error 
                     ?   <span className='sign-form--error'>
-                            {error == errorSignMsg[0] 
+                            {error === errorSignMsg[0] 
                             ? 'La contraseña debe tener 6 caracteres'
-                            : error == errorSignMsg[1] 
+                            : error === errorSignMsg[1] 
                             ? 'Mail ya en uso' 
                             : error}
                         </span> 

@@ -21,7 +21,7 @@ const Item = () => {
 
     const { item } = params;
     const string = Object.entries({ item }).shift().pop()
-    const data = cards.filter(item=>item.id == string)[0];
+    const data = cards.filter(item=>item.id === string)[0];
     dispatch(obsoleteViewed({cardId:string,userId:adminLogged.id}));
  
     const cardHandle =  (e) => {
@@ -58,9 +58,9 @@ const Item = () => {
                             <span className='item-subtitle'>Estado</span>
                             <div className='item-state'>
                                 <h4 className={`item-${data.state} item-state--child`}>
-                                    {data.state == 'complete' ? 'Completo' : 'Incompleto'}
+                                    {data.state === 'complete' ? 'Completo' : 'Incompleto'}
                                 </h4>
-                                {data.state == 'complete' 
+                                {data.state === 'complete' 
                                 ? <button onClick={cardHandle} className={`${data.state}-button item-state--child`} data-operation="state" data-value="incomplete">Marcar como incompleto</button> 
                                 : <button onClick={cardHandle} className={`${data.state}-button item-state--child`} data-operation="state" data-value="complete">Marcar como completo</button>}
                             </div>
@@ -103,8 +103,8 @@ const Item = () => {
                                     <span>Descargar</span>
                                     <img src={Download} />
                                 </a>
-                                <button  className='item-file--archive item-file--son' data-operation="archive" onClick={cardHandle} data-value={data.archive == 'true' ? 'false': 'true'}>
-                                    <span>{data.archive == 'true' ? 'Desarchivar' : 'Archivar'}</span>
+                                <button  className='item-file--archive item-file--son' data-operation="archive" onClick={cardHandle} data-value={data.archive === 'true' ? 'false': 'true'}>
+                                    <span>{data.archive === 'true' ? 'Desarchivar' : 'Archivar'}</span>
                                     <img src={Folder} />
                                 </button>
                             </div>

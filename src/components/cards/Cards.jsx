@@ -20,10 +20,10 @@ const Cards = () => {
 
   if (data) {
     arrayData=[...data]
-    if(show !== 'all') {arrayData = arrayData.filter(item=>item.state == show);}
+    if(show !== 'all') {arrayData = arrayData.filter(item=>item.state === show);}
     
-    if (order == 'recent')  arrayData.sort((a, b) => b.serialNum - a.serialNum)
-    else if(order == 'old') arrayData.sort((a, b) => a.serialNum - b.serialNum)
+    if (order === 'recent')  arrayData.sort((a, b) => b.serialNum - a.serialNum)
+    else if(order === 'old') arrayData.sort((a, b) => a.serialNum - b.serialNum)
     
   }
 
@@ -68,7 +68,7 @@ const Cards = () => {
             arrayData.map(item => {
               if (item.archive !== 'true') {
                 return (
-                  <div key={item.id} className={adminLogged.viewed.find(pos=>pos==item.id) ? `cards-item`: `new-card cards-item`}>
+                  <div key={item.id} className={adminLogged.viewed.find(pos=>pos===item.id) ? `cards-item`: `new-card cards-item`}>
                     <div className='item-menu'>
                       <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu} /></div>
                       {menuOpen &&
