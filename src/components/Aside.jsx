@@ -2,13 +2,13 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import './Aside.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShow, setOrder, showFilter, orderFilter} from '../features/filters/filtersSlice'
+import { filtersAndOrder, selectCardsOrder, selectCardsShow } from '../features/content/contentSlice'
 import ArrowDown from '../icons/arrow-down.svg'
 
-const Aside = () => {
+const Aside = ({responsive}) => {
   const dispatch = useDispatch()
-  const show = useSelector(showFilter)
-  const order = useSelector(orderFilter)
+  const show = useSelector(selectCardsShow)
+ const order = useSelector(selectCardsOrder)
   
   const [showComplete,setShowComplete] = useState(false)
   const [showIncomplete,setShowIncomplete] = useState(false)
@@ -20,28 +20,30 @@ const Aside = () => {
     if(e.target.name == 'completeSelect'){
       if(!showComplete){
         setShowComplete(true)
-        dispatch(setShow('complete'))}
-      if(showComplete){
+        dispatch(filtersAndOrder({show:'complete'}))
+      }if(showComplete){
         setShowComplete(false)
-        dispatch(setShow(''))}
-      if(show == 'incomplete'){
+        dispatch(filtersAndOrder({show:'all'}))
+      }if(show == 'incomplete'){
         setShowIncomplete(false)
         setShowComplete(true)
-        dispatch(setShow('complete'))
+        dispatch(filtersAndOrder({show:'complete'}))
       }
     }
 
     if(e.target.name == 'incompleteSelect'){
       if(!showIncomplete){
         setShowIncomplete(true)
-        dispatch(setShow('incomplete'))}
+        dispatch(filtersAndOrder({show:'incomplete'}))
+      }
       if(showIncomplete){
         setShowIncomplete(false)
-        dispatch(setShow(''))}
+        dispatch(filtersAndOrder({show:'all'}))
+      }
       if(show == 'complete'){
         setShowComplete(false)
         setShowIncomplete(true)
-        dispatch(setShow('incomplete'))
+        dispatch(filtersAndOrder({show:'incomplete'}))
       }
     }
   }
@@ -63,7 +65,7 @@ const Aside = () => {
       }
       else{
         setMenuOpen(false)
-        dispatch(setOrder('recent'))
+        dispatch(filtersAndOrder({order:'recent'}))
       }
     }
 
@@ -73,18 +75,14 @@ const Aside = () => {
       }
       else {
         setMenuOpen(false)
-        dispatch(setOrder('old'))
+        dispatch(filtersAndOrder({order:'old'}))
       }
     }
   }
 
-  /*document.onclick = ()=>{
-    if(menuOpen){setMenuOpen(false)}
-    if(!menuOpen && menuOpenVerif){setMenuOpenVerif(false)}
-  }*/
-
   return (
-    <aside className='dashboard'>
+    <aside className={`${responsive && 'responsive'} dashboard`}>
+      {responsive && <Link to='/' className='dashboard-home--link'>Ir a la home</Link>}
       <h2 className='dashboard-title' id='main-title'>Filtros</h2>
 
       <div className='dashboard-states'>
@@ -100,7 +98,7 @@ const Aside = () => {
       </div>
 
       <div className='dashboard-order'>
-        <h3 className='dashboard-title'>Orden</h3>
+        <h3 className='dashboard-title'>Orden de subida</h3>
         <div onClick={OrderMenuManage} className='dashboard-order-select'>
           <span>{order == 'recent' ? 'Más reciente' : 'Más antiguo'}</span>
           <img src={ArrowDown}/>

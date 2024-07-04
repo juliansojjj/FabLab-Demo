@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useGetDocsQuery } from '../../app/cardsApi'
 import './Cards.css'
-import { db } from '../../firebase'
-import { doc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
 import Menu from '../../icons/menu.svg'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
-import { useSelector } from 'react-redux'
-import { selectAdmin, selectCards } from '../../features/content/contentSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectAdmin, selectCards, cardModification } from '../../features/content/contentSlice'
 
 const ArchiveCards = () => {
   const data = useSelector(selectCards)
   const adminLogged = useSelector(selectAdmin)
+  const dispatch = useDispatch()
   const [selectMenu, setSelectMenu] = useState(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [eliminateOption, setEliminateOption] = useState('')
@@ -40,29 +38,15 @@ const ArchiveCards = () => {
 
   const unArchiveCard = async (e) => {
     e.preventDefault()
-    const id = e.target.attributes.getNamedItem("data-cardid").value;
-    try {
-      const docRef = doc(db, 'card', id)
-      const data = { archive: 'false' }
-      updateDoc(docRef, data).then(alertManage())
-        .catch((err) => { console.log(err.message) })
-    } catch (err) {
-      return { error: err }
-    }
+    const cardId = e.currentTarget.attributes.getNamedItem("data-cardid").value;
+    dispatch(cardModification({operation:'archive',cardId:cardId,value:'false'}));  
   }
 
   const eliminateCard = async (e) => {
-    const id = e.target.attributes.getNamedItem("data-cardid").value;
-    try {
-      const docRef = doc(db, 'card', id)
-      await deleteDoc(docRef).then(()=>{
-        setEliminateOption(false)
-        alertManage()
-      })
-        .catch((err) => { console.log(err.message) })
-    } catch (err) {
-      return { error: err }
-    }
+    e.preventDefault()
+    const cardId = e.currentTarget.attributes.getNamedItem("data-cardid").value;
+    dispatch(cardModification({operation:'eliminate',cardId:cardId,value:''})); 
+    setEliminateOption(false)
   }
 
   const alertManage = (e) => {

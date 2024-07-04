@@ -12,6 +12,9 @@ const initialState = {
     "users":localData.users,
     "cards":localData.cards,
 
+    "show":"all",
+    "order":"recent",
+
     "search":''
 }
 
@@ -66,17 +69,35 @@ const contentSlice = createSlice({
                 state.users[userIndex].viewed.push(cardId)
                 state.admin.viewed.push(cardId)
             }
+        },
+        cardModification(state,action){
+            const cardId = action.payload.cardId;
+            const cardIndex = state.cards.findIndex(item=>item.id == cardId);
+            
+            if(action.payload.operation == 'state')         state.cards[cardIndex].state = action.payload.value;         
+            else if(action.payload.operation == 'archive')  state.cards[cardIndex].archive = action.payload.value;
+            else if(action.payload.operation == 'printer')  state.cards[cardIndex].printer = action.payload.value;
+            else state.cards.splice(cardIndex,1)
+        },
+        filtersAndOrder(state,action){
+            if(action.payload.order) state.order = action.payload.order;
+            if(action.payload.show) state.show = action.payload.show;
+            
+
         }
     }
 })
 
-export const {newUser, userLogin, userLogout, usersRole, deleteUser, searchUpdate, obsoleteViewed} = contentSlice.actions;
+export const {newUser, userLogin, userLogout, usersRole, deleteUser, searchUpdate, obsoleteViewed, cardModification, filtersAndOrder} = contentSlice.actions;
 
 export const  selectUserLogin = (state)=> state.content.userLogin;
 export const  selectAdmin = (state)=> state.content.admin;
 
 export const  selectUsers = (state)=> state.content.users;
 export const  selectCards = (state)=> state.content.cards;
+
+export const  selectCardsOrder = (state)=> state.content.order;
+export const  selectCardsShow = (state)=> state.content.show;
 
 export const  selectSearch = (state)=> state.content.search;
 

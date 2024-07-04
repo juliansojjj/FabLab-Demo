@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
-import { useGetUsersQuery, useGetUserMutation } from "../../app/cardsApi";
 import {
   deleteUser,
   selectAdmin,
@@ -24,7 +23,6 @@ const Profile = () => {
 
   const [alert, setAlert] = useState(false);
   const [eliminateOption, setEliminateOption] = useState();
-  const [getUser, { data: info, error: err }] = useGetUserMutation();
   const [email, setEmail] = useState();
   const [user, setUser] = useState();
   const [editPass, setEditPass] = useState(false);

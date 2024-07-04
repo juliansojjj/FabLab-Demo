@@ -4,7 +4,6 @@ import Lupa from '../icons/lupa.svg'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
-import { useGetDocsQuery } from '../app/cardsApi'
 import { selectCards } from '../features/content/contentSlice'
 
 const SearchBar = () => {

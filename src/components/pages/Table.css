@@ -121,3 +121,31 @@
     margin: 0 .7em 0 .2em;
     filter: invert(9%) sepia(97%) saturate(3684%) hue-rotate(354deg) brightness(102%) contrast(114%);
 }
+
+.bannedStudent{
+    text-decoration: line-through;
+}
+
+@media(max-width:768px){
+    .table-column{
+        display: grid;
+        grid-template-columns: 5em 10em 7em;
+        background-color: var(--lightGrey);
+        color: var(--smokeGrey);
+        justify-items: center;
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
+        padding: .3em;
+        max-width: 22em;
+    }
+    
+    .table-item{
+        display: grid;
+        grid-template-columns: 5em 10em 7em;
+        text-align: center;
+        padding: .3em;
+        border-bottom: .5px solid var(--neutralGrey);
+        background-color: white;
+        max-width: 22em;
+    }
+}

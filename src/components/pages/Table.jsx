@@ -1,40 +1,27 @@
 import React, { useState } from 'react'
 import Header from '../Header'
 import './Table.css'
-import { useGetUsersQuery, useGetDocsQuery } from '../../app/cardsApi'
-import { db } from '../../firebase'
-import { doc, updateDoc } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
 import Alert from "../../icons/triangle-alert-empty.svg"
 import Xmark from "../../icons/xmark-solid.svg"
-import { useSelector } from 'react-redux'
-import { selectCards, selectUsers } from '../../features/content/contentSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCards, selectUsers, cardModification } from '../../features/content/contentSlice'
 
 const Table = () => {
+  const dispatch = useDispatch()
   const data = useSelector(selectUsers)
   const info = useSelector(selectCards)
   const [alert, setAlert] = useState(false)
 
-  const updateToComplete = async (id) =>{
-    try{
-      const docRef = doc(db,'card',id)
-      const data = {state:'complete'}
-      updateDoc(docRef,data).then(console.log('Complete Now'))
-      .catch((err)=>{console.log(err.message)})
-  }catch(err){
-      return {error:err}
-  }
-  }
+  const stateHandle = (e) =>{
+    e.preventDefault()
+    const cardId = e.currentTarget.attributes.getNamedItem("data-cardid").value;
+    const state = e.currentTarget.attributes.getNamedItem("data-state").value;
+    console.log(state)
+    console.log(cardId)
+    if (state == 'complete')  dispatch(cardModification({operation:'state',cardId:cardId,value:'incomplete'}));
+    else                      dispatch(cardModification({operation:'state',cardId:cardId,value:'complete'}));  
 
-  const updateToIncomplete = async (id) =>{
-    try{
-      const docRef = doc(db,'card',id)
-      const data = {state:'incomplete'}
-      updateDoc(docRef,data).then(console.log('Incomplete Now'))
-      .catch((err)=>{console.log(err.message)})
-  }catch(err){
-      return {error:err}
-  }
   }
 
   const alertManage = (msg) => {
@@ -42,22 +29,6 @@ const Table = () => {
     else if (!alert) {
       setAlert(msg);
       setTimeout(() => { setAlert(false) }, 4000)
-    }
-  }
-
-  const manageState = async (e) => {
-    e.preventDefault()
-    const state = e.target.getAttribute("data-state");
-    const id = e.target.getAttribute("data-id");
-    console.log(state)
-    console.log(id)
-    if(state == 'complete'){
-      updateToIncomplete(id)
-      alertManage('Actualice la página para ver los cambios')
-    }
-    else{
-      updateToComplete(id)
-      alertManage('Actualice la página para ver los cambios')
     }
   }
 
@@ -74,10 +45,10 @@ const Table = () => {
               <span>Estados</span>
             </div>
             {data.map(item => {
-              if (item.student == 'true') {
+              if (!item.admin) {
                 return (
                   <div className='table-item' key={item.id}>
-                    <span>{item.userName}</span>
+                    <span className={item.student == 'false' && 'bannedStudent'}>{item.userName}</span>
                     <div className='table-item--container'>
                       {item.cards.map(card => {
                         return (
@@ -96,9 +67,9 @@ const Table = () => {
                                 return (
                                   <button
                                     className={`table-${doc.state}-btn`}
-                                    onClick={manageState}
+                                    onClick={stateHandle}
                                     data-state={doc.state}
-                                    data-id={doc.id}>
+                                    data-cardid={doc.id}>
                                     {doc.state == 'complete'
                                       ? 'Marcar como incompleto'
                                       : 'Marcar como completo'}

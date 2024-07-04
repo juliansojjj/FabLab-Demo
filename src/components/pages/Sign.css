@@ -6,7 +6,7 @@
 .presentation-img{
     height: 12em;
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(22deg) brightness(107%) contrast(101%);
-    margin: 4em 0 0 4em;
+    margin: 4em 0 0 3em;
 }
 
 .main{
@@ -45,6 +45,7 @@
     border-radius: .5em;
     background-color: var(--greenComplete);
     color: white;
+    margin-bottom: 1em;
 }
 .sign-form--btn:hover{
     background-color: #14769d;
@@ -63,4 +64,36 @@
 }
 .sign-redirect:hover{
     color: #570b0b;
+}
+
+@media(max-width:1200px){
+    .presentation-img{
+        height: 10em;
+    }
+}
+@media(max-width:992px){
+   
+}
+@media(max-width:768px){
+    .sign-form{
+        width: fit-content;
+    }
+}
+@media(max-width:576px){
+    .presentation-container{
+        padding: 1em;
+        height: fit-content;
+    }
+    .presentation-img{
+        height: 3em;
+        margin: 0;
+
+    }
+    .sign-form{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        padding-top: 2em;
+    }
 }

@@ -6,9 +6,7 @@ const Archive = () => {
   return (
     <div className='base'>
         <Header/>
-        <main>
-            <ArchiveCards/>
-        </main>
+        <ArchiveCards/>
     </div>
   )
 }

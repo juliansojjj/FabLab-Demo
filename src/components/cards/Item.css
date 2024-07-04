@@ -168,6 +168,36 @@ hr {
     display: flex;
     flex-direction: column;
 }
+.item-file--buttons{
+    display: flex;
+    justify-content: right;
+}
+
+.item-file--archive{
+    background-color: var(--neutralGrey);
+    border: none;
+    border-radius: .5em;
+    height: fit-content;
+    width: fit-content;
+    text-align: center;
+    padding: .6em;
+    color: white;
+    margin: 1em 1em 0 0;
+    cursor: default;
+    justify-self: flex-end;
+}
+.item-file--archive:hover{
+    background-color: var(--smokeGrey);
+    cursor: default;
+}
+.item-file--archive:active{
+    transform: scale(.98);
+}
+.item-file--archive img{
+    height: .9em;
+    margin-left: .5em;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+}
 
 .item-file--download{
     background-color: green;
@@ -247,4 +277,24 @@ hr {
 .item-overdue{
     color:var(--redOverdue);
     background-color: white;
+}
+
+@media(max-width:992px){
+    .item-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+@media(max-width:768px){
+    .item-container{
+        max-width: 25em;
+    }
+    .item-file{
+        display: flex;
+        flex-direction: column;
+    }
+    .item-img-container{
+        width: 20em;
+    }
 }

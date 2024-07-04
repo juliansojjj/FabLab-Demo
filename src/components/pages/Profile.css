@@ -341,3 +341,17 @@
     filter: opacity(70%);
     z-index: 20;
 }
+
+@media(max-width:768px){
+    .user-info{
+        display: flex;
+        flex-direction: column;
+    }
+    .user-pass{
+        grid-template-columns: repeat(2,min-content);
+        margin-top: 1em;
+    }
+    .user-pass--show{
+        min-width: 15em;
+    }
+}
