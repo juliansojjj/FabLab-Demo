@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.de3ab72a.css",
-    "main.js": "/static/js/main.adc67703.js",
-    "static/media/SFPRODISPLAYTHIN.ttf": "/static/media/SFPRODISPLAYTHIN.d0f113527cb2352c0c39.ttf",
-    "static/media/SFPRODISPLAYMEDIUM.OTF": "/static/media/SFPRODISPLAYMEDIUM.b85d841dacb040b84951.OTF",
-    "static/media/SFPRODISPLAYBOLD.OTF": "/static/media/SFPRODISPLAYBOLD.b1f4d2c69fa808ebca12.OTF",
-    "static/media/SFPRODISPLAYREGULAR.OTF": "/static/media/SFPRODISPLAYREGULAR.d1f5e6e16dd4f75c3950.OTF",
-    "static/media/edit-pen.svg": "/static/media/edit-pen.e3f42389ade09e323973960d39dd2cb2.svg",
-    "static/media/user-gear-solid.svg": "/static/media/user-gear-solid.00f35abd8daef38b5a29db666986dc96.svg",
-    "static/media/folder-filled.svg": "/static/media/folder-filled.7ccb4eae3665e19ec376d15559b03681.svg",
-    "static/media/logo.svg": "/static/media/logo.ff2f77f5888a55f65eb1acefebee516d.svg",
-    "static/media/arrow-down.svg": "/static/media/arrow-down.ee6bebd9c72f62933cce744687366f00.svg",
-    "static/media/triangle-alert-empty.svg": "/static/media/triangle-alert-empty.5d436a8baa14a35494456de112846e95.svg",
-    "index.html": "/index.html",
-    "static/media/download-solid.svg": "/static/media/download-solid.293c0d5e07261c1ec5a1aefbeba867a9.svg",
-    "static/media/aside-solid.svg": "/static/media/aside-solid.5ea1bd219f259009fec6b1ff9bb0c812.svg",
-    "static/media/lupa.svg": "/static/media/lupa.cd761af2e6d53d07ac6129e7f885fa95.svg",
-    "static/media/menu.svg": "/static/media/menu.29e109f16a308c868057bb35990f467d.svg",
-    "static/media/xmark-solid.svg": "/static/media/xmark-solid.ae469738e479d31aa952364e12120ad2.svg",
-    "static/media/check-solid.svg": "/static/media/check-solid.d77a6106b69459fb02faabc5c2925156.svg",
-    "main.de3ab72a.css.map": "/static/css/main.de3ab72a.css.map",
-    "main.adc67703.js.map": "/static/js/main.adc67703.js.map"
+    "main.css": "/FabLab-Demo/static/css/main.55f7c64f.css",
+    "main.js": "/FabLab-Demo/static/js/main.895aac03.js",
+    "static/media/SFPRODISPLAYTHIN.ttf": "/FabLab-Demo/static/media/SFPRODISPLAYTHIN.d0f113527cb2352c0c39.ttf",
+    "static/media/SFPRODISPLAYMEDIUM.OTF": "/FabLab-Demo/static/media/SFPRODISPLAYMEDIUM.b85d841dacb040b84951.OTF",
+    "static/media/SFPRODISPLAYBOLD.OTF": "/FabLab-Demo/static/media/SFPRODISPLAYBOLD.b1f4d2c69fa808ebca12.OTF",
+    "static/media/SFPRODISPLAYREGULAR.OTF": "/FabLab-Demo/static/media/SFPRODISPLAYREGULAR.d1f5e6e16dd4f75c3950.OTF",
+    "static/media/edit-pen.svg": "/FabLab-Demo/static/media/edit-pen.e3f42389ade09e323973960d39dd2cb2.svg",
+    "static/media/user-gear-solid.svg": "/FabLab-Demo/static/media/user-gear-solid.00f35abd8daef38b5a29db666986dc96.svg",
+    "static/media/folder-filled.svg": "/FabLab-Demo/static/media/folder-filled.7ccb4eae3665e19ec376d15559b03681.svg",
+    "static/media/logo.svg": "/FabLab-Demo/static/media/logo.ff2f77f5888a55f65eb1acefebee516d.svg",
+    "static/media/arrow-down.svg": "/FabLab-Demo/static/media/arrow-down.ee6bebd9c72f62933cce744687366f00.svg",
+    "static/media/triangle-alert-empty.svg": "/FabLab-Demo/static/media/triangle-alert-empty.5d436a8baa14a35494456de112846e95.svg",
+    "index.html": "/FabLab-Demo/index.html",
+    "static/media/download-solid.svg": "/FabLab-Demo/static/media/download-solid.293c0d5e07261c1ec5a1aefbeba867a9.svg",
+    "static/media/aside-solid.svg": "/FabLab-Demo/static/media/aside-solid.5ea1bd219f259009fec6b1ff9bb0c812.svg",
+    "static/media/lupa.svg": "/FabLab-Demo/static/media/lupa.cd761af2e6d53d07ac6129e7f885fa95.svg",
+    "static/media/menu.svg": "/FabLab-Demo/static/media/menu.29e109f16a308c868057bb35990f467d.svg",
+    "static/media/xmark-solid.svg": "/FabLab-Demo/static/media/xmark-solid.ae469738e479d31aa952364e12120ad2.svg",
+    "static/media/check-solid.svg": "/FabLab-Demo/static/media/check-solid.d77a6106b69459fb02faabc5c2925156.svg",
+    "main.55f7c64f.css.map": "/FabLab-Demo/static/css/main.55f7c64f.css.map",
+    "main.895aac03.js.map": "/FabLab-Demo/static/js/main.895aac03.js.map"
   },
   "entrypoints": [
-    "static/css/main.de3ab72a.css",
-    "static/js/main.adc67703.js"
+    "static/css/main.55f7c64f.css",
+    "static/js/main.895aac03.js"
   ]
 }
