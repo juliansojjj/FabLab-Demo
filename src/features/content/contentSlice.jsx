@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import localData from '../../database/data.json';
-import _ from 'lodash';
-
 
 const initialState = {
     "admin":{
@@ -32,7 +30,7 @@ const contentSlice = createSlice({
                 state.users.push(action.payload);
             }
         },
-        userLogout(state,action){
+        userLogout(state){
             state.userLogin=false;
             state.admin = {};
         },
@@ -45,9 +43,7 @@ const contentSlice = createSlice({
              } 
         },
         deleteUser(state,action){
-            console.log(action.payload)
             const userIndex = state.users.findIndex(item=>item.id === action.payload);
-            console.log(userIndex)
             state.userLogin=false;
             state.admin = {};
             if(userIndex !== -1) state.users.splice(userIndex,1);
@@ -56,16 +52,13 @@ const contentSlice = createSlice({
             const input = action.payload.trim()
             const card = state.cards.find(item=>item.title.toLocaleLowerCase === input)
                 
-            if(!card){
-            }else state.search = card
+            if(card) state.search = card
 
         },
         obsoleteViewed(state,action){
             const userIndex = state.users.findIndex(item=>item.id === action.payload.userId);
             const cardId = action.payload.cardId;
-            console.log(action.payload)
-            if(state.users[userIndex].viewed.find(item=>item === cardId)){                
-            }else {
+            if(!state.users[userIndex].viewed.find(item=>item === cardId)){ 
                 state.users[userIndex].viewed.push(cardId)
                 state.admin.viewed.push(cardId)
             }

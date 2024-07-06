@@ -23,8 +23,6 @@ const Profile = () => {
 
   const [alert, setAlert] = useState(false);
   const [eliminateOption, setEliminateOption] = useState();
-  const [email, setEmail] = useState();
-  const [user, setUser] = useState();
   const [editPass, setEditPass] = useState(false);
   const [passError, setPassError] = useState();
   const passMsgErrors = [
@@ -35,13 +33,12 @@ const Profile = () => {
 
   const adminLogged = useSelector(selectAdmin);
 
-  const logout = (e) => {
+  const logout = () => {
     dispatch(userLogout());
   };
 
   const adminHandle = async (e) => {
     const id = e.target.attributes.getNamedItem("data-userid").value;
-    const role = e.target.attributes.getNamedItem("data-admin").value;
     const operation = e.target.attributes.getNamedItem("data-operation").value;
     dispatch(
       usersRole({
@@ -56,7 +53,6 @@ const Profile = () => {
     const id = e.target.attributes.getNamedItem("data-userid").value;
     const operation = e.target.attributes.getNamedItem("data-operation").value;
 
-    console.log(operation);
     dispatch(
       usersRole({
         id: id,
@@ -66,13 +62,13 @@ const Profile = () => {
     );
   };
 
-  const eliminateUser = async (e) => {
+  const eliminateUser = async () => {
     const id = adminLogged.id;
     dispatch(deleteUser(id));
     navigate("/");
   };
 
-  const managePass = (e) => {
+  const managePass = () => {
     if (!editPass) setEditPass(true);
     else setEditPass(false);
   };
@@ -92,7 +88,6 @@ const Profile = () => {
   };
 
   const alertManage = (msg) => {
-    console.log(msg);
     if (alert) setAlert(false);
     else if (!alert) {
       setAlert(msg);
@@ -103,7 +98,6 @@ const Profile = () => {
   };
 
   const successAlertManage = (msg) => {
-    console.log(msg);
     if (successAlert) setSuccessAlert(false);
     else if (!successAlert) {
       setSuccessAlert(msg);
@@ -129,7 +123,7 @@ const Profile = () => {
             </button>
             <button
               className="eliminate-cancel"
-              onClick={(e) => {
+              onClick={() => {
                 setEliminateOption(false);
               }}
             >
@@ -238,7 +232,7 @@ const Profile = () => {
               <span>Mail</span>
               <span>Administrador</span>
             </div>
-            {users.map((item, i) => {
+            {users.map((item) => {
               if (!item.student) {
                 return (
                   <div className="users-list--item" key={item.id}>
@@ -340,7 +334,7 @@ const Profile = () => {
           Cerrar Sesión
         </button>
         <button
-          onClick={(e) => {
+          onClick={() => {
             setEliminateOption(true);
           }}
           className="account-button"

@@ -21,8 +21,6 @@ const Login = () => {
       viewed:[]
     };
   }
-  
-  const user = createRandomUser();
 
   const handleSubmit = (e) => {
     e.preventDefault();

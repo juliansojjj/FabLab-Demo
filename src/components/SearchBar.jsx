@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { selectCards } from '../features/content/contentSlice'
 import Lupa from '../icons/lupa.svg'
 import './Header.css'
 
 const SearchBar = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
     const data = useSelector(selectCards);
     const [searchInputFocus,setSearchInputFocus] = useState(false)
     const [searchBarFocus,setSearchBarFocus] = useState(false)
@@ -42,7 +39,7 @@ const SearchBar = () => {
             onChange={handleSearchChange}
             value={typeSearch}
             placeholder='Busqueda de Card'
-            onFocus={(e)=>{setSearchInputFocus(true);setSearchBarFocus(true)}}/>
+            onFocus={()=>{setSearchInputFocus(true);setSearchBarFocus(true)}}/>
           <img src={Lupa} alt='searchLogo' className='search-submit img-min' />
       </div>
       {typeSearch.trim() &&

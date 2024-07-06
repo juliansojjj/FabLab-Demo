@@ -12,8 +12,7 @@ const Header = () => {
   const location = useLocation();
   const [responsiveMenu, setResponsiveMenu] = useState(false);
 
-  console.log(location)
-  const menuHandle = (e)=>{
+  const menuHandle = ()=>{
     if(location.pathname === '/'){
       if(responsiveMenu) {
         setResponsiveMenu(false)
@@ -33,17 +32,17 @@ const Header = () => {
     <div>
     <header>
         <div>
-          <Link to='/'><img src={Fablab} className='img-logo web-logo' replace /></Link>
+          <Link to='/'><img src={Fablab} className='img-logo web-logo'  /></Link>
           {location.pathname === '/' ? 
           <img src={menu} className='img-responsive' alt='MenuLogo' onClick={menuHandle}/> 
-          : <Link to='/'><img src={Fablab} alt='FabLabLogo' className='img-logo responsive-logo' replace /></Link>
+          : <Link to='/'><img src={Fablab} alt='FabLabLogo' className='img-logo responsive-logo'  /></Link>
             
           }
           
           
         </div>
         <SearchBar/>
-        <Link to="/profile"><img alt='ProfileLogo' src={userIcon} className='img-min' replace /></Link>
+        <Link to="/profile"><img alt='ProfileLogo' src={userIcon} className='img-min'  /></Link>
     </header>
     {responsiveMenu &&
       <div>

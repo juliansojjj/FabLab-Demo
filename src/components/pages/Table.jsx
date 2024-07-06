@@ -17,8 +17,6 @@ const Table = () => {
     e.preventDefault()
     const cardId = e.currentTarget.attributes.getNamedItem("data-cardid").value;
     const state = e.currentTarget.attributes.getNamedItem("data-state").value;
-    console.log(state)
-    console.log(cardId)
     if (state === 'complete')  dispatch(cardModification({operation:'state',cardId:cardId,value:'incomplete'}));
     else                      dispatch(cardModification({operation:'state',cardId:cardId,value:'complete'}));  
 
@@ -57,7 +55,7 @@ const Table = () => {
                               {info.map(doc => {
                                 if (doc.id === card) {
                                   return (
-                                    <span>{doc.title}</span>
+                                    <span key={doc.id}>{doc.title}</span>
                                   )
                                 }
                               })}
@@ -69,7 +67,8 @@ const Table = () => {
                                     className={`table-${doc.state}-btn`}
                                     onClick={stateHandle}
                                     data-state={doc.state}
-                                    data-cardid={doc.id}>
+                                    data-cardid={doc.id}
+                                    key={doc.id}>
                                     {doc.state === 'complete'
                                       ? 'Marcar como incompleto'
                                       : 'Marcar como completo'}

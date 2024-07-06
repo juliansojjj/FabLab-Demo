@@ -12,8 +12,6 @@ const Item = () => {
     
     const params = useParams()
     const dispatch = useDispatch()
-    const [advice, setAdvice] = useState(true)
-    const [alert, setAlert] = useState(false)
     const [menu, setMenu] = useState(false)
     const adminLogged = useSelector(selectAdmin);
     const cards = useSelector(selectCards);
@@ -28,19 +26,17 @@ const Item = () => {
         e.preventDefault()
         const operation = e.currentTarget.attributes.getNamedItem("data-operation").value;
         const value = e.currentTarget.attributes.getNamedItem("data-value").value;
-        console.log(value)
         dispatch(cardModification({operation:operation,cardId:string,value:value}));  
     }
 
     const printerHandle =  (e) => {
         e.preventDefault()
         const value = e.currentTarget.attributes.getNamedItem("data-value").value;
-        console.log(value)
         dispatch(cardModification({operation:'printer',cardId:string,value:value}));  
         setMenu(false);
     }
 
-    const setMenuOpen = (e) => {
+    const setMenuOpen = () => {
         if (menu) setMenu(false)
         else setMenu(true)
     }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { filtersAndOrder, selectCardsOrder, selectCardsShow } from '../features/content/contentSlice'
 import ArrowDown from '../icons/arrow-down.svg'
 import './Aside.css'
+import PropTypes from 'prop-types';
 
 const Aside = ({responsive}) => {
   const dispatch = useDispatch()
@@ -14,7 +15,6 @@ const Aside = ({responsive}) => {
   const [showIncomplete,setShowIncomplete] = useState(false)
 
   const [menuOpen,setMenuOpen] = useState(false)
-  const [menuOpenVerif,setMenuOpenVerif] = useState(false)
 
   const showManage = (e)=>{
     if(e.target.name === 'completeSelect'){
@@ -48,13 +48,11 @@ const Aside = ({responsive}) => {
     }
   }
 
-  const OrderMenuManage = (e)=>{
+  const OrderMenuManage = ()=>{
     if(!menuOpen){
-      setMenuOpen(true)
-      setMenuOpenVerif(true)}
+      setMenuOpen(true)}
     else {
-      setMenuOpen(false)
-      setMenuOpenVerif(false)}
+      setMenuOpen(false)}
   }
 
   const orderManage = (e)=>{
@@ -119,5 +117,9 @@ const Aside = ({responsive}) => {
     </aside>
   )
 }
+
+Aside.propTypes = {
+  responsive: PropTypes.bool, 
+};
 
 export default Aside

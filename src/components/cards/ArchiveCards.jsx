@@ -49,7 +49,7 @@ const ArchiveCards = () => {
     setEliminateOption(false)
   }
 
-  const alertManage = (e) => {
+  const alertManage = () => {
     if (alert) setAlert(false);
     else if (!alert) {
       setAlert(true);
@@ -65,7 +65,7 @@ const ArchiveCards = () => {
           <h2>Eliminar Card</h2>
           <p>La card se eliminará de manera <b>definitiva</b> ¿Está seguro que desea deletearla?</p>
           <button className='eliminate-confirm' onClick={eliminateCard} data-cardid={eliminateOption}>Eliminar</button>
-          <button className='eliminate-cancel' onClick={(e) => { setEliminateOption(false) }}>Cancelar</button>
+          <button className='eliminate-cancel' onClick={() => { setEliminateOption(false) }}>Cancelar</button>
         </div>
         <div className='eliminate-background'></div>
       </div> : ''}
@@ -87,8 +87,8 @@ const ArchiveCards = () => {
                     {menuOpen ?
                       selectMenu === `item-click-${item.id}` ?
                         <div className='archive-menu'>
-                          <div className='archive-menu--option' archive={item.archive} onClick={unArchiveCard} data-cardid={item.id}>Desarchivar</div>
-                          <div className='archive-menu--option' onClick={(e) => { setEliminateOption(item.id) }}>Eliminar</div>
+                          <div className='archive-menu--option' onClick={unArchiveCard} data-cardid={item.id}>Desarchivar</div>
+                          <div className='archive-menu--option' onClick={() => { setEliminateOption(item.id) }}>Eliminar</div>
                         </div> : ''
                       : ''}
                   </div>

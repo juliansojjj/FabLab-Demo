@@ -8,7 +8,6 @@ import './Sign.css'
 
 const Signup = () => {
     const dispatch = useDispatch();
-    const [userType, setuserType] = useState();
 
     const navigate = useNavigate()
     const [email,setEmail] = useState()

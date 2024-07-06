@@ -13,7 +13,6 @@ const Cards = () => {
 
   const dispatch = useDispatch()
   const [selectMenu, setSelectMenu] = useState(null)
-  const [alert, setAlert] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   
   let arrayData = []
@@ -47,14 +46,6 @@ const Cards = () => {
     }
   }
 
-  const alertManage = (msg) => {
-    if (alert) setAlert(false);
-    else if (!alert) {
-      setAlert(msg);
-      setTimeout(() => { setAlert(false) }, 4000)
-    }
-  }
-
   const archiveCard = async (e) => {
     e.preventDefault()
     const cardId = e.currentTarget.attributes.getNamedItem("data-cardid").value;
@@ -73,7 +64,7 @@ const Cards = () => {
                       <div className='menu-click'><img src={Menu} id={`item-click-${item.id}`} onClick={cardMenu} /></div>
                       {menuOpen &&
                         selectMenu === `item-click-${item.id}` && 
-                          <div className='menu-option' archive={item.archive} onClick={archiveCard} data-cardid={item.id}>Archivar</div>
+                          <div className='menu-option' onClick={archiveCard} data-cardid={item.id}>Archivar</div>
                       }
                     </div>
                     <Link to={`/card/${item.id}`} data-cardid={item.id}>
