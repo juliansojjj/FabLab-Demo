@@ -74,21 +74,20 @@ h2{
 
 @font-face {
     font-family: 'SF Pro Display - Bold';
-    src: url('../public/fonts/SF_Pro_Display/SFPRODISPLAYBOLD.OTF');
+    src: url('../public/fonts/SFPRODISPLAYBOLD.OTF') format('opentype');
 }
-
 @font-face{
     font-family: 'SF Pro Display - Medium';
-    src: url("../public/fonts/SF_Pro_Display/SFPRODISPLAYMEDIUM.OTF");
+    src: url("../public/fonts/SFPRODISPLAYMEDIUM.OTF")format('opentype');
 }
 
 @font-face {
     font-family: 'SF Pro Display - Regular';
-    src: url('../public/fonts/SF_Pro_Display/SFPRODISPLAYREGULAR.OTF');
+    src: url('../public/fonts/SFPRODISPLAYREGULAR.OTF')format('opentype');
 }
 @font-face {
     font-family: 'SF Pro Display - Thin';
-    src: url('../public/fonts/SF_Pro_Display/SFPRODISPLAYTHIN.ttf');
+    src: url('../public/fonts/SFPRODISPLAYTHIN.ttf') format('truetype');
 }
 
 :root{
