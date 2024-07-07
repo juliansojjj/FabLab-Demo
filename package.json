@@ -2,7 +2,7 @@
   "name": "fablab-app",
   "version": "1.0.0",
   "private": false,
-  "homepage": "https://juliansojjj.github.io/FabLab-Demo/",
+  "homepage": "https://juliansojjj.github.io/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
