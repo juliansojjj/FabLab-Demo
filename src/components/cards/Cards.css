@@ -34,12 +34,12 @@
     margin: .5em 0 .5em 0;
     font-size: 1.3em;
     color: var(--neutralGrey);
-    font-weight: 100;
+    font-weight: 300;
 }
 .cards-date{
     margin: 0 0 .5em 0;
     color: var(--neutralGrey);
-    font-weight: 100;
+    font-weight: 200;
 }
 .cards-user{
     margin: 1em 0 .5em 0;
@@ -64,7 +64,11 @@
 }
 .new-card .cards-title{
     color: black;
-    font-family: 'SF Pro Display - Medium';
+    .poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
 }
 .new-card .cards-date{
     font-weight: 400;

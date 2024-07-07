@@ -86,11 +86,11 @@ const Aside = ({responsive}) => {
       <div className='dashboard-states'>
         <h3 className='dashboard-title'>Estado</h3>
         <div className='state-check'>
-          <h4 className='dashboard-subtitle'>Terminado</h4>
+          <div className='dashboard-subtitle'>Terminado</div>
           <input type="checkbox" onChange={showManage} name='completeSelect' checked={showComplete} />
         </div>
         <div className='state-check'>
-          <h4 className='dashboard-subtitle'>En proceso</h4>
+          <div className='dashboard-subtitle'>En proceso</div>
           <input type="checkbox" onChange={showManage} name='incompleteSelect' checked={showIncomplete}/>
         </div>
       </div>

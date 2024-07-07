@@ -7,7 +7,9 @@
     background-color: white;
     box-sizing: border-box;
     padding: 1em;
-    font-family: 'SF Pro Display - Thin';
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
 }
 
 .dashboard-states{
@@ -23,7 +25,11 @@
 
 .dashboard-home--link{
     font-size: 1.2em;
-    font-family: 'SF Pro Display - Medium';
+    .poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
     text-decoration: underline;
     margin-bottom: 1em;
 }
@@ -35,7 +41,11 @@
 .dashboard-title{
     color: var(--neutralGrey);
     margin: 0 0 .5em 0;
-    font-family: 'SF Pro Display - Regular';
+    .poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
     font-weight: 400;
     font-size: 1.4em;
 }
@@ -49,13 +59,13 @@
 }
 
 .dashboard-subtitle{
+    font-weight: 400;
     color: var(--smokeGrey);
-    margin: 0;
 }
 
 .state-check{
     display: grid;
-    grid-template-columns: 5em 2em;
+    grid-template-columns: 5.5em 2em;
     margin-bottom: .5em;
 }
 .state-check input{
@@ -142,6 +152,8 @@
         background-color: white;
         box-sizing: border-box;
         padding: 1em;
-        font-family: 'SF Pro Display - Thin';
+        font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
     }
 }
