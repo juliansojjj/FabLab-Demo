@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/FabLab-Demo/static/css/main.4365846d.css",
+    "main.css": "/FabLab-Demo/static/css/main.1704cc20.css",
     "main.js": "/FabLab-Demo/static/js/main.895aac03.js",
     "static/media/SFPRODISPLAYTHIN.ttf": "/FabLab-Demo/static/media/SFPRODISPLAYTHIN.d0f113527cb2352c0c39.ttf",
     "static/media/SFPRODISPLAYMEDIUM.OTF": "/FabLab-Demo/static/media/SFPRODISPLAYMEDIUM.b85d841dacb040b84951.OTF",
@@ -19,11 +19,11 @@
     "static/media/menu.svg": "/FabLab-Demo/static/media/menu.29e109f16a308c868057bb35990f467d.svg",
     "static/media/xmark-solid.svg": "/FabLab-Demo/static/media/xmark-solid.ae469738e479d31aa952364e12120ad2.svg",
     "static/media/check-solid.svg": "/FabLab-Demo/static/media/check-solid.d77a6106b69459fb02faabc5c2925156.svg",
-    "main.4365846d.css.map": "/FabLab-Demo/static/css/main.4365846d.css.map",
+    "main.1704cc20.css.map": "/FabLab-Demo/static/css/main.1704cc20.css.map",
     "main.895aac03.js.map": "/FabLab-Demo/static/js/main.895aac03.js.map"
   },
   "entrypoints": [
-    "static/css/main.4365846d.css",
+    "static/css/main.1704cc20.css",
     "static/js/main.895aac03.js"
   ]
 }
